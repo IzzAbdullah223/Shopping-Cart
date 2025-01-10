@@ -1,0 +1,191 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+    
+    @font-face {
+        font-family: 'GT Walsheim Pro BOLD';
+        src:url('../../assets/font/GTWalsheimPro-Black.woff2') format('woff2');
+      }
+    
+      @font-face {
+        font-family: 'GT Walsheim Pro THIN';
+        src:url('../../assets/font/GTWalsheimPro-Thin.woff2') format('woff2');
+        font-weight: 300;
+      }
+    
+      @font-face {
+        font-family: 'GT Walsheim Pro REGULAR';
+        src:url('../../assets/font/GTWalsheimPro-Regular.woff2') format('woff2');
+        font-weight: 300;
+      }
+    
+    
+    
+    .MiddleContainer{
+        height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 30px;
+    }
+    
+    @media(max-width:960px){
+        .MiddleContainer{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            
+        }
+        .Navigation{
+            margin-top: 35px;
+        }
+    }
+    
+     
+    .LeftSide{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        font-family: 'GT Walsheim Pro REGULAR';
+       
+    }
+    
+    .LeftSide>div{
+        background-color: rgba(255, 255, 255, 0.178); /* White with 30% opacity */
+        backdrop-filter: blur(10px); /* Apply blur effect */
+    }
+    
+    .LeftTop{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 30px;
+        border-radius: 25px;
+        color: white;
+    }
+    
+    .LeftTop h1{
+        font-family: 'GT Walsheim Pro BOLD';
+        font-size: 3.5rem;
+        text-align: center
+    }
+    
+    
+    .LeftTop p{
+        font-size: 1.2rem;
+        font-family: 'GT Walsheim Pro REGULAR';
+    }
+    
+    .LeftTop span{
+        display: block;
+    }
+    
+    .LeftTop div{
+        font-family: 'GT Walsheim Pro REGULAR';
+        text-align: center;
+        font-size: 1.3rem;
+    }
+    
+    .LeftBottom{
+        display: flex;
+        justify-content: space-evenly;
+        padding: 15px 10px;
+        border-radius: 15px;
+    }
+    
+    
+     
+    .LeftBottom>div{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background-color: white;
+        padding: 5px 15px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.3s, background-color 0.2s;
+    }
+    
+    .LeftBottom>div:hover{
+        transform: scale(1.1);
+        background-color: #6bbbbb;
+    }
+    
+    .BottomGit{
+        margin-right: -90px;
+    }
+    
+    @media(max-width:635px){
+        .LeftTop  span{
+            display: inline;
+        }
+        .BottomGit{
+            margin-right: 0px;
+        }
+    
+        .MiddleContainer{
+            padding: 0px;
+        }
+        .LeftTop{
+            text-align: center;
+        }
+    
+    }
+    
+    
+    .BottomR img{
+        width: 25px;
+    }
+    
+    .Navigation{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        background-color: rgba(255, 255, 255, 0.178); /* White with 30% opacity */
+        backdrop-filter: blur(10px); /* Apply blur effect */
+        padding: 20px 30px;
+        border-radius: 15px;
+    }
+    
+    .Navigation h2{
+        color: white;
+        text-align: center;
+        font-family: 'GT Walsheim Pro REGULAR';
+    }
+
+ 
+    
+     
+    
+    .Navigation img{
+        width: 20px;
+    }
+
+ 
+    
+    .Navigation>div{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background-color: white;
+        padding: 10px 25px;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: transform 0.3s, background-color 0.2s;
+        font-family: 'GT Walsheim Pro THIN';
+    }
+    
+    
+    .Navigation>div:hover{
+        transform: scale(1.1);
+        background-color: #6bbbbb;
+    }
+
+    .Link{
+        text-decoration: none;
+        color: inherit;
+    }
+    
