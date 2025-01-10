@@ -12,14 +12,14 @@ import IOS from '../../../assets/icons/iOS'
 
  
 
-function PC(){
+function XboxOne(){
     const Apikey = "2bcc24482f844476a6b3935319801e0c"
 
     const [Loading,setLoading] = useState(true)
     const [data,setData] = useState<any>(null)
     useEffect(()=>{
         const fetchData = async ()=>{
-            const response = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&platforms=4&`)
+            const response = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&platforms=14,80,1,186&`)
             const result = await response.json()
             setData(result)    
         }
@@ -91,7 +91,7 @@ function PC(){
                     <h1>Loading</h1>
                 ):(
                     <div className={POPCSS.RightSideContainer}>
-                    <h1>PC</h1>
+                    <h1>Xbox One</h1>
                     <div className={POPCSS.GameCardsContainer}>
     
                         <div className={POPCSS.GameCard}>
@@ -547,4 +547,4 @@ function PC(){
 
 }
 
-export default PC
+export default XboxOne

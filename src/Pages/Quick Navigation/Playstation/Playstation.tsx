@@ -42,26 +42,26 @@ function PlayStation(){
           
             const Platforms:JSX.Element[]=[]
 
-            for(let i=0;i<data.results[index].platforms.length;i++){
+            for(let i=0;i<data.results[index].parent_platforms.length;i++){
 
 
-                if(data.results[index].platforms[i].platform.name === "PC")
+                if(data.results[index].parent_platforms[i].platform.name === "PC")
                     Platforms.push(<Windows key={i}></Windows>)
 
-                if(data.results[index].platforms[i].platform.name === "PlayStation 5")
+                if(data.results[index].parent_platforms[i].platform.name === "PlayStation")
                      
                     Platforms.push(<Playstation key={i}></Playstation>)
 
-                if(data.results[index].platforms[i].platform.name === "Xbox Series S/X")
+                if(data.results[index].parent_platforms[i].platform.name === "Xbox")
            
                     Platforms.push(<Xbox key={i}></Xbox>)
 
-                if(data.results[index].platforms[i].platform.name === "Nintendo Switch")
+                if(data.results[index].parent_platforms[i].platform.name === "Nintendo")
            
                     Platforms.push(<Nintendo key={i}></Nintendo>)
 
 
-                if(data.results[index].platforms[i].platform.name === "macOS")
+                if(data.results[index].parent_platforms[i].platform.name === "Apple Macintosh")
            
                     Platforms.push(<IOS key={i}></IOS>)
             }
