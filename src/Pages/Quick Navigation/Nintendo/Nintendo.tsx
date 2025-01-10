@@ -1,6 +1,6 @@
 import POPCSS from '../../Quick Navigation/Popular in 2024/Pop2024.module.css'
 import LeftColumn from '../LeftColumn/LeftColumn'
-import  { useState,useEffect} from 'react'
+import { useState,useEffect} from 'react'
 import { createRoot } from 'react-dom/client'
 import Plus from '../../../assets/icons/Plus'
 import Windows from '../../../assets/icons/Windows'
@@ -12,14 +12,14 @@ import IOS from '../../../assets/icons/iOS'
 
  
 
-function PlayStation(){
+function NintendoSwitch(){
     const Apikey = "2bcc24482f844476a6b3935319801e0c"
 
     const [Loading,setLoading] = useState(true)
     const [data,setData] = useState<any>(null)
     useEffect(()=>{
         const fetchData = async ()=>{
-            const response = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&platforms=48,16,18&`)
+            const response = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&platforms=7&`)
             const result = await response.json()
             setData(result)    
         }
@@ -91,7 +91,7 @@ function PlayStation(){
                     <h1>Loading</h1>
                 ):(
                     <div className={POPCSS.RightSideContainer}>
-                    <h1>Playstation</h1>
+                    <h1>PC</h1>
                     <div className={POPCSS.GameCardsContainer}>
     
                         <div className={POPCSS.GameCard}>
@@ -547,4 +547,4 @@ function PlayStation(){
 
 }
 
-export default PlayStation
+export default NintendoSwitch
