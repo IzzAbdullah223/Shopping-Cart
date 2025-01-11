@@ -7,7 +7,7 @@ import Star from '../../assets/Images/star.svg'
 import Rating from '../../assets/Images/rating.svg'
 import Trophy from '../../assets/Images/Trophy.svg'
 import Crown from '../../assets/Images/crown.svg'
-import ContentCSS from './Content.module.css'
+import ContentCSS from '../HomePage/Content.module.css'
 
 function Content(){
 

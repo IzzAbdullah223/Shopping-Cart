@@ -10,15 +10,15 @@
       }
     
       @font-face {
-        font-family: 'GT Walsheim Pro THIN';
-        src:url('../../assets/font/GTWalsheimPro-Thin.woff2') format('woff2');
+        font-family: 'GT Walsheim Pro LIGHT';
+        src:url('../../assets/font/GTWalsheimPro-Light.woff2') format('woff2');
         font-weight: 300;
       }
     
       @font-face {
-        font-family: 'GT Walsheim Pro REGULAR';
+        font-family: 'GT Walsheim Pro Regular';
         src:url('../../assets/font/GTWalsheimPro-Regular.woff2') format('woff2');
-        font-weight: 300;
+       
       }
     
     
@@ -48,7 +48,8 @@
         display: flex;
         flex-direction: column;
         gap: 30px;
-        font-family: 'GT Walsheim Pro REGULAR';
+       
+   
        
     }
     
@@ -75,7 +76,7 @@
     
     .LeftTop p{
         font-size: 1.2rem;
-        font-family: 'GT Walsheim Pro REGULAR';
+        font-family: 'GT Walsheim Pro LIGHT';
     }
     
     .LeftTop span{
@@ -83,9 +84,10 @@
     }
     
     .LeftTop div{
-        font-family: 'GT Walsheim Pro REGULAR';
+        font-family: 'GT Walsheim Pro LIGHT';
         text-align: center;
         font-size: 1.3rem;
+       
     }
     
     .LeftBottom{
@@ -106,6 +108,8 @@
         border-radius: 10px;
         cursor: pointer;
         transition: transform 0.3s, background-color 0.2s;
+        font-family: 'GT Walsheim Pro REGULAR';
+        font-size: 1.1rem;
     }
     
     .LeftBottom>div:hover{

@@ -29,7 +29,7 @@
     gap: 20px;
     color: white;
     font-family: 'GT Walsheim Pro REGULAR';
-    transition: transform 0.3s
+    transition: transform 0.3s;
 }
 
 .LeftSide:hover{
@@ -103,5 +103,5 @@
 
 .SearchBarContainer img{
     margin-right: 10px;
-    width: 20px;    
+    width: 20px;   
 }

@@ -34,6 +34,12 @@ body{
     flex-direction: column;
     gap: 35px;
     width: 260px;
+    position: sticky;
+    top: 0;
+    overflow-y: auto;
+    height: 100vh;
+    scrollbar-width: none;
+    
 }
 
 .LeftColumn h1{

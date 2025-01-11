@@ -2,9 +2,15 @@ import HeaderCSS from '../Header/Header.module.css'
 import Logo from '../assets/Images/logo.png'
 import Cart from '../assets/Images/cart1.svg'
 import Magnify from '../assets/Images/magnify.svg'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
+import Modal from '../Modal/Modal'
 
 function Header(){
+
+    const[modal,setModal] = useState(false)
+    const toggleModal = () =>{
+        setModal(!modal)
+    }
 
 
     const SearchBarContainerRef = useRef<HTMLDivElement | null>(null)
@@ -24,7 +30,8 @@ function Header(){
                 <input type='text' placeholder='Search games...' onClick={Animation}></input>
                 <img src={Magnify}></img>
             </div>
-            <img src={Cart}></img>
+            <img src={Cart} onClick={toggleModal}></img>
+            <Modal modal={modal} toggleModal={toggleModal}></Modal>
         </div>
     )
 

@@ -14,14 +14,30 @@ import IOS from '../../../assets/icons/iOS'
 
 function Pop2024(){
     const Apikey = "2bcc24482f844476a6b3935319801e0c"
+    interface platforms{
+        name:String
+    }
+    interface Results{
+        name:String,
+        background_image:String,
+        parent_platforms:platforms[]
+    }
+    interface GamesDetails{
+        GamesData:Results[]
+    }
 
     const [Loading,setLoading] = useState(true)
-    const [data,setData] = useState<any>(null)
+    const [data,setData] = useState<GamesDetails | null>(null)
     useEffect(()=>{
         const fetchData = async ()=>{
             const response = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&dates=2024-01-01,2024-12-31`)
             const result = await response.json()
-            setData(result)    
+            const FormattedData:GamesDetails={
+                GamesData:result.results
+            }
+
+            setData(FormattedData)
+            
         }
         fetchData()
          
@@ -30,6 +46,8 @@ function Pop2024(){
 
     
     function displayGames(){
+        console.log(data)
+       /* console.log(data)
         const gameImage = document.querySelectorAll<HTMLImageElement>(`.${POPCSS.GameCard} img`)
         const gameName = document.querySelectorAll<HTMLHeadingElement>(`.${POPCSS.GameCard} h2`)
         const gamePlatforms = document.querySelectorAll<HTMLDivElement>(`.${POPCSS.Platforms}`)
@@ -71,6 +89,7 @@ function Pop2024(){
         })
 
         setLoading(L=>L=false)
+        */
       }
      
 
@@ -82,7 +101,6 @@ function Pop2024(){
 
 
     return(
-
         <div className={POPCSS.PageContainer}>
             <LeftColumn></LeftColumn>
             <div className="RightSide">
