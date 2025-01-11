@@ -1,4 +1,4 @@
-import { useEffect,useState,useRef } from 'react'
+import { useEffect,useState} from 'react'
 import PLAYCSS from '../PlayDice/PlayDice.module.css'
 import LeftArrow from '../../../assets/icons/LeftArrow'
 import ChevronLeft from '../../../assets/icons/ChevronLeft'

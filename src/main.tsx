@@ -1,5 +1,6 @@
-import { StrictMode } from 'react'
+
 import { createRoot } from 'react-dom/client'
+/*
 import Header from './Header/Header'
 import HomePage from './Pages/HomePage/HomePage'
 import LeftColumn from './Pages/Quick Navigation/LeftColumn/LeftColumn'
@@ -11,6 +12,7 @@ import PlayStation from './Pages/Quick Navigation/Playstation/Playstation'
 import XboxOne from './Pages/Quick Navigation/Xbox One/XboxOne'
 import NintendoSwitch from './Pages/Quick Navigation/Nintendo/Nintendo'
 import PlayDice from './Pages/Quick Navigation/PlayDice/PlayDice'
+*/
 
 import Modal from './Modal/Modal'
  
