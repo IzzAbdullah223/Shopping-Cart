@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react'
+import { useState,useEffect,useRef } from 'react'
 import ModalCSS from './Modal.module.css'
 
 function Modal(){
@@ -9,23 +9,30 @@ function Modal(){
         setModal(!modal)
     }
 
+    const ModalArea = useRef<HTMLDivElement>(null);
 
-    useEffect(()=>{  // close modal when clicking outside 
-        document.addEventListener("mousedown",()=>{
+  
+//From here to Line 27  
+    useEffect(()=>{  // close modal when clicking outside
+       let handler= (event:MouseEvent)=>{
+            if(ModalArea.current && !ModalArea.current.contains(event.target as Node)){
             setModal(!modal)
-        })
-    })
+            }
+        };
+        document.addEventListener("mousedown",handler);
 
-
-
+        return()=>{  //Cleaning up the event listener 
+            document.removeEventListener("mousedown",handler)
+        };
+    });
     return(
     
          <>
-         <button onClick={toggleModal} className={ModalCSS.ModalBTN}>Open Modal</button>
+           <button onClick={toggleModal} className={ModalCSS.ModalBTN}>Open Modal</button>
             {modal && (
                     <div className={ModalCSS.Modal}>
                         <div className={ModalCSS.Overlay}></div>
-                            <div className={ModalCSS.ModalContent}>
+                            <div ref={ModalArea} className={ModalCSS.ModalContent}>
                                 <div className={ModalCSS.Top}>
                                     <h2>0 Games</h2>
                                     <h3>Clear</h3>
@@ -33,11 +40,7 @@ function Modal(){
                                 <h3>Total: $ 0</h3>
                             </div>
                     </div>
-
             )}
- 
-
-            
         </>
 
     )
