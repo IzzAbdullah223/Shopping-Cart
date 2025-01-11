@@ -11,6 +11,8 @@ import PlayStation from './Pages/Quick Navigation/Playstation/Playstation'
 import XboxOne from './Pages/Quick Navigation/Xbox One/XboxOne'
 import NintendoSwitch from './Pages/Quick Navigation/Nintendo/Nintendo'
 import PlayDice from './Pages/Quick Navigation/PlayDice/PlayDice'
+
+import Modal from './Modal/Modal'
  
  
 
@@ -21,8 +23,8 @@ import PlayDice from './Pages/Quick Navigation/PlayDice/PlayDice'
 createRoot(document.getElementById('root')!).render(
   //<StrictMode>
   <> 
-  <Header></Header>
- <NintendoSwitch></NintendoSwitch>
+  <Modal></Modal>
+ 
   </>
     
  // </StrictMode>,

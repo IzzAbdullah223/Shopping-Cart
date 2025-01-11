@@ -1,0 +1,72 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'GT Walsheim Pro THIN';
+    src: url('../assets/font/GTWalsheimPro-Thin.woff2');
+}
+
+
+@font-face {
+    font-family: 'GT Walsheim Pro REGULAR';
+    src: url('../assets/font/GTWalsheimPro-Black.woff2');
+}
+
+
+.ModalBTN{
+    padding: 10px 10px;
+    border-radius: 5px;
+   background-color: lightblue;
+
+}
+ 
+.Modal, .Overlay{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+
+.Overlay{
+    background: hsla(0, 0%, 19%, 0.13);
+}
+
+ 
+
+
+.ModalContent{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: #202020;
+    height: 100vh;
+    right: 0;
+    min-width: 18%;
+    padding: 40px 20px;
+}
+
+
+.Top{
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    gap: 20px;
+    font-family: 'GT Walsheim Pro REGULAR';
+}
+
+
+
+.ModalContent  h3,.Top h4{
+    color: #858585;
+    font-family: 'GT Walsheim Pro THIN';
+}
+
+.ModalContent h3{
+    margin-top: auto;
+}

@@ -23,6 +23,7 @@ function PlayDice(){
     const[gameImages,setgameImages]=useState<string[]>([])    
     const Apikey = "2bcc24482f844476a6b3935319801e0c"
     const [ImageIndex,setImageIndex] = useState(0)
+    const [Loading,seLoading] = useState(false)
 
     useEffect(()=>{
         const   fetchData= async()=>{
@@ -65,43 +66,15 @@ function PlayDice(){
            }
  
             setData(formattedData)
+            seLoading(true)
         }
         fetchData()
 
     },[])
 
   
-     if(data!==null){
-        displayGame()
-     }
-
-    function displayGame(){
-     
-        const Image = document.querySelector<HTMLImageElement>(`.${PLAYCSS.ImageContainer} img`)
-            Image!.src = gameImages[ImageIndex]
-
-       const gameTitle = document.querySelector<HTMLHeadingElement>(`.${PLAYCSS.TopRight} h1`)
-            gameTitle!.textContent = data!.GameTitle
-    
-        const Description = document.querySelector<HTMLParagraphElement>(`.${PLAYCSS.GameDescriptionContainer} p`)
-            Description!.textContent =  data!.GameDesc
-
-        const MoreTop = document.querySelectorAll<HTMLHeadingElement>(`.${PLAYCSS.MoreTop} h3`)
-
-        const gameLink = document.querySelector<HTMLAnchorElement>(`.${PLAYCSS.MoreTop} a`)
-             gameLink!.href = data!.Website
-
-             gameLink!.textContent = `Website: ${data!.Website}`
-
-        const MoreTopItems =[`Released: ${data?.Released}`,`Genres: ${data?.Genres}`,`Platforms:${data?.Platforms}`,`Developers: ${data?.Developers}`,`Publishers: ${data?.Publishers}`]
-
-       
-        MoreTop.forEach((GameInfo,index)=>{
-            GameInfo.textContent= MoreTopItems[index]
-        });
-            
-    } 
-
+ 
+  
     function LeftChevron(){
         if(ImageIndex==0){
             setImageIndex(I=>I=6)
@@ -110,11 +83,6 @@ function PlayDice(){
         else{
         setImageIndex(I=>I-=1) 
         }
-        
-    
-        const Image = document.querySelector<HTMLImageElement>(`.${PLAYCSS.ImageContainer} img`)
-            Image!.src = gameImages[ImageIndex]
-
     }
 
     function RightChevron(){
@@ -124,12 +92,6 @@ function PlayDice(){
         else{
         setImageIndex(I=>I+=1)
         }
-        const Image = document.querySelector<HTMLImageElement>(`.${PLAYCSS.ImageContainer} img`)
-            Image!.src=gameImages[ImageIndex]
-            Image?.classList.add(PLAYCSS.MoveImageRight)
-            
-            
-
     }
 
     function DisplayMore(){
@@ -142,6 +104,8 @@ function PlayDice(){
         Chevron?.classList.toggle(PLAYCSS.ChevronUp)
 }
 
+
+    if(Loading){
     return(
     <div style={PLAYCSS}>
         <div className={PLAYCSS.Top}>
@@ -150,14 +114,14 @@ function PlayDice(){
                <h2>Harbor</h2>
            </div>
            <div className={PLAYCSS.TopRight}>
-               <h1>Fallout 4</h1>
+               <h1>{data?.GameTitle}</h1>
            </div>
         </div>
         <div className={PLAYCSS.Below}>
             <div className={PLAYCSS.BelowLeft}>
                 <div className={PLAYCSS.ImageContainer}>
                     <ChevronLeft onClick={LeftChevron}></ChevronLeft>
-                    <img></img>
+                    <img src={gameImages[ImageIndex]}></img>
                     <ChevronRight onClick={RightChevron}></ChevronRight>
                     <div className={PLAYCSS.DotsContainer}>
                         <div className={PLAYCSS.Dot}></div>
@@ -173,16 +137,16 @@ function PlayDice(){
             <div className={PLAYCSS.BelowRight}>
                 <div className={PLAYCSS.GameDescriptionContainer}>
                     <h2>Description</h2>
-                    <p></p>
+                    <p>{data?.GameDesc}</p>
                 </div>
                 <div className={PLAYCSS.MoreContainer}>
                         <div className={PLAYCSS.MoreTop}> 
-                          <a></a>  
-                            <h3></h3>
-                            <h3></h3>
-                            <h3></h3>
-                            <h3></h3>
-                            <h3></h3>
+                          <a>{data?.Website}</a>  
+                            <h3>{data?.Released}</h3>
+                            <h3>{data?.Genres}</h3>
+                            <h3>{data?.Platforms}</h3>
+                            <h3>{data?.Developers}</h3>
+                            <h3>{data?.Publishers}</h3>
                         </div>
                         <div className={PLAYCSS.More} onClick={DisplayMore}>
                             <h3>More</h3>
@@ -198,6 +162,7 @@ function PlayDice(){
    </div>
         
     )
+}
 
 }
 
