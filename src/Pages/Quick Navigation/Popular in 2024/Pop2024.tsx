@@ -14,24 +14,35 @@ import IOS from '../../../assets/icons/iOS'
 
 function Pop2024(){
     const Apikey = "2bcc24482f844476a6b3935319801e0c"
-    interface platforms{
-        name:String
+    interface Platform{
+         name:string
     }
     interface Results{
         name:String,
         background_image:String,
-        parent_platforms:platforms[]
+        parent_platforms:Platforms[]
     }
     interface GamesDetails{
         GamesData:Results[]
     }
 
+    interface Platforms{
+        platform:Platform
+    }
+
     const [Loading,setLoading] = useState(true)
+
     const [data,setData] = useState<GamesDetails | null>(null)
+
+    const[Platforms,setPlatforms] = useState<JSX.Element[] | null>(null)
+
+
     useEffect(()=>{
         const fetchData = async ()=>{
             const response = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&dates=2024-01-01,2024-12-31`)
             const result = await response.json()
+
+
             const FormattedData:GamesDetails={
                 GamesData:result.results
             }
@@ -46,512 +57,47 @@ function Pop2024(){
 
     
     function displayGames(){
-        console.log(data)
-       /* console.log(data)
-        const gameImage = document.querySelectorAll<HTMLImageElement>(`.${POPCSS.GameCard} img`)
-        const gameName = document.querySelectorAll<HTMLHeadingElement>(`.${POPCSS.GameCard} h2`)
-        const gamePlatforms = document.querySelectorAll<HTMLDivElement>(`.${POPCSS.Platforms}`)
-
-
-        gameImage.forEach((gameCardImage,index)=>{
-            gameCardImage.src=data.results[index].background_image
-            gameName[index].textContent=data.results[index].name
-          
-            const Platforms:JSX.Element[]=[]
-
-            for(let i=0;i<data.results[index].platforms.length;i++){
-
-
-                if(data.results[index].platforms[i].platform.name === "PC")
-                    Platforms.push(<Windows key={i}></Windows>)
-
-                if(data.results[index].platforms[i].platform.name === "PlayStation 5")
-                     
-                    Platforms.push(<Playstation key={i}></Playstation>)
-
-                if(data.results[index].platforms[i].platform.name === "Xbox Series S/X")
-           
-                    Platforms.push(<Xbox key={i}></Xbox>)
-
-                if(data.results[index].platforms[i].platform.name === "Nintendo Switch")
-           
-                    Platforms.push(<Nintendo key={i}></Nintendo>)
-
-
-                if(data.results[index].platforms[i].platform.name === "macOS")
-           
-                    Platforms.push(<IOS key={i}></IOS>)
-            }
-     
-            const root = createRoot(gamePlatforms[index])
-
-            root.render(<>{Platforms}</>) 
-        })
-
-        setLoading(L=>L=false)
-        */
+       // setLoading(L=>L=false)
+       
       }
      
 
-      useEffect(()=>{  //It is wrapped in useffect because root.render() otherwise an error will occur 
+      useEffect(()=>{   
         if(data!=null){
-            displayGames()
+              displayGames()
+            //setLoading(L=>L=false)
            }    
-      })
+      },[data])
 
 
     return(
         <div className={POPCSS.PageContainer}>
             <LeftColumn></LeftColumn>
-            <div className="RightSide">
+            <div className={POPCSS.RightSide}>
                 {Loading? (
-                    <h1>Loading</h1>
+                    <div className={POPCSS.LoadingContainer}>
+
+                    </div>
+                     
                 ):(
                     <div className={POPCSS.RightSideContainer}>
                     <h1>Popular in 2024</h1>
                     <div className={POPCSS.GameCardsContainer}>
-    
-                        <div className={POPCSS.GameCard}>
-                            <div className={POPCSS.Top}>
-                                <img></img>
+                        {data?.GamesData.map((game,index)=>(
+                            <div className={POPCSS.GameCard}>
+                                <div className={POPCSS.Top}>
+                                    <img src={game.background_image as string}></img>
+                                </div>
+                                <div className={POPCSS.Below}>
+                                    <h3>Add to cart</h3>
+                                    <Plus></Plus>
+                                </div>
+                                <div className={POPCSS.Platforms}>
+
+                                </div>
                             </div>
-                            <div className={POPCSS.Below}>
-                                <div className={POPCSS.Left}>
-                                    <div className={POPCSS.LeftTop}> 
-                                        <h3>Add to cart</h3>
-                                        <Plus></Plus>
-                                    </div>
-                                    <div className={POPCSS.Platforms}> 
-                                       
-                                    </div>
-                                    <h2>Satisfactory</h2>
-                                </div>
-                                <div className={POPCSS.Right}>
-                                    <h3>$12.98</h3>
-                                </div>
-                                
-                            </div>  
-                        </div>
-    
-                        <div className={POPCSS.GameCard}>
-                            <div className={POPCSS.Top}>
-                                <img></img>
-                            </div>
-                            <div className={POPCSS.Below}>
-                                <div className={POPCSS.Left}>
-                                    <div className={POPCSS.LeftTop}> 
-                                        <h3>Add to cart</h3>
-                                        <Plus></Plus>
-                                    </div>
-                                    <div className={POPCSS.Platforms}> 
-                                  
-                                    </div>
-                                    <h2>V Rising</h2>
-                                </div>
-                                <div className={POPCSS.Right}>
-                                    <h3>$12.98</h3>
-                                </div>
-                                
-                            </div>  
-                        </div>
-    
-                        <div  className={POPCSS.GameCard}>
-                            <div className={POPCSS.Top}>
-                                <img></img>
-                            </div>
-                            <div className={POPCSS.Below}>
-                                <div className={POPCSS.Left}>
-                                    <div className={POPCSS.LeftTop}> 
-                                        <h3>Add to cart</h3>
-                                        <Plus></Plus>
-                                    </div>
-                                    <div className={POPCSS.Platforms}> 
-                                       
-                                    </div>
-                                    <h2>S.T.A.L.K.E.R. 2: Heart of Chornobyl</h2>
-                                </div>
-                                <div className={POPCSS.Right}>
-                                    <h3>$12.98</h3>
-                                </div>
-                                
-                            </div>  
-                        </div>
-    
-    
-                        <div  className={POPCSS.GameCard}>
-                            <div className={POPCSS.Top}>
-                                <img></img>
-                            </div>
-                            <div className={POPCSS.Below}>
-                                <div className={POPCSS.Left}>
-                                    <div className={POPCSS.LeftTop}> 
-                                        <h3>Add to cart</h3>
-                                        <Plus></Plus>
-                                    </div>
-                                    <div className={POPCSS.Platforms}> 
-                                       
-                                    </div>
-                                    <h2>V Rising</h2>
-                                </div>
-                                <div className={POPCSS.Right}>
-                                    <h3>$12.98</h3>
-                                </div>
-                                
-                            </div>  
-                        </div>
-    
-    
-                        <div className={POPCSS.GameCard}>
-                            <div className={POPCSS.Top}>
-                                <img></img>
-                            </div>
-                            <div className={POPCSS.Below}>
-                                <div className={POPCSS.Left}>
-                                    <div className={POPCSS.LeftTop}> 
-                                        <h3>Add to cart</h3>
-                                        <Plus></Plus>
-                                    </div>
-                                    <div className={POPCSS.Platforms}> 
-                                       
-                                    </div>
-                                    <h2>Hollow Knight: Silksong</h2>
-                                </div>
-                                <div className={POPCSS.Right}>
-                                    <h3>$12.98</h3>
-                                </div>
-                                
-                            </div>  
-                        </div>
-    
-                        <div className={POPCSS.GameCard}>
-                            <div className={POPCSS.Top}>
-                                <img></img>
-                            </div>
-                            <div className={POPCSS.Below}>
-                                <div className={POPCSS.Left}>
-                                    <div className={POPCSS.LeftTop}> 
-                                        <h3>Add to cart</h3>
-                                        <Plus></Plus>
-                                    </div>
-                                    <div className={POPCSS.Platforms}> 
-                                        
-                                    </div>
-                                    <h2>Hollow Knight: Silksong</h2>
-                                </div>
-                                <div className={POPCSS.Right}>
-                                    <h3>$12.98</h3>
-                                </div>
-                                
-                            </div>  
-                        </div>
-    
-                        <div className={POPCSS.GameCard}>
-                            <div className={POPCSS.Top}>
-                                <img></img>
-                            </div>
-                            <div className={POPCSS.Below}>
-                                <div className={POPCSS.Left}>
-                                    <div className={POPCSS.LeftTop}> 
-                                        <h3>Add to cart</h3>
-                                        <Plus></Plus>
-                                    </div>
-                                    <div className={POPCSS.Platforms}> 
-                                        
-                                    </div>
-                                    <h2>Hollow Knight: Silksong</h2>
-                                </div>
-                                <div className={POPCSS.Right}>
-                                    <h3>$12.98</h3>
-                                </div>
-                                
-                            </div>  
-                        </div>
-    
-                        <div className={POPCSS.GameCard}>
-                            <div className={POPCSS.Top}>
-                                <img></img>
-                            </div>
-                            <div className={POPCSS.Below}>
-                                <div className={POPCSS.Left}>
-                                    <div className={POPCSS.LeftTop}> 
-                                        <h3>Add to cart</h3>
-                                        <Plus></Plus>
-                                    </div>
-                                    <div className={POPCSS.Platforms}> 
-                                        
-                                    </div>
-                                    <h2>Hollow Knight: Silksong</h2>
-                                </div>
-                                <div className={POPCSS.Right}>
-                                    <h3>$12.98</h3>
-                                </div>
-                                
-                            </div>  
-                        </div>
-    
-                        <div className={POPCSS.GameCard}>
-                            <div className={POPCSS.Top}>
-                                <img></img>
-                            </div>
-                            <div className={POPCSS.Below}>
-                                <div className={POPCSS.Left}>
-                                    <div className={POPCSS.LeftTop}> 
-                                        <h3>Add to cart</h3>
-                                        <Plus></Plus>
-                                    </div>
-                                    <div className={POPCSS.Platforms}> 
-                                        
-                                    </div>
-                                    <h2>Hollow Knight: Silksong</h2>
-                                </div>
-                                <div className={POPCSS.Right}>
-                                    <h3>$12.98</h3>
-                                </div>
-                                
-                            </div>  
-                        </div>
-    
-                        <div className={POPCSS.GameCard}>
-                            <div className={POPCSS.Top}>
-                                <img></img>
-                            </div>
-                            <div className={POPCSS.Below}>
-                                <div className={POPCSS.Left}>
-                                    <div className={POPCSS.LeftTop}> 
-                                        <h3>Add to cart</h3>
-                                        <Plus></Plus>
-                                    </div>
-                                    <div className={POPCSS.Platforms}> 
-                                        
-                                    </div>
-                                    <h2>Hollow Knight: Silksong</h2>
-                                </div>
-                                <div className={POPCSS.Right}>
-                                    <h3>$12.98</h3>
-                                </div>
-                                
-                            </div>  
-                        </div>
-    
-                        <div className={POPCSS.GameCard}>
-                            <div className={POPCSS.Top}>
-                                <img></img>
-                            </div>
-                            <div className={POPCSS.Below}>
-                                <div className={POPCSS.Left}>
-                                    <div className={POPCSS.LeftTop}> 
-                                        <h3>Add to cart</h3>
-                                        <Plus></Plus>
-                                    </div>
-                                    <div className={POPCSS.Platforms}> 
-                                       
-                                    </div>
-                                    <h2>Hollow Knight: Silksong</h2>
-                                </div>
-                                <div className={POPCSS.Right}>
-                                    <h3>$12.98</h3>
-                                </div>
-                                
-                            </div>  
-                        </div>
-    
-                        <div className={POPCSS.GameCard}>
-                            <div className={POPCSS.Top}>
-                                <img></img>
-                            </div>
-                            <div className={POPCSS.Below}>
-                                <div className={POPCSS.Left}>
-                                    <div className={POPCSS.LeftTop}> 
-                                        <h3>Add to cart</h3>
-                                        <Plus></Plus>
-                                    </div>
-                                    <div className={POPCSS.Platforms}> 
-                                        
-                                    </div>
-                                    <h2>Hollow Knight: Silksong</h2>
-                                </div>
-                                <div className={POPCSS.Right}>
-                                    <h3>$12.98</h3>
-                                </div>
-                                
-                            </div>  
-                        </div>
-    
-                        <div className={POPCSS.GameCard}>
-                            <div className={POPCSS.Top}>
-                                <img></img>
-                            </div>
-                            <div className={POPCSS.Below}>
-                                <div className={POPCSS.Left}>
-                                    <div className={POPCSS.LeftTop}> 
-                                        <h3>Add to cart</h3>
-                                        <Plus></Plus>
-                                    </div>
-                                    <div className={POPCSS.Platforms}> 
-                                        
-                                    </div>
-                                    <h2>Hollow Knight: Silksong</h2>
-                                </div>
-                                <div className={POPCSS.Right}>
-                                    <h3>$12.98</h3>
-                                </div>
-                                
-                            </div>  
-                        </div>
-    
-                        <div className={POPCSS.GameCard}>
-                            <div className={POPCSS.Top}>
-                                <img></img>
-                            </div>
-                            <div className={POPCSS.Below}>
-                                <div className={POPCSS.Left}>
-                                    <div className={POPCSS.LeftTop}> 
-                                        <h3>Add to cart</h3>
-                                        <Plus></Plus>
-                                    </div>
-                                    <div className={POPCSS.Platforms}> 
-                                        
-                                    </div>
-                                    <h2>Hollow Knight: Silksong</h2>
-                                </div>
-                                <div className={POPCSS.Right}>
-                                    <h3>$12.98</h3>
-                                </div>
-                                
-                            </div>  
-                        </div>
-    
-                        <div className={POPCSS.GameCard}>
-                            <div className={POPCSS.Top}>
-                                <img></img>
-                            </div>
-                            <div className={POPCSS.Below}>
-                                <div className={POPCSS.Left}>
-                                    <div className={POPCSS.LeftTop}> 
-                                        <h3>Add to cart</h3>
-                                        <Plus></Plus>
-                                    </div>
-                                    <div className={POPCSS.Platforms}> 
-                                    
-                                    </div>
-                                    <h2>Hollow Knight: Silksong</h2>
-                                </div>
-                                <div className={POPCSS.Right}>
-                                    <h3>$12.98</h3>
-                                </div>
-                                
-                            </div>  
-                        </div>
-    
-                        <div className={POPCSS.GameCard}>
-                            <div className={POPCSS.Top}>
-                                <img></img>
-                            </div>
-                            <div className={POPCSS.Below}>
-                                <div className={POPCSS.Left}>
-                                    <div className={POPCSS.LeftTop}> 
-                                        <h3>Add to cart</h3>
-                                        <Plus></Plus>
-                                    </div>
-                                    <div className={POPCSS.Platforms}> 
-                                        
-                                    </div>
-                                    <h2>Hollow Knight: Silksong</h2>
-                                </div>
-                                <div className={POPCSS.Right}>
-                                    <h3>$12.98</h3>
-                                </div>
-                                
-                            </div>  
-                        </div>
-    
-                        <div className={POPCSS.GameCard}>
-                            <div className={POPCSS.Top}>
-                                <img></img>
-                            </div>
-                            <div className={POPCSS.Below}>
-                                <div className={POPCSS.Left}>
-                                    <div className={POPCSS.LeftTop}> 
-                                        <h3>Add to cart</h3>
-                                        <Plus></Plus>
-                                    </div>
-                                    <div className={POPCSS.Platforms}> 
-                                        
-                                    </div>
-                                    <h2>Hollow Knight: Silksong</h2>
-                                </div>
-                                <div className={POPCSS.Right}>
-                                    <h3>$12.98</h3>
-                                </div>
-                                
-                            </div>  
-                        </div>
-    
-                        <div className={POPCSS.GameCard}>
-                            <div className={POPCSS.Top}>
-                                <img></img>
-                            </div>
-                            <div className={POPCSS.Below}>
-                                <div className={POPCSS.Left}>
-                                    <div className={POPCSS.LeftTop}> 
-                                        <h3>Add to cart</h3>
-                                        <Plus></Plus>
-                                    </div>
-                                    <div className={POPCSS.Platforms}> 
-                                        
-                                    </div>
-                                    <h2>Hollow Knight: Silksong</h2>
-                                </div>
-                                <div className={POPCSS.Right}>
-                                    <h3>$12.98</h3>
-                                </div>
-                                
-                            </div>  
-                        </div>
-    
-                        <div className={POPCSS.GameCard}>
-                            <div className={POPCSS.Top}>
-                                <img></img>
-                            </div>
-                            <div className={POPCSS.Below}>
-                                <div className={POPCSS.Left}>
-                                    <div className={POPCSS.LeftTop}> 
-                                        <h3>Add to cart</h3>
-                                        <Plus></Plus>
-                                    </div>
-                                    <div className={POPCSS.Platforms}> 
-                                        
-                                    </div>
-                                    <h2>Hollow Knight: Silksong</h2>
-                                </div>
-                                <div className={POPCSS.Right}>
-                                    <h3>$12.98</h3>
-                                </div>
-                                
-                            </div>  
-                        </div>
-    
-                        <div className={POPCSS.GameCard}>
-                            <div className={POPCSS.Top}>
-                                <img></img>
-                            </div>
-                            <div className={POPCSS.Below}>
-                                <div className={POPCSS.Left}>
-                                    <div className={POPCSS.LeftTop}> 
-                                        <h3>Add to cart</h3>
-                                        <Plus></Plus>
-                                    </div>
-                                    <div className={POPCSS.Platforms}> 
-                                        
-                                    </div>
-                                    <h2>Hollow Knight: Silksong</h2>
-                                </div>
-                                <div className={POPCSS.Right}>
-                                    <h3>$12.98</h3>
-                                </div>
-                                
-                            </div>  
-                        </div>
+                        ))}
+
                     </div>
                     </div>
                 )}
