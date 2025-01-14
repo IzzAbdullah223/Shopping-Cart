@@ -115,22 +115,35 @@ function PlayStation(){
                         <ChevronDown></ChevronDown>
                     </div>
                     <div className={POPCSS.CustomDropDown}>
-                        <div>
-                            <div className={POPCSS.test1}>Name</div>
-                            <Checkmark></Checkmark>
+
+                        <div className={POPCSS.ItemContainer}> 
+                            <div>
+                                <div>Name</div>
+                                <Checkmark></Checkmark>
+                            </div>
                         </div>
-                        <div>
-                            <div>Release date</div>
-                            <Checkmark></Checkmark>
+                    
+                        <div className={POPCSS.ItemContainer}> 
+                            <div>
+                                <div>Name</div>
+                                <Checkmark></Checkmark>
+                            </div>
                         </div>
-                        <div>
-                            <div>Popularity</div>
-                            <Checkmark></Checkmark>
+
+                        <div className={POPCSS.ItemContainer}> 
+                            <div>
+                                <div>Name</div>
+                                <Checkmark></Checkmark>
+                            </div>
                         </div>
-                        <div>
-                            <div>Rating</div>
-                            <Checkmark></Checkmark>
+
+                        <div className={POPCSS.ItemContainer}> 
+                            <div>
+                                <div>Name</div>
+                                <Checkmark></Checkmark>
+                            </div>
                         </div>
+
                     </div>
 
                     
