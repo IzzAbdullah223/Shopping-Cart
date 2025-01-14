@@ -7,6 +7,8 @@ import Playstation from '../../../assets/icons/Playstation'
 import Xbox from '../../../assets/icons/Xbox'
 import Nintendo from '../../../assets/icons/Nintendo'
 import IOS from '../../../assets/icons/iOS'
+import ChevronDown from '../../../assets/icons/ChevronDown'
+import Checkmark from '../../../assets/icons/CheckMark'
 
 
  
@@ -38,7 +40,7 @@ function PlayStation(){
 
     useEffect(()=>{
         const fetchData = async ()=>{
-            const response = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&dates=2024-01-01,2024-12-31`)
+            const response = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&platform=18`)
             const result = await response.json()
 
 
@@ -106,7 +108,32 @@ function PlayStation(){
                         <h1>Loading</h1>  
                 ):(
                     <div className={POPCSS.RightSideContainer}>
-                    <h1>Popular in 2024</h1>
+                    <h1>PlayStation</h1>
+                    <div className={POPCSS.SelectContainer}>
+                        <div>Order by: </div>
+                        <h3>Popularity</h3>
+                        <ChevronDown></ChevronDown>
+                    </div>
+                    <div className={POPCSS.CustomDropDown}>
+                        <div>
+                            <div className={POPCSS.test1}>Name</div>
+                            <Checkmark></Checkmark>
+                        </div>
+                        <div>
+                            <div>Release date</div>
+                            <Checkmark></Checkmark>
+                        </div>
+                        <div>
+                            <div>Popularity</div>
+                            <Checkmark></Checkmark>
+                        </div>
+                        <div>
+                            <div>Rating</div>
+                            <Checkmark></Checkmark>
+                        </div>
+                    </div>
+
+                    
                     <div className={POPCSS.GameCardsContainer}>
                         {data?.GamesData.map((game,index)=>(
                             <div className={POPCSS.GameCard} key={index}>
@@ -138,4 +165,4 @@ function PlayStation(){
         </div>
     )
 }
-export default Playstation
+export default PlayStation
