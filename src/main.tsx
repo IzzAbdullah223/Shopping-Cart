@@ -25,7 +25,7 @@ createRoot(document.getElementById('root')!).render(
   //<StrictMode>
   <> 
   <Header></Header>
-  <Pop2024></Pop2024>
+  <PlayStation></PlayStation>
  
   </>
     
