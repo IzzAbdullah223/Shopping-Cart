@@ -34,7 +34,7 @@ function Pop2024(){
 
     const [data,setData] = useState<GamesDetails | null>(null)
 
-    const[Platforms,setPlatforms] = useState<JSX.Element[] | null>(null)
+    const[Platforms,setPlatforms] = useState<JSX.Element[][] | null>(null)
 
 
     useEffect(()=>{
@@ -56,44 +56,79 @@ function Pop2024(){
     },[])
 
     
-    function displayGames(){
-       // setLoading(L=>L=false)
-       
+    function GamePlatforms(){
+        const tempArray:JSX.Element[][]=Array.from({length:20},()=>[])// Initalzing 20 inner arrays
+        for(let i=0;i<20;i++){
+            for(let j=0;j<data!.GamesData[i].parent_platforms.length;j++){
+
+               switch(data!.GamesData[i].parent_platforms[j].platform.name){
+                    case "PC":
+                        tempArray[i].push(<Windows></Windows>)
+                        break;
+
+                    case "PlayStation":
+                        tempArray[i].push(<Playstation></Playstation>)
+                        break;
+
+                    case "Xbox":
+                        tempArray[i].push(<Xbox></Xbox>)
+                        break;
+                    
+                    case "Apple Macintosh":
+                        tempArray[i].push(<IOS></IOS>)
+                        break;
+
+                    case "Nintendo":
+                        tempArray[i].push(<Nintendo></Nintendo>)
+                        break;
+                }
+
+            }
+        }
+
+      
+        setPlatforms(tempArray)
+    
+        setLoading(L=>L=false)
       }
      
 
       useEffect(()=>{   
         if(data!=null){
-              displayGames()
-            //setLoading(L=>L=false)
+              GamePlatforms()
            }    
       },[data])
 
 
-    return(
+      return(
         <div className={POPCSS.PageContainer}>
             <LeftColumn></LeftColumn>
             <div className={POPCSS.RightSide}>
                 {Loading? (
-                    <div className={POPCSS.LoadingContainer}>
-
-                    </div>
-                     
+                        <h1>Loading</h1>  
                 ):(
                     <div className={POPCSS.RightSideContainer}>
                     <h1>Popular in 2024</h1>
                     <div className={POPCSS.GameCardsContainer}>
                         {data?.GamesData.map((game,index)=>(
-                            <div className={POPCSS.GameCard}>
+                            <div className={POPCSS.GameCard} key={index}>
                                 <div className={POPCSS.Top}>
                                     <img src={game.background_image as string}></img>
                                 </div>
                                 <div className={POPCSS.Below}>
-                                    <h3>Add to cart</h3>
-                                    <Plus></Plus>
-                                </div>
-                                <div className={POPCSS.Platforms}>
-
+                                    <div className={POPCSS.Left}>
+                                        <div className={POPCSS.LeftTop}>
+                                            <h3>Add to cart</h3>
+                                            <Plus></Plus>
+                                        </div>
+                                        <div className={POPCSS.Platforms}>
+                                            {Platforms![index].map((platform,idx)=>(
+                                                React.cloneElement(platform,{key:idx})
+                                            ))}
+                                        </div>
+                                        <h2>{game.name}</h2>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         ))}

@@ -28,15 +28,12 @@
   font-family: "GT Walsheim Pro Bold";
 }
 
- 
 .RightSideContainer{
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
+display: flex;
+flex-direction: column;
+gap: 30px;
 }
 
- 
- 
 .GameCardsContainer{
   display: flex;
   flex-wrap: wrap;
