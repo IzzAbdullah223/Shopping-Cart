@@ -24,7 +24,8 @@ function PlayStation(){
         parent_platforms:Platforms[]
     }
     interface GamesDetails{
-        GamesData:Results[]
+        PopularData:Results[],
+        RatingData:Results[]
     }
 
     interface Platforms{
@@ -34,6 +35,8 @@ function PlayStation(){
     const [Loading,setLoading] = useState(true)
 
     const [data,setData] = useState<GamesDetails | null>(null)
+
+    const [currentData,setCurrentData] = useState<Results[]|null>(null)
 
     const[Platforms,setPlatforms] = useState<JSX.Element[][] | null>(null)
 
@@ -47,31 +50,57 @@ function PlayStation(){
 
     useEffect(()=>{
         const fetchData = async ()=>{
-         //const Popularresponse = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&platform=18`)
-           // const result = await response.json()
+         const popularResponse = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&platform=18`)
+            const result = await popularResponse.json()
 
-           const Ratingresponse = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&platforms=18,187&ordering=-rating`)
-           const result2 = await Ratingresponse.json()
+           const ratingResponse = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&platforms=18,187&ordering=-rating`)
+           const result2 = await ratingResponse.json()
 
 
             const FormattedData:GamesDetails={
-                GamesData:result2.results
+                PopularData:result.results,
+                RatingData:result2.results
             }
-
+           
             setData(FormattedData)
+            setCurrentData(FormattedData.PopularData)
             
         }
         fetchData()
          
     },[])
 
+
+
+      useEffect(()=>{   
+        if(data!=null){
+            // GamePlatforms()
+              switch(selectedItem){
+
+                case "Popularity":
+                    setCurrentData(data.PopularData)
+                    break;
+
+                case "Rating":
+                    setCurrentData(data.RatingData)
+              }
+
+
+        }
+
+           
+      },[currentData,selectedItem])
+
+
     
-    function GamePlatforms(){
+    
+
+      function GamePlatforms(){
         const tempArray:JSX.Element[][]=Array.from({length:20},()=>[])// Initalzing 20 inner arrays
         for(let i=0;i<20;i++){
-            for(let j=0;j<data!.GamesData[i].parent_platforms.length;j++){
+            for(let j=0;j<currentData![i].parent_platforms.length;j++){
 
-               switch(data!.GamesData[i].parent_platforms[j].platform.name){
+               switch(currentData![i].parent_platforms[j].platform.name){
                     case "PC":
                         tempArray[i].push(<Windows></Windows>)
                         break;
@@ -101,14 +130,6 @@ function PlayStation(){
         setLoading(L=>L=false)
       }
 
-      useEffect(()=>{   
-        if(data!=null){
-              GamePlatforms()
-           }    
-      },[data])
-
-
-  
       function ShowDropDown(){
         setSelectorVisible(S=>S=!S)
         setMenuIsVisible(M=>M=!M)
@@ -120,11 +141,6 @@ function PlayStation(){
         setMenuIsVisible(M=>M=!M)
       }
 
-      function setName(){
-        setSelectedItem(s=>s="Name")
-        setSelectorVisible(S=>S=!S)
-        setMenuIsVisible(M=>M=!M)
-      }
 
       function setReleaseDate(){
         setSelectedItem(s=>s="Release Date")
@@ -157,13 +173,6 @@ function PlayStation(){
 
                 
                         <div className={POPCSS.CustomDropDown} style={{display: isMenuVisible? "flex": "none"}}>
-
-                            <div className={POPCSS.ItemContainer} onClick={setName}> 
-                                <div>
-                                    <div>Name</div>
-                                    <Checkmark></Checkmark>
-                                </div>
-                            </div>
                     
                             <div className={POPCSS.ItemContainer} onClick={setReleaseDate}> 
                                 <div>
@@ -191,7 +200,7 @@ function PlayStation(){
 
                     
                     <div className={POPCSS.GameCardsContainer}>
-                        {data?.GamesData.map((game,index)=>(
+                        {currentData?.map((game,index)=>(
                             <div className={POPCSS.GameCard} key={index}>
                                 <div className={POPCSS.Top}>
                                     <img src={game.background_image as string}></img>
