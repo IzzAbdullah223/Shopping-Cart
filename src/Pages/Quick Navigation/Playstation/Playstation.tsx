@@ -74,7 +74,7 @@ function PlayStation(){
 
       useEffect(()=>{   
         if(data!=null){
-            // GamePlatforms()
+             GamePlatforms()
               switch(selectedItem){
 
                 case "Popularity":
@@ -136,20 +136,20 @@ function PlayStation(){
       }
 
       function setPopularity(){
-        setSelectedItem(s=>s="Popularity")
+        setSelectedItem(S=>S="Popularity")
         setSelectorVisible(S=>S=!S)
         setMenuIsVisible(M=>M=!M)
       }
 
 
       function setReleaseDate(){
-        setSelectedItem(s=>s="Release Date")
+        setSelectedItem(S=>S="Release Date")
         setSelectorVisible(S=>S=!S)
         setMenuIsVisible(M=>M=!M)
       }
 
       function setRating(){
-        setSelectedItem(s=>s="Rating")
+        setSelectedItem(S=>S="Rating")
         setSelectorVisible(S=>S=!S)
         setMenuIsVisible(M=>M=!M)
       }
@@ -159,7 +159,7 @@ function PlayStation(){
             <LeftColumn></LeftColumn>
             <div className={POPCSS.RightSide}>
                 {Loading? (
-                        <h1>Loading</h1>  
+                    <h1>Loading</h1>
                 ):(
                     <div className={POPCSS.RightSideContainer}>
                     <h1>PlayStation</h1>
@@ -170,8 +170,6 @@ function PlayStation(){
                             <ChevronDown></ChevronDown>
                         </div>
 
-
-                
                         <div className={POPCSS.CustomDropDown} style={{display: isMenuVisible? "flex": "none"}}>
                     
                             <div className={POPCSS.ItemContainer} onClick={setReleaseDate}> 
@@ -196,9 +194,6 @@ function PlayStation(){
                             </div>
                         </div>
                  
-                  
-
-                    
                     <div className={POPCSS.GameCardsContainer}>
                         {currentData?.map((game,index)=>(
                             <div className={POPCSS.GameCard} key={index}>

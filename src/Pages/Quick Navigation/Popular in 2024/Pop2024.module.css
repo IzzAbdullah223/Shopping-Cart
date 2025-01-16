@@ -49,6 +49,8 @@ gap: 30px;
 align-items: flex-start;
 }
 
+ 
+
 .SelectContainer{
   display: flex;
   gap: 10px;
@@ -171,4 +173,15 @@ padding: 2px 10px;
   cursor: pointer;
 }
 
- 
+.RightSide{
+  flex: 1;
+}
+
+.LoadingContainer{
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
