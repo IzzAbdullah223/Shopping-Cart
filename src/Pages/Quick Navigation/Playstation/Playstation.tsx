@@ -39,14 +39,23 @@ function PlayStation(){
 
     const[selectedItem,setSelectedItem] = useState<String>("Popularity")
 
+    const [isMenuVisible,setMenuIsVisible] = useState(false)
+
+    const [isSelectorVisible,setSelectorVisible] = useState(true)
+    
+
+
     useEffect(()=>{
         const fetchData = async ()=>{
-            const response = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&platform=18`)
-            const result = await response.json()
+         //const Popularresponse = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&platform=18`)
+           // const result = await response.json()
+
+           const Ratingresponse = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&platforms=18,187&ordering=-rating`)
+           const result2 = await Ratingresponse.json()
 
 
             const FormattedData:GamesDetails={
-                GamesData:result.results
+                GamesData:result2.results
             }
 
             setData(FormattedData)
@@ -91,7 +100,6 @@ function PlayStation(){
     
         setLoading(L=>L=false)
       }
-     
 
       useEffect(()=>{   
         if(data!=null){
@@ -100,28 +108,34 @@ function PlayStation(){
       },[data])
 
 
-      useEffect(()=>{
-        let handler=()=>{}
-      })
-
+  
       function ShowDropDown(){
-         console.log(document.querySelector(`.${POPCSS.SelectContainer}`))
+        setSelectorVisible(S=>S=!S)
+        setMenuIsVisible(M=>M=!M)
       }
 
       function setPopularity(){
         setSelectedItem(s=>s="Popularity")
+        setSelectorVisible(S=>S=!S)
+        setMenuIsVisible(M=>M=!M)
       }
 
       function setName(){
         setSelectedItem(s=>s="Name")
+        setSelectorVisible(S=>S=!S)
+        setMenuIsVisible(M=>M=!M)
       }
 
       function setReleaseDate(){
         setSelectedItem(s=>s="Release Date")
+        setSelectorVisible(S=>S=!S)
+        setMenuIsVisible(M=>M=!M)
       }
 
       function setRating(){
         setSelectedItem(s=>s="Rating")
+        setSelectorVisible(S=>S=!S)
+        setMenuIsVisible(M=>M=!M)
       }
 
       return(
@@ -133,42 +147,47 @@ function PlayStation(){
                 ):(
                     <div className={POPCSS.RightSideContainer}>
                     <h1>PlayStation</h1>
-                    <div className={POPCSS.SelectContainer} onClick={ShowDropDown}>
-                        <div>Order by: </div>
-                        <h3>Popularity</h3>
-                        <ChevronDown></ChevronDown>
-                    </div>
-                    <div className={POPCSS.CustomDropDown} onClick={setName}>
 
-                        <div className={POPCSS.ItemContainer}> 
-                            <div>
-                                <div>Name</div>
-                                <Checkmark></Checkmark>
-                            </div>
+                        <div className={POPCSS.SelectContainer} onClick={ShowDropDown} style={{display:isSelectorVisible? "flex":"none"}}>
+                            <div>Order by: </div>
+                            <h3>{selectedItem}</h3>
+                            <ChevronDown></ChevronDown>
                         </div>
+
+
+                
+                        <div className={POPCSS.CustomDropDown} style={{display: isMenuVisible? "flex": "none"}}>
+
+                            <div className={POPCSS.ItemContainer} onClick={setName}> 
+                                <div>
+                                    <div>Name</div>
+                                    <Checkmark></Checkmark>
+                                </div>
+                            </div>
                     
-                        <div className={POPCSS.ItemContainer} onClick={setReleaseDate}> 
-                            <div>
-                                <div>Release date</div>
-                                <Checkmark></Checkmark>
+                            <div className={POPCSS.ItemContainer} onClick={setReleaseDate}> 
+                                <div>
+                                    <div>Release date</div>
+                                    <Checkmark></Checkmark>
+                                </div>
+                            </div>
+
+                            <div className={POPCSS.ItemContainer} onClick={setPopularity}> 
+                                <div>
+                                    <div>Popularity</div>
+                                    <Checkmark></Checkmark>
+                                </div>
+                            </div>
+
+                            <div className={POPCSS.ItemContainer} onClick={setRating}> 
+                                <div>
+                                    <div>Rating</div>
+                                    <Checkmark></Checkmark>
+                                </div>
                             </div>
                         </div>
-
-                        <div className={POPCSS.ItemContainer} onClick={setPopularity}> 
-                            <div>
-                                <div>Popularity</div>
-                                <Checkmark></Checkmark>
-                            </div>
-                        </div>
-
-                        <div className={POPCSS.ItemContainer} onClick={setRating}> 
-                            <div>
-                                <div>Rating</div>
-                                <Checkmark></Checkmark>
-                            </div>
-                        </div>
-
-                    </div>
+                 
+                  
 
                     
                     <div className={POPCSS.GameCardsContainer}>

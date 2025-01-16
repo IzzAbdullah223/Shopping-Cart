@@ -69,6 +69,8 @@ font-size: 1.2rem;
   font-family: 'GT Walsheim Bold';
 }
 
+ 
+
 .CustomDropDown{
   background-color: white;
   color: black;
@@ -79,6 +81,7 @@ font-size: 1.2rem;
   padding-bottom: 10px;
   display: none;
 }
+
 
 .ItemContainer{
 cursor: pointer;
@@ -113,6 +116,7 @@ padding: 2px 10px;
   border-radius: 5%;
   transition: transform 0.4s ease-out;
   flex: 1;
+  
 }
 
 .GameCard:hover{
