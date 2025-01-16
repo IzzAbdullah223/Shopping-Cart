@@ -37,6 +37,7 @@ function PlayStation(){
 
     const[Platforms,setPlatforms] = useState<JSX.Element[][] | null>(null)
 
+    const[selectedItem,setSelectedItem] = useState<String>("Popularity")
 
     useEffect(()=>{
         const fetchData = async ()=>{
@@ -86,7 +87,6 @@ function PlayStation(){
             }
         }
 
-      
         setPlatforms(tempArray)
     
         setLoading(L=>L=false)
@@ -100,6 +100,30 @@ function PlayStation(){
       },[data])
 
 
+      useEffect(()=>{
+        let handler=()=>{}
+      })
+
+      function ShowDropDown(){
+         console.log(document.querySelector(`.${POPCSS.SelectContainer}`))
+      }
+
+      function setPopularity(){
+        setSelectedItem(s=>s="Popularity")
+      }
+
+      function setName(){
+        setSelectedItem(s=>s="Name")
+      }
+
+      function setReleaseDate(){
+        setSelectedItem(s=>s="Release Date")
+      }
+
+      function setRating(){
+        setSelectedItem(s=>s="Rating")
+      }
+
       return(
         <div className={POPCSS.PageContainer}>
             <LeftColumn></LeftColumn>
@@ -109,12 +133,12 @@ function PlayStation(){
                 ):(
                     <div className={POPCSS.RightSideContainer}>
                     <h1>PlayStation</h1>
-                    <div className={POPCSS.SelectContainer}>
+                    <div className={POPCSS.SelectContainer} onClick={ShowDropDown}>
                         <div>Order by: </div>
                         <h3>Popularity</h3>
                         <ChevronDown></ChevronDown>
                     </div>
-                    <div className={POPCSS.CustomDropDown}>
+                    <div className={POPCSS.CustomDropDown} onClick={setName}>
 
                         <div className={POPCSS.ItemContainer}> 
                             <div>
@@ -123,23 +147,23 @@ function PlayStation(){
                             </div>
                         </div>
                     
-                        <div className={POPCSS.ItemContainer}> 
+                        <div className={POPCSS.ItemContainer} onClick={setReleaseDate}> 
                             <div>
-                                <div>Name</div>
+                                <div>Release date</div>
                                 <Checkmark></Checkmark>
                             </div>
                         </div>
 
-                        <div className={POPCSS.ItemContainer}> 
+                        <div className={POPCSS.ItemContainer} onClick={setPopularity}> 
                             <div>
-                                <div>Name</div>
+                                <div>Popularity</div>
                                 <Checkmark></Checkmark>
                             </div>
                         </div>
 
-                        <div className={POPCSS.ItemContainer}> 
+                        <div className={POPCSS.ItemContainer} onClick={setRating}> 
                             <div>
-                                <div>Name</div>
+                                <div>Rating</div>
                                 <Checkmark></Checkmark>
                             </div>
                         </div>
