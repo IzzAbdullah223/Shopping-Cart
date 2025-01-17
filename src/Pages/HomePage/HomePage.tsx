@@ -14,7 +14,6 @@ function HomePage() {
             Your browser does not support
           </video>
           <div>
-            <Header></Header>
             <Content></Content>
           </div>
       </div>
