@@ -17,7 +17,7 @@ import Pop2024 from './Pages/Quick Navigation/Popular in 2024/Pop2024'
 createRoot(document.getElementById('root')!).render(
   //<StrictMode>
   <> 
- 
+  <Header></Header>
   </>
     
  // </StrictMode>,

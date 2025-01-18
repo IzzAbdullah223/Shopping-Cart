@@ -71,6 +71,7 @@
     animation: Slide 0.5s ease;
     font-family: 'GT Walsheim Pro BOLD';
     overflow-y: auto;
+    scrollbar-width: none;
 }
 
 @keyframes Slide{

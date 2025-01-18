@@ -1,4 +1,4 @@
-import Header from "../../Header/Header"
+
 import Content from "./Content"
 import HomepageCSS from "./Homepage.module.css"
 import PykeVideo from '../../assets/Images/pyke.mp4'

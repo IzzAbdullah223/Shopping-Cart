@@ -1,36 +1,34 @@
-import HeaderCSS from '../Header/Header.module.css'
+import HeaderCSS from './Header.module.css'
 import Logo from '../assets/Images/logo.png'
-import Cart from '../assets/Images/cart1.svg'
-import Magnify from '../assets/Images/magnify.svg'
-import { useRef, useState } from 'react'
+import Magnify from '../assets/icons/Magnify'
+import Cart from '../assets/icons/Cart'
 import Modal from '../Modal/Modal'
+import {useState} from 'react'
+
 
 function Header(){
 
     const[modal,setModal] = useState(false)
-    const toggleModal = () =>{
-        setModal(!modal)
-    }
 
+        const toggleModal = () => {
+            setModal(!modal)
+        }
 
-    const SearchBarContainerRef = useRef<HTMLDivElement | null>(null)
-
-
-    const Animation=()=>{
-           SearchBarContainerRef.current?.classList.add("SearchBarContainerAnimation")
-    }
+        function test(){
+            console.log("yes")
+        }
 
     return(
         <div className={HeaderCSS.HeaderContainer}>
             <div className={HeaderCSS.LeftSide}>
                 <img src={Logo}></img>
-                <h2 className={HeaderCSS.HeaderTitle}>Game Harbor</h2>
+                <h1>Game Harbor</h1>
             </div>
-            <div ref={SearchBarContainerRef} className={HeaderCSS.SearchBarContainer}>
-                <input type='text' placeholder='Search games...' onClick={Animation}></input>
-                <img src={Magnify}></img>
+            <div className={HeaderCSS.SearchBarContainer}>
+                <input type='text' placeholder='Search games...'></input>
+                <Magnify></Magnify>
             </div>
-            <img src={Cart} onClick={toggleModal}></img>
+            <Cart onClick={toggleModal}></Cart>
             <Modal modal={modal} toggleModal={toggleModal}></Modal>
         </div>
     )

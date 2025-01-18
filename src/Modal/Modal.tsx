@@ -7,13 +7,7 @@ type modalProps={
 }
 
 function Modal({modal,toggleModal}:modalProps){
-
  
-   // const [modal,setModal] = useState(false);
-
-   // const toggleModal = () =>{
-   //     setModal(!modal)
-   // }
 
     const PicsTest:string[]=['https://media.rawg.io/media/games/bde/bdef96f7782fba0ff62dabc37ff4b1f0.jpg','https://media.rawg.io/media/games/bde/bdef96f7782fba0ff62dabc37ff4b1f0.jpg',
     'https://media.rawg.io/media/games/bde/bdef96f7782fba0ff62dabc37ff4b1f0.jpg',

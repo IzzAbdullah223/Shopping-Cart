@@ -6,104 +6,75 @@
 
   @font-face {
     font-family: 'GT Walsheim Pro REGULAR';
-    src:url('../assets/font/GTWalsheimPro-Black.woff2') format('woff2');
+    src:url('../assets/font/GTWalsheimPro-Light.woff2') format('woff2');
     font-weight: 300;
   }
 
+  body{
+    background-color: #0f1011;
+  }
 
   .HeaderContainer{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 40px;
-}
+    font-family: 'GT Walsheim Pro REGULAR';
+    gap: 20px;
+    padding: 22px 40px;
+    outline: red solid;
+  }
 
-.HeaderContainer img{
-    width: 55px;
-}
-
-
-.LeftSide{
+  .LeftSide{
     display: flex;
     align-items: center;
-    gap: 20px;
     color: white;
-    font-family: 'GT Walsheim Pro REGULAR';
-    transition: transform 0.3s;
-}
+    gap: 13px;
+  }
 
-.LeftSide:hover{
-    cursor: pointer;
-    transform: scale(1.1);
-}
+  .LeftSide h1{
+    font-size: 1.7rem;
+    letter-spacing: 1px;
+  }
 
+  @media(max-width:750px){
+    .LeftSide h1{
+      display: none;
 
-@media(max-width:579px){
-    .HeaderTitle{
-           display: none
-        }
-
-    .HeaderContainer{
-        margin: -10px;
     }
-}
+  }
 
+  .LeftSide img{
+    width: 50px;
+    height: auto;
+  }
 
-.SearchBarContainer{
-    background-color: white;
+  .SearchBarContainer{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-width: 16%;
-    border-radius: 10px;
-    height: 35px;
     overflow: hidden;
-    transition: min-width 0.2s ease-out;
-}
+    background-color: white;
+    width: 335px;
+    padding: 6px;
+    border-radius: 10px;
+    margin-right: 20px
+  }
 
-.SearchBarContainer:focus-within{
-    min-width: 20%;
-}
+  
 
-@media(max-width:1600px){
-    .SearchBarContainer:focus-within{
-        min-width: 32%;
-    }
-}
-
-@media(max-width :900px){
-    
-        .SearchBarContainer:focus-within{
-            min-width: 50%;
-        }
-   
-}
-
-@media(max-width :570px){
-    
-    .SearchBarContainer:focus-within{
-        min-width: 80%;
-    }
-
-}
- 
- 
-.SearchBarContainer input{
-    border: none;
-    flex: 1;
-    padding: 10px;
-    font-size: 1rem;
-    height: 30px;
-}
-
-.SearchBarContainer input:focus{
+  .SearchBarContainer input,.SearchBarContainer input:focus{
     border: none;
     outline: none;
-}
+    flex: 1;
+    font-size: 1.1rem;
+    padding-left: 10px;
+  }
 
-.SearchBarContainer img{
-    margin-right: 10px;
-    width: 20px;   
-}
+
+
+
+ 
+
+ 
 
  
