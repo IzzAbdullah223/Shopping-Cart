@@ -136,20 +136,20 @@ function PlayStation(){
       }
 
       function setPopularity(){
-        setSelectedItem(S=>S="Popularity")
+        setSelectedItem("Popularity")
         setSelectorVisible(S=>S=!S)
         setMenuIsVisible(M=>M=!M)
       }
 
 
       function setReleaseDate(){
-        setSelectedItem(S=>S="Release Date")
+        setSelectedItem("Release Date")
         setSelectorVisible(S=>S=!S)
         setMenuIsVisible(M=>M=!M)
       }
 
       function setRating(){
-        setSelectedItem(S=>S="Rating")
+        setSelectedItem("Rating")
         setSelectorVisible(S=>S=!S)
         setMenuIsVisible(M=>M=!M)
       }

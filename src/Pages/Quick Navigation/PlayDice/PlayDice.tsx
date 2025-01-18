@@ -87,7 +87,7 @@ function PlayDice(){
 
     function RightChevron(){
         if(ImageIndex==6){
-            setImageIndex(I=>I=0)
+            setImageIndex(0)
         }
         else{
         setImageIndex(I=>I+=1)

@@ -71,7 +71,7 @@ function XboxOne(){
             root.render(<>{Platforms}</>) 
         })
 
-        setLoading(L=>L=false)
+        setLoading(false)
       }
      
 

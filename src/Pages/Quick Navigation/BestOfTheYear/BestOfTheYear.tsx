@@ -1,6 +1,6 @@
 import POPCSS from '../../Quick Navigation/Popular in 2024/Pop2024.module.css'
 import LeftColumn from '../LeftColumn/LeftColumn'
-import React, { useState,useEffect,useRef } from 'react'
+import { useState,useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import Plus from '../../../assets/icons/Plus'
 import Windows from '../../../assets/icons/Windows'
