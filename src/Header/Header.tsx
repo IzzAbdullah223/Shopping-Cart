@@ -14,8 +14,8 @@ function Header(){
             setModal(!modal)
         }
 
-        function test(){
-            console.log("yes")
+        const Animation = () =>{
+          document.querySelector(`.${HeaderCSS.SearchBarContainer}`)?.classList.add("SearchBarContainerAnimation")
         }
 
     return(
@@ -24,7 +24,7 @@ function Header(){
                 <img src={Logo}></img>
                 <h1>Game Harbor</h1>
             </div>
-            <div className={HeaderCSS.SearchBarContainer}>
+            <div className={HeaderCSS.SearchBarContainer} onClick={Animation}>
                 <input type='text' placeholder='Search games...'></input>
                 <Magnify></Magnify>
             </div>

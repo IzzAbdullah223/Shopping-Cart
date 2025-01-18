@@ -28,6 +28,7 @@
     align-items: center;
     color: white;
     gap: 13px;
+    transition: transform 0.3s ease;
   }
 
   .LeftSide h1{
@@ -35,17 +36,24 @@
     letter-spacing: 1px;
   }
 
-  @media(max-width:775px){
+  .LeftSide img{
+    width: 50px;
+    height: auto;
+  }
+
+  .LeftSide:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+  @media(max-width:780px){
     .LeftSide h1{
       display: none;
 
     }
   }
 
-  .LeftSide img{
-    width: 50px;
-    height: auto;
-  }
+ 
 
   .SearchBarContainer{
     display: flex;
@@ -53,10 +61,23 @@
     justify-content: space-between;
     overflow: hidden;
     background-color: white;
-    width: 335px;
+    width: 340px;
     padding: 6px;
     border-radius: 10px;
-    margin-right: 20px
+    margin-right: 20px;
+    transition: width 0.2s ease-out;
+  }
+
+  @keyframes bounce{
+    0%{width: 340px;}
+    70%{width: 550px;}
+    100%{width: 530px;}
+  }
+
+  .SearchBarContainer:focus-within{
+    width: 530px;
+    animation: bounce 0.5s ease
+
   }
 
   
@@ -68,6 +89,11 @@
     font-size: 1.1rem;
     padding-left: 10px;
   }
+
+
+ 
+
+
 
 
 
