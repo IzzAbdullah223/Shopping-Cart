@@ -1,4 +1,4 @@
-import { useState,useEffect,useRef } from 'react'
+import {useEffect,useRef } from 'react'
 import ModalCSS from './Modal.module.css'
 
 type modalProps={
@@ -46,7 +46,7 @@ function Modal({modal,toggleModal}:modalProps){
                                     <h3>Clear</h3>
                                 </div>
                                 <div className={ModalCSS.ModalGamesContainer}>
-                                {PicsTest.map((game,index)=>(
+                                {PicsTest.map((_,index)=>(
                                     <div className={ModalCSS.ModalGame} key={index}>
                                         <button className={ModalCSS.DeleteGame}>x</button>
                                         <div className={ModalCSS.GameInfo}>
