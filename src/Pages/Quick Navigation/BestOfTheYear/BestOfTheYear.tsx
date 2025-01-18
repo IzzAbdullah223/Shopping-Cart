@@ -71,7 +71,7 @@ function BestOfTheYear(){
             root.render(<>{Platforms}</>) 
         })
 
-        setLoading(L=>L=false)
+        setLoading(false)
       }
      
 

@@ -127,7 +127,7 @@ function PlayStation(){
 
         setPlatforms(tempArray)
     
-        setLoading(L=>L=false)
+        setLoading(false)
       }
 
       function ShowDropDown(){

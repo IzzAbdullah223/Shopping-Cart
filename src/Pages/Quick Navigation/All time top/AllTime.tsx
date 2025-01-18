@@ -73,7 +73,7 @@ function AllTime(){
             root.render(<>{Platforms}</>) 
         })
 
-        setLoading(L=>L=false)
+        setLoading(false)
       }
      
 

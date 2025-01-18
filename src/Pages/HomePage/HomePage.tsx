@@ -7,6 +7,7 @@ import Rating from '../../assets/Images/rating.svg'
 import Trophy from '../../assets/Images/Trophy.svg'
 import Crown from '../../assets/Images/crown.svg'
 import ContentCSS from '../HomePage/Content.module.css'
+import {Link} from 'react-router-dom'
 
 function HomePage() {
   
