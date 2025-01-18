@@ -21,7 +21,6 @@
     font-family: 'GT Walsheim Pro REGULAR';
     gap: 20px;
     padding: 22px 40px;
-    outline: red solid;
   }
 
   .LeftSide{
@@ -36,7 +35,7 @@
     letter-spacing: 1px;
   }
 
-  @media(max-width:750px){
+  @media(max-width:775px){
     .LeftSide h1{
       display: none;
 
