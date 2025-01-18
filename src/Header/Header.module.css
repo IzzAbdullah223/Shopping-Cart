@@ -46,7 +46,7 @@
     transform: scale(1.1);
 }
 
-  @media(max-width:780px){
+  @media(max-width:790px){
     .LeftSide h1{
       display: none;
 

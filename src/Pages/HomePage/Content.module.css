@@ -24,7 +24,7 @@
     
     
     .MiddleContainer{
-        height: 90vh;
+        min-height: 90vh;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -48,14 +48,14 @@
         display: flex;
         flex-direction: column;
         gap: 30px;
-       
-   
+        padding: 0px 20px;
        
     }
     
     .LeftSide>div{
         background-color: rgba(255, 255, 255, 0.178); /* White with 30% opacity */
         backdrop-filter: blur(10px); /* Apply blur effect */
+        
     }
     
     .LeftTop{
@@ -77,6 +77,7 @@
     .LeftTop p{
         font-size: 1.2rem;
         font-family: 'GT Walsheim Pro LIGHT';
+        text-align: center;
     }
     
     .LeftTop span{
@@ -87,6 +88,7 @@
         font-family: 'GT Walsheim Pro LIGHT';
         text-align: center;
         font-size: 1.3rem;
+        
        
     }
     
