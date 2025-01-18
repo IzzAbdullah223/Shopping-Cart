@@ -21,8 +21,6 @@
        
       }
     
-    
-    
     .MiddleContainer{
         min-height: 90vh;
         display: flex;
@@ -101,7 +99,7 @@
     
     
      
-    .LeftBottom>div{
+    .LeftBottom>a{
         display: flex;
         align-items: center;
         gap: 10px;
@@ -112,15 +110,21 @@
         transition: transform 0.3s, background-color 0.2s;
         font-family: 'GT Walsheim Pro REGULAR';
         font-size: 1.1rem;
+        text-decoration: none;
+        color: inherit;
     }
     
-    .LeftBottom>div:hover{
+    .LeftBottom>a:hover{
         transform: scale(1.1);
         background-color: #6bbbbb;
     }
     
     .BottomGit{
         margin-right: -90px;
+    }
+
+    .BottomR img{
+        width: 25px;
     }
     
     @media(max-width:635px){
@@ -140,11 +144,6 @@
     
     }
     
-    
-    .BottomR img{
-        width: 25px;
-    }
-    
     .Navigation{
         display: flex;
         flex-direction: column;
@@ -160,17 +159,11 @@
         text-align: center;
         font-family: 'GT Walsheim Pro REGULAR';
     }
-
- 
-    
      
-    
     .Navigation img{
         width: 20px;
     }
 
- 
-    
     .Navigation>div{
         display: flex;
         align-items: center;
@@ -190,8 +183,4 @@
         background-color: #6bbbbb;
     }
 
-    .Link{
-        text-decoration: none;
-        color: inherit;
-    }
     

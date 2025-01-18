@@ -13,7 +13,6 @@ function HomePage() {
 
   return (
   <div className={ContentCSS.MiddleContainer}>
-
       <div className={ContentCSS.LeftSide}>
         <div className={ContentCSS.LeftTop}>
             <h1>Game Harbor</h1>
@@ -21,14 +20,16 @@ function HomePage() {
             <div>Enjoy 😉</div>
         </div>
         <div className={ContentCSS.LeftBottom}>
-            <div className={ContentCSS.BottomGit}>
+          
+            <a className={ContentCSS.BottomGit} href='https://github.com/IzzAbdullah223'>
                 <img src={github}></img>
                 <div >Izz Abdallah</div>
-            </div>
-            <div className={ContentCSS.BottomR}>
+            </a>
+             
+            <a className={ContentCSS.BottomR} href='https://rawg.io/apidocs'>
                 <img src={RAWG}></img>
                 <div>RAWG API</div>
-            </div>
+            </a>
         </div>
       </div>
 
@@ -61,10 +62,10 @@ function HomePage() {
             <h3>All time</h3>
         </div>
       </div>
-      
+
   </div>
-   
   )
+
 }
 
 export default HomePage
