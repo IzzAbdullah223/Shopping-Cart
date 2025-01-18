@@ -88,7 +88,7 @@ function Pop2024(){
       
         setPlatforms(tempArray)
     
-        setLoading(L=>L=false)
+        setLoading(false)
       }
      
 
