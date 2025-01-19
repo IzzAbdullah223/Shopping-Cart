@@ -29,6 +29,7 @@
     color: white;
     gap: 13px;
     transition: transform 0.3s ease;
+    text-decoration: none;
   }
 
   .LeftSide h1{

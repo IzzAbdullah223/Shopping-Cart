@@ -97,8 +97,6 @@
         border-radius: 15px;
     }
     
-    
-     
     .LeftBottom>a{
         display: flex;
         align-items: center;
@@ -164,7 +162,7 @@
         width: 20px;
     }
 
-    .Navigation>div{
+    .Navigation>.Link{
         display: flex;
         align-items: center;
         justify-content: center;
@@ -175,10 +173,13 @@
         cursor: pointer;
         transition: transform 0.3s, background-color 0.2s;
         font-family: 'GT Walsheim Pro THIN';
+        text-decoration: none;
+        color: inherit;
     }
+
     
     
-    .Navigation>div:hover{
+    .Navigation>.Link:hover{
         transform: scale(1.1);
         background-color: #6bbbbb;
     }

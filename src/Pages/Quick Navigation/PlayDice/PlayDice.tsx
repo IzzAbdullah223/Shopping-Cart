@@ -37,7 +37,6 @@ function PlayDice(){
 
             const response2 = await fetch(`https://api.rawg.io/api/games?key=${Apikey}`)
             const result2 = await response2.json()
-            console.log(result2)
            setgameImages(g=>[...g,result.background_image])
            for(let i=0;i<6;i++){
            setgameImages(g=>[...g,result1.results[i].image])
@@ -77,7 +76,7 @@ function PlayDice(){
   
     function LeftChevron(){
         if(ImageIndex==0){
-            setImageIndex(I=>I=6)
+            setImageIndex(6)
         }
         
         else{
@@ -105,7 +104,7 @@ function PlayDice(){
 }
 
 
-    if(Loading){
+   // if(Loading){
     return(
     <div style={PLAYCSS}>
         <div className={PLAYCSS.Top}>
@@ -162,11 +161,8 @@ function PlayDice(){
    </div>
         
     )
-}
+//}
 
 }
-
-
-
 
 export default PlayDice

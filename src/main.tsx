@@ -5,6 +5,7 @@ import { createBrowserRouter,RouterProvider} from 'react-router-dom'
 import Layout from './Layout'
 import HomePage from './Pages/HomePage/HomePage'
 import PlayDice from './Pages/Quick Navigation/PlayDice/PlayDice'
+import BestOfTheYear from './Pages/Quick Navigation/BestOfTheYear/BestOfTheYear'
 
 const router = createBrowserRouter([
   {
@@ -12,7 +13,8 @@ const router = createBrowserRouter([
     element:<Layout></Layout>,
     children:[
       {path:'/', element:<HomePage></HomePage>},
-      {path:'/', element:<PlayDice></PlayDice>}
+      {path:'PlayDice', element:<PlayDice></PlayDice>},
+      {path: "BestOfTheYear", element:<BestOfTheYear></BestOfTheYear>}
     ]
   }
 ])

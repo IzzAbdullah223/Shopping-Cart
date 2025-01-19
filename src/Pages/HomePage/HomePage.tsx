@@ -36,32 +36,32 @@ function HomePage() {
 
       <div className={ContentCSS.Navigation}>
         <h2>Quick Navigation</h2>
-        <div>
+        <Link to="PlayDice" className={ContentCSS.Link}> 
             <img src={Dice}></img>
             <h3>Play Dice</h3>
-        </div>
-        <div>
+        </Link>
+        <Link to="AddedGames" className={ContentCSS.Link}>
             <img src={Tiles}></img>
             <h3>Added Games</h3>
-        </div>
-        <div>
+        </Link>
+        <Link to="Last30Days" className={ContentCSS.Link}>
             <img src={Star}></img>
             <h3>Last 30 days</h3>
-        </div>
+        </Link>
          
-        <div>
+        <Link to="PopularIn2024" className={ContentCSS.Link}>
            <img src={Rating}></img>
              <h3>Popular in 2024</h3>  
-        </div>
+        </Link>
          
-        <div>
+        <Link to="BestOfTheYear" className={ContentCSS.Link} >
             <img src={Trophy}></img>
             <h3>Best of the year </h3>
-        </div>
-        <div>
+        </Link>
+        <Link to="AllTime" className={ContentCSS.Link}>
             <img src={Crown}></img>
-            <h3>All time</h3>
-        </div>
+            <h3>All time top</h3>
+        </Link>
       </div>
 
   </div>

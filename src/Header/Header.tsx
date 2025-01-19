@@ -4,6 +4,7 @@ import Magnify from '../assets/icons/Magnify'
 import Cart from '../assets/icons/Cart'
 import Modal from '../Modal/Modal'
 import {useState} from 'react'
+import {Link} from 'react-router-dom'
 
 
 function Header(){
@@ -17,10 +18,10 @@ function Header(){
    
     return(
         <div className={HeaderCSS.HeaderContainer}>
-            <div className={HeaderCSS.LeftSide}>
+            <Link to="/" className={HeaderCSS.LeftSide}>
                 <img src={Logo}></img>
                 <h1>Game Harbor</h1>
-            </div>
+            </Link>
             <div className={HeaderCSS.SearchBarContainer}>
                 <input type='text' placeholder='Search games...'></input>
                 <Magnify></Magnify>
