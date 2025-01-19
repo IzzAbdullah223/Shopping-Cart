@@ -6,6 +6,7 @@ import Layout from './Layout'
 import HomePage from './Pages/HomePage/HomePage'
 import PlayDice from './Pages/Quick Navigation/PlayDice/PlayDice'
 import BestOfTheYear from './Pages/Quick Navigation/BestOfTheYear/BestOfTheYear'
+import AllTime from './Pages/Quick Navigation/All time top/AllTime'
 
 const router = createBrowserRouter([
   {
@@ -14,7 +15,8 @@ const router = createBrowserRouter([
     children:[
       {path:'/', element:<HomePage></HomePage>},
       {path:'PlayDice', element:<PlayDice></PlayDice>},
-      {path: "BestOfTheYear", element:<BestOfTheYear></BestOfTheYear>}
+      {path: "BestOfTheYear", element:<BestOfTheYear></BestOfTheYear>},
+      {path: "AllTimeTop", element:<AllTime></AllTime>}
     ]
   }
 ])

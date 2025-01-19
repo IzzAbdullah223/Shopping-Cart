@@ -58,7 +58,7 @@ function HomePage() {
             <img src={Trophy}></img>
             <h3>Best of the year </h3>
         </Link>
-        <Link to="AllTime" className={ContentCSS.Link}>
+        <Link to="AllTimeTop" className={ContentCSS.Link}>
             <img src={Crown}></img>
             <h3>All time top</h3>
         </Link>

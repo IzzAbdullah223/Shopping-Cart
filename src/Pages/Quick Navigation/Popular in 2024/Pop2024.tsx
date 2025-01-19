@@ -134,11 +134,8 @@ function Pop2024(){
 
                     </div>
                     </div>
-                )}
-                
- 
-            </div>
-            
+                )}      
+            </div>            
         </div>
     )
 
