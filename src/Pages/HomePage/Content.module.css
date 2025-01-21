@@ -106,10 +106,10 @@
         border-radius: 10px;
         cursor: pointer;
         transition: transform 0.3s, background-color 0.2s;
-        font-family: 'GT Walsheim Pro REGULAR';
         font-size: 1.1rem;
         text-decoration: none;
         color: inherit;
+        
     }
     
     .LeftBottom>a:hover{

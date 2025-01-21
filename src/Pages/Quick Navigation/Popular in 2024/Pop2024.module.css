@@ -43,6 +43,11 @@ display: flex;
 flex-direction: column;
 gap: 30px;
 align-items: flex-start;
+width: 100%;
+}
+
+.RightSide{
+  width: 100%;
 }
 
 .SelectContainer{
@@ -101,6 +106,7 @@ font-size: 1.2rem;
   flex-wrap: wrap;
   gap: 40px;
   padding-right: 30px;
+  padding-bottom: 40px;
 }
  
 
@@ -166,15 +172,13 @@ font-size: 1.2rem;
   cursor: pointer;
 }
 
-.RightSide{
-  flex: 1;
-}
 
 .LoadingContainer{
-  height: 80vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+display: flex;
+justify-content: center;
+margin: 0 auto;
+  
 }
 
+ 
 

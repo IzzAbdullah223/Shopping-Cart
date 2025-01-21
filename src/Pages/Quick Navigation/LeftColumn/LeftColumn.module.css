@@ -24,6 +24,7 @@
 
 body{
     background-color: #0f1011;
+    
 }
 
 .LeftColumn{
@@ -83,20 +84,41 @@ gap: 10px;
     display: flex;
     align-items: center;
     gap: 20px;
+    text-decoration: none;
+    color: inherit;
  }
 
+ .Test svg{
+    fill: rgb(252, 252, 252);
+    
+ }
 
  .Test:hover{
-      cursor: pointer;
+    cursor: pointer;
+}
+
+.Test:hover svg{
+  fill: black;
+}
+
+.Test:hover .IconContainer{
+  background-color: white;
+}
+
+ .ActiveLink{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    text-decoration: none;
+    color: inherit;
  }
 
- .Test:hover svg{
+ .ActiveLink svg, .ActiveLink .IconContainer{
     fill: black;
+    background-color: rgb(255, 255, 255);
  }
 
- .Test:hover .IconContainer{
-    background-color: white;
- }
+
  
 
  .Fire{

@@ -11,7 +11,7 @@
   }
 
   body{
-    background-color: #0f1011;
+   
   }
 
   .HeaderContainer{
@@ -21,6 +21,7 @@
     font-family: 'GT Walsheim Pro REGULAR';
     gap: 20px;
     padding: 22px 40px;
+    
   }
 
   .LeftSide{
@@ -88,7 +89,12 @@
     font-size: 1.1rem;
     padding-left: 10px;
   }
+  .SearchBarContainer svg{
+    fill: black;
+  }
 
+
+ 
 
  
 

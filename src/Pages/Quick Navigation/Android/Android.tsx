@@ -1,4 +1,3 @@
-
 import POPCSS from '../../Quick Navigation/Popular in 2024/Pop2024.module.css'
 import LeftColumn from '../LeftColumn/LeftColumn'
 import React, { useState,useEffect} from 'react'
@@ -8,6 +7,7 @@ import Playstation from '../../../assets/icons/Playstation'
 import Xbox from '../../../assets/icons/Xbox'
 import Nintendo from '../../../assets/icons/Nintendo'
 import IOS from '../../../assets/icons/iOS'
+import AndroidI from '../../../assets/icons/Android'
 import ChevronDown from '../../../assets/icons/ChevronDown'
 import Checkmark from '../../../assets/icons/CheckMark'
 import LoadingComponent from '../../../LoadingComponent'
@@ -15,7 +15,7 @@ import LoadingComponent from '../../../LoadingComponent'
 
  
 
-function PC(){
+function Android(){
     const Apikey = "2bcc24482f844476a6b3935319801e0c"
     interface Platform{
          name:string
@@ -37,7 +37,9 @@ function PC(){
 
     const [Loading,setLoading] = useState(true)
 
-    const [Loading2,setLoading2] = useState(false)
+    const [Loading2,setLoading2]= useState(true)
+
+    const [shouldStartTimer,setShouldStartTimer] = useState(true)
 
     const [data,setData] = useState<GamesDetails | null>(null)
 
@@ -50,20 +52,19 @@ function PC(){
     const [isMenuVisible,setMenuIsVisible] = useState(false)
 
     const [isSelectorVisible,setSelectorVisible] = useState(true)
-
-    const[shouldStartTimer,setShouldStartTimer] = useState(false)
     
 
 
     useEffect(()=>{
         const fetchData = async ()=>{
-         const popularResponse = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&platforms=4&`)
+         const popularResponse = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&platforms=21`)
             const result = await popularResponse.json()
 
-           const ratingResponse = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&platforms=4&ordering=-rating`)
+           const ratingResponse = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&platforms=21&ordering=-rating`)
            const result2 = await ratingResponse.json()
 
-           const releaseResponse = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&platforms=4&ordering=-released`)
+           const releaseResponse = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&platforms=21&ordering=-released`
+           )
            const result3 = await releaseResponse.json()
 
 
@@ -99,16 +100,17 @@ function PC(){
                 case "Release Date":
                     setCurrentData(data.ReleaseData)
                     break;
-
               }
-
-             
 
 
         }
 
            
       },[currentData,selectedItem])
+
+
+    
+    
 
       function GamePlatforms(){
         const tempArray:JSX.Element[][]=Array.from({length:20},()=>[])// Initalzing 20 inner arrays
@@ -135,6 +137,9 @@ function PC(){
                     case "Nintendo":
                         tempArray[i].push(<Nintendo></Nintendo>)
                         break;
+
+                    case "Android":
+                        tempArray[i].push(<AndroidI></AndroidI>)
                 }
 
             }
@@ -151,6 +156,7 @@ function PC(){
       }
 
       function setPopularity(){
+        console.log(data)
         setLoading2(true)
         setSelectedItem("Popularity")
         setSelectorVisible(S=>S=!S)
@@ -175,19 +181,18 @@ function PC(){
         setShouldStartTimer(true)
       }
 
-
-      useEffect(()=>{
-        if(shouldStartTimer){
-        const timer = setTimeout(()=>{
-            setLoading2(false)
-            setShouldStartTimer(false)
-        },1500)
-        return ()=> clearTimeout(timer)
-    }
-    },[shouldStartTimer])
-
+         useEffect(()=>{
+           if(shouldStartTimer){
+           const timer = setTimeout(()=>{
+               setLoading2(false)
+               setShouldStartTimer(false)
+           },1500)
+           return ()=> clearTimeout(timer)
+       }
+       },[shouldStartTimer])
 
 
+      
 
       return(
         <div className={POPCSS.PageContainer}>
@@ -197,7 +202,7 @@ function PC(){
                     <h1>Loading</h1>
                 ):(
                     <div className={POPCSS.RightSideContainer}>
-                    <h1>PC</h1>
+                    <h1>Android</h1>
 
                         <div className={POPCSS.SelectContainer} onClick={ShowDropDown} style={{display:isSelectorVisible? "flex":"none"}}>
                             <div>Order by: </div>
@@ -230,7 +235,7 @@ function PC(){
                         </div>
 
                         
-                    {Loading2 ? (
+                        {Loading2 ? (
                         <div className={POPCSS.LoadingContainer}>
                                 <LoadingComponent></LoadingComponent>
                         </div>
@@ -260,11 +265,11 @@ function PC(){
                         ))}
                     </div>
                     )}
- 
+             
                     </div>
                 )}
             </div>
         </div>
     )
 }
-export default PC
+export default Android

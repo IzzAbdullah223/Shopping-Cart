@@ -4,7 +4,7 @@ import LayoutCSS from './Layout.module.css'
 import PykeVideo from  './assets/Images/pyke.mp4'
 
 function Layout(){
-
+    const location = useLocation();
     const  isHomePage= location.pathname==='/'
     return(
         <div className={LayoutCSS.PageContainer}>

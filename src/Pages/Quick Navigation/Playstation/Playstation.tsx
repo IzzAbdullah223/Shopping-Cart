@@ -9,6 +9,7 @@ import Nintendo from '../../../assets/icons/Nintendo'
 import IOS from '../../../assets/icons/iOS'
 import ChevronDown from '../../../assets/icons/ChevronDown'
 import Checkmark from '../../../assets/icons/CheckMark'
+import LoadingComponent from '../../../LoadingComponent'
 
 
  
@@ -25,7 +26,8 @@ function PlayStation(){
     }
     interface GamesDetails{
         PopularData:Results[],
-        RatingData:Results[]
+        RatingData:Results[],
+        ReleaseData:Results[]
     }
 
     interface Platforms{
@@ -33,6 +35,10 @@ function PlayStation(){
     }
 
     const [Loading,setLoading] = useState(true)
+
+    const [Loading2,setLoading2]= useState(true)
+
+    const [shouldStartTimer,setShouldStartTimer] = useState(true)
 
     const [data,setData] = useState<GamesDetails | null>(null)
 
@@ -56,10 +62,15 @@ function PlayStation(){
            const ratingResponse = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&platforms=18,187&ordering=-rating`)
            const result2 = await ratingResponse.json()
 
+           const releaseResponse = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&platforms=18,187&ordering=-released`
+           )
+           const result3 = await releaseResponse.json()
+
 
             const FormattedData:GamesDetails={
                 PopularData:result.results,
-                RatingData:result2.results
+                RatingData:result2.results,
+                ReleaseData:result3.results
             }
            
             setData(FormattedData)
@@ -83,6 +94,11 @@ function PlayStation(){
 
                 case "Rating":
                     setCurrentData(data.RatingData)
+                    break;
+
+                case "Release Date":
+                    setCurrentData(data.ReleaseData)
+                    break;
               }
 
 
@@ -136,23 +152,42 @@ function PlayStation(){
       }
 
       function setPopularity(){
+        setLoading2(true)
         setSelectedItem("Popularity")
         setSelectorVisible(S=>S=!S)
         setMenuIsVisible(M=>M=!M)
+        setShouldStartTimer(true)
       }
 
 
       function setReleaseDate(){
+        setLoading2(true)
         setSelectedItem("Release Date")
         setSelectorVisible(S=>S=!S)
         setMenuIsVisible(M=>M=!M)
+        setShouldStartTimer(true)
       }
 
       function setRating(){
+        setLoading2(true)
         setSelectedItem("Rating")
         setSelectorVisible(S=>S=!S)
         setMenuIsVisible(M=>M=!M)
+        setShouldStartTimer(true)
       }
+
+         useEffect(()=>{
+           if(shouldStartTimer){
+           const timer = setTimeout(()=>{
+               setLoading2(false)
+               setShouldStartTimer(false)
+           },1500)
+           return ()=> clearTimeout(timer)
+       }
+       },[shouldStartTimer])
+
+
+      
 
       return(
         <div className={POPCSS.PageContainer}>
@@ -193,8 +228,14 @@ function PlayStation(){
                                 </div>
                             </div>
                         </div>
-                 
-                    <div className={POPCSS.GameCardsContainer}>
+
+                        
+                        {Loading2 ? (
+                        <div className={POPCSS.LoadingContainer}>
+                                <LoadingComponent></LoadingComponent>
+                        </div>
+                    ) :(
+                        <div className={POPCSS.GameCardsContainer}>
                         {currentData?.map((game,index)=>(
                             <div className={POPCSS.GameCard} key={index}>
                                 <div className={POPCSS.Top}>
@@ -217,8 +258,9 @@ function PlayStation(){
                                 </div>
                             </div>
                         ))}
-
                     </div>
+                    )}
+             
                     </div>
                 )}
             </div>
