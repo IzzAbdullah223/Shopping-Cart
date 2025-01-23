@@ -1,14 +1,20 @@
 import {useEffect,useRef } from 'react'
 import ModalCSS from './Modal.module.css'
 
+interface modalGame{
+    Name:String,
+    Picture:String
+}
 type modalProps={
     modal:boolean,
-    toggleModal:()=>void
+    toggleModal:()=>void,
+    numberOfGames:number,
+    modalGames:modalGame[]
 }
 
-function Modal({modal,toggleModal}:modalProps){
+function Modal({modal,toggleModal,numberOfGames}:modalProps){
  
-
+ 
     const PicsTest:string[]=['https://media.rawg.io/media/games/bde/bdef96f7782fba0ff62dabc37ff4b1f0.jpg','https://media.rawg.io/media/games/bde/bdef96f7782fba0ff62dabc37ff4b1f0.jpg',
     'https://media.rawg.io/media/games/bde/bdef96f7782fba0ff62dabc37ff4b1f0.jpg',
     'https://media.rawg.io/media/games/bde/bdef96f7782fba0ff62dabc37ff4b1f0.jpg',
@@ -42,7 +48,7 @@ function Modal({modal,toggleModal}:modalProps){
                         <div className={ModalCSS.Overlay}></div>
                             <div ref={ModalArea} className={ModalCSS.ModalContent}>
                                 <div className={ModalCSS.Top}>
-                                    <h2>0 Games</h2>
+                                    <h2>Games: {numberOfGames}</h2>
                                     <h3>Clear</h3>
                                 </div>
                                 <div className={ModalCSS.ModalGamesContainer}>

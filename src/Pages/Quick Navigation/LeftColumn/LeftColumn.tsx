@@ -44,29 +44,29 @@ function LeftColumn(){
             <div className={LastCSS.YourGames}>
                 <h1>NewReleases</h1>
                 <div className={LastCSS.ReleaseList}>
-                    <NavLink to="ThisWeek" className={({isActive})=>
+                    <NavLink to="/Last30Days" className={({isActive})=>
                     isActive? `${LastCSS.test} ${LastCSS.ActiveLink}`: LastCSS.Test}> 
                         <div className={LastCSS.IconContainer}>
                          <Star></Star>
                         </div>
-                    <h3>This week</h3>
+                    <h3>Last 30 Days</h3>
                     </NavLink>
 
-                    <NavLink to="NextWeek" className={({isActive})=>
+                    <NavLink to="/ThisWeek" className={({isActive})=>
                     isActive? `${LastCSS.test} ${LastCSS.ActiveLink}`: LastCSS.Test}> 
                     <div className={`${LastCSS.IconContainer} ${LastCSS.Fire}`}>
                         <Fire></Fire>
                     </div>
-                    <h3>Next week</h3>
+                    <h3>This week</h3>
                     </NavLink>
 
 
-                    <NavLink to="Last30Days" className={({isActive})=>
+                    <NavLink to="/NextWeek" className={({isActive})=>
                     isActive? `${LastCSS.test} ${LastCSS.ActiveLink}`: LastCSS.Test}> 
                     <div className={`${LastCSS.IconContainer} ${LastCSS.Skip}`}>
                         <Skip></Skip>
                     </div>
-                    <h3>Last 30 days</h3>
+                    <h3>Next week</h3>
                     </NavLink> 
 
                 </div>
@@ -212,7 +212,7 @@ function LeftColumn(){
                     </NavLink>
 
 
-                    <NavLink to="Puzzle" className={({isActive})=>
+                    <NavLink to="/Puzzle" className={({isActive})=>
                     isActive? `${LastCSS.test} ${LastCSS.ActiveLink}`: LastCSS.Test}> 
                     <div className={`${LastCSS.IconContainer}`}>
                         <Puzzle></Puzzle>
@@ -221,7 +221,7 @@ function LeftColumn(){
                     </NavLink>
 
 
-                    <NavLink to="Racing" className={({isActive})=>
+                    <NavLink to="/Racing" className={({isActive})=>
                     isActive? `${LastCSS.test} ${LastCSS.ActiveLink}`: LastCSS.Test}> 
                     <div className={`${LastCSS.IconContainer}`}>
                         <Racing></Racing>
@@ -230,7 +230,7 @@ function LeftColumn(){
                     </NavLink>
 
 
-                    <NavLink to="Sports" className={({isActive})=>
+                    <NavLink to="/Sports" className={({isActive})=>
                     isActive? `${LastCSS.test} ${LastCSS.ActiveLink}`: LastCSS.Test}> 
                     <div className={`${LastCSS.IconContainer}`}>
                         <Sports></Sports>

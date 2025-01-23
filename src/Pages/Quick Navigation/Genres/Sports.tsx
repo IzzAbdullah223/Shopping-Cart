@@ -14,7 +14,7 @@ import LoadingComponent from '../../../LoadingComponent'
 
  
 
-function Adventure(){
+function Sports(){
     const Apikey = "2bcc24482f844476a6b3935319801e0c"
     interface Platform{
          name:string
@@ -56,14 +56,14 @@ function Adventure(){
 
     useEffect(()=>{
         const fetchData = async ()=>{
-         const popularResponse = await fetch(`https://api.rawg.io/api/games?genres=adventure&key=${Apikey}`)
+         const popularResponse = await fetch(`https://api.rawg.io/api/games?genres=sports&key=${Apikey}`)
             const result = await popularResponse.json()
                 console.log(result)
 
-           const ratingResponse = await fetch(`https://api.rawg.io/api/games?genres=adventure&ordering=-rating&key=${Apikey}`)
+           const ratingResponse = await fetch(`https://api.rawg.io/api/games?genres=sports&ordering=-rating&key=${Apikey}`)
            const result2 = await ratingResponse.json()
 
-           const releaseResponse = await fetch(`https://api.rawg.io/api/games?genres=adventure&ordering=-released&key=${Apikey}`)
+           const releaseResponse = await fetch(`https://api.rawg.io/api/games?genres=sports&ordering=-released&key=${Apikey}`)
            const result3 = await releaseResponse.json()
 
 
@@ -198,7 +198,7 @@ function Adventure(){
                     <h1>Loading</h1>
                 ):(
                     <div className={POPCSS.RightSideContainer}>
-                    <h1>Adventure</h1>
+                    <h1>Sports</h1>
 
                         <div className={POPCSS.SelectContainer} onClick={ShowDropDown} style={{display:isSelectorVisible? "flex":"none"}}>
                             <div>Order by: </div>
@@ -268,4 +268,4 @@ function Adventure(){
         </div>
     )
 }
-export default Adventure
+export default Sports

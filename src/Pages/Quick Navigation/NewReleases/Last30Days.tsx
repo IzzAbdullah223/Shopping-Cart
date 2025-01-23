@@ -14,7 +14,7 @@ import LoadingComponent from '../../../LoadingComponent'
 
  
 
-function Adventure(){
+function Last30Days(){
     const Apikey = "2bcc24482f844476a6b3935319801e0c"
     interface Platform{
          name:string
@@ -36,6 +36,8 @@ function Adventure(){
 
     const [Loading,setLoading] = useState(true)
 
+    const [last30Day,setLast30Day] = useState<String | null>(null)
+
     const [Loading2,setLoading2]= useState(true)
 
     const [shouldStartTimer,setShouldStartTimer] = useState(true)
@@ -56,6 +58,8 @@ function Adventure(){
 
     useEffect(()=>{
         const fetchData = async ()=>{
+
+
          const popularResponse = await fetch(`https://api.rawg.io/api/games?genres=adventure&key=${Apikey}`)
             const result = await popularResponse.json()
                 console.log(result)
@@ -109,9 +113,12 @@ function Adventure(){
 
 
     
-    
+      function getLast30Days():String{
+        return "test"
 
-      function GamePlatforms(){
+      }
+
+      function GamePlatforms():void{
         console.log(data)
        const tempArray:JSX.Element[][]=Array.from({length:20},()=>[])// Initalzing 20 inner arrays
         for(let i=0;i<20;i++){
@@ -147,12 +154,12 @@ function Adventure(){
         setLoading(false)
       }
 
-      function ShowDropDown(){
+      function ShowDropDown():void{
         setSelectorVisible(S=>S=!S)
         setMenuIsVisible(M=>M=!M)
       }
 
-      function setPopularity(){
+      function setPopularity():void{
         setLoading2(true)
         setSelectedItem("Popularity")
         setSelectorVisible(S=>S=!S)
@@ -161,7 +168,7 @@ function Adventure(){
       }
 
 
-      function setReleaseDate(){
+      function setReleaseDate():void{
         setLoading2(true)
         setSelectedItem("Release Date")
         setSelectorVisible(S=>S=!S)
@@ -169,7 +176,7 @@ function Adventure(){
         setShouldStartTimer(true)
       }
 
-      function setRating(){
+      function setRating():void{
         setLoading2(true)
         setSelectedItem("Rating")
         setSelectorVisible(S=>S=!S)
@@ -198,7 +205,7 @@ function Adventure(){
                     <h1>Loading</h1>
                 ):(
                     <div className={POPCSS.RightSideContainer}>
-                    <h1>Adventure</h1>
+                    <h1>Last 30 Days</h1>
 
                         <div className={POPCSS.SelectContainer} onClick={ShowDropDown} style={{display:isSelectorVisible? "flex":"none"}}>
                             <div>Order by: </div>
@@ -268,4 +275,4 @@ function Adventure(){
         </div>
     )
 }
-export default Adventure
+export default Last30Days

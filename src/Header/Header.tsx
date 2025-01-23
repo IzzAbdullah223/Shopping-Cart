@@ -6,8 +6,20 @@ import Modal from '../Modal/Modal'
 import {useState} from 'react'
 import {Link} from 'react-router-dom'
 
+interface modalGame{
+    Name:string,
+    Picture:string
+}
 
-function Header(){
+interface HeaderProps{
+    numberOfGames:number,
+    modalGames:modalGame[],
+
+}
+
+function Header({numberOfGames,modalGames}:HeaderProps){
+
+    
 
     const[modal,setModal] = useState(false)
 
@@ -27,7 +39,7 @@ function Header(){
                 <Magnify></Magnify>
             </div>
             <Cart onClick={toggleModal}></Cart>
-            <Modal modal={modal} toggleModal={toggleModal}></Modal>
+            <Modal numberOfGames={numberOfGames} modalGames={modalGames} modal={modal} toggleModal={toggleModal}></Modal>
         </div>
     )
 

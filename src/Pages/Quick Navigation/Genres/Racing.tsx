@@ -14,7 +14,7 @@ import LoadingComponent from '../../../LoadingComponent'
 
  
 
-function Adventure(){
+function Racing(){
     const Apikey = "2bcc24482f844476a6b3935319801e0c"
     interface Platform{
          name:string
@@ -56,14 +56,13 @@ function Adventure(){
 
     useEffect(()=>{
         const fetchData = async ()=>{
-         const popularResponse = await fetch(`https://api.rawg.io/api/games?genres=adventure&key=${Apikey}`)
+         const popularResponse = await fetch(`https://api.rawg.io/api/games?genres=racing&key=${Apikey}`)
             const result = await popularResponse.json()
-                console.log(result)
 
-           const ratingResponse = await fetch(`https://api.rawg.io/api/games?genres=adventure&ordering=-rating&key=${Apikey}`)
+           const ratingResponse = await fetch(`https://api.rawg.io/api/games?genres=racing&ordering=-rating&key=${Apikey}`)
            const result2 = await ratingResponse.json()
 
-           const releaseResponse = await fetch(`https://api.rawg.io/api/games?genres=adventure&ordering=-released&key=${Apikey}`)
+           const releaseResponse = await fetch(`https://api.rawg.io/api/games?genres=racing&ordering=-released&key=${Apikey}`)
            const result3 = await releaseResponse.json()
 
 
@@ -112,7 +111,6 @@ function Adventure(){
     
 
       function GamePlatforms(){
-        console.log(data)
        const tempArray:JSX.Element[][]=Array.from({length:20},()=>[])// Initalzing 20 inner arrays
         for(let i=0;i<20;i++){
             for(let j=0;j<currentData![i].parent_platforms.length;j++){
@@ -268,4 +266,4 @@ function Adventure(){
         </div>
     )
 }
-export default Adventure
+export default Racing
