@@ -10,29 +10,14 @@ import IOS from '../../../assets/icons/iOS'
 import ChevronDown from '../../../assets/icons/ChevronDown'
 import Checkmark from '../../../assets/icons/CheckMark'
 import LoadingComponent from '../../../LoadingComponent'
+import {GamesDetailsWithSelect,Results} from '../../../main'
 
 
  
 
 function Sports(){
     const Apikey = "2bcc24482f844476a6b3935319801e0c"
-    interface Platform{
-         name:string
-    }
-    interface Results{
-        name:String,
-        background_image:String,
-        parent_platforms:Platforms[]
-    }
-    interface GamesDetails{
-        PopularData:Results[],
-        RatingData:Results[],
-        ReleaseData:Results[]
-    }
-
-    interface Platforms{
-        platform:Platform
-    }
+ 
 
     const [Loading,setLoading] = useState(true)
 
@@ -40,7 +25,7 @@ function Sports(){
 
     const [shouldStartTimer,setShouldStartTimer] = useState(true)
 
-    const [data,setData] = useState<GamesDetails | null>(null)
+    const [data,setData] = useState<GamesDetailsWithSelect | null>(null)
 
     const [currentData,setCurrentData] = useState<Results[]|null>(null)
 
@@ -67,7 +52,7 @@ function Sports(){
            const result3 = await releaseResponse.json()
 
 
-            const FormattedData:GamesDetails={
+            const FormattedData:GamesDetailsWithSelect={
                 PopularData:result.results,
                 RatingData:result2.results,
                 ReleaseData:result3.results

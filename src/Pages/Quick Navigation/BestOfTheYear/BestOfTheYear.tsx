@@ -7,27 +7,13 @@ import Playstation from '../../../assets/icons/Playstation'
 import Xbox from '../../../assets/icons/Xbox'
 import Nintendo from '../../../assets/icons/Nintendo'
 import IOS from '../../../assets/icons/iOS'
+import { GamesDetails } from '../../../main'
 
 
  
 
 function BestOfTheYear(){
     const Apikey = "2bcc24482f844476a6b3935319801e0c"
-    interface Platform{
-         name:string
-    }
-    interface Results{
-        name:String,
-        background_image:String,
-        parent_platforms:Platforms[]
-    }
-    interface GamesDetails{
-        GamesData:Results[]
-    }
-
-    interface Platforms{
-        platform:Platform
-    }
 
     const [Loading,setLoading] = useState(true)
 

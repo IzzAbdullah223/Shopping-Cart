@@ -22,22 +22,39 @@ import Racing from './Pages/Quick Navigation/Genres/Racing';
 import Sports from './Pages/Quick Navigation/Genres/Sports';
 import Last30Days from './Pages/Quick Navigation/NewReleases/Last30Days';
 
-
-interface modalGame{
-    Name:string,
-    Picture:string,
-
+export interface Platform{
+  name:string
 }
+export interface Results{
+ name:String,
+ background_image:String,
+ parent_platforms:Platforms[]
+}
+export interface GamesDetails{
+ GamesData:Results[]
+}
+
+export interface GamesDetailsWithSelect{
+  PopularData:Results[],
+  RatingData:Results[],
+  ReleaseData:Results[]
+ }
+
+export interface Platforms{
+ platform:Platform
+}
+ 
+
 
 function App() {
   const [numberOfGames, setNumberOfGames] = useState<number>(0);
-  const [modalGames, setModalGames] = useState<modalGame[]>([])
+   
 
   const router = createBrowserRouter([
     {
       path: '/',
       element: <Layout numberOfGames={numberOfGames} setNumberOfGames={setNumberOfGames}
-                       modalGames={modalGames} setModalGames={setModalGames}/>,
+                    />,
       children: [
         { path: '/', element: <HomePage /> },
         { path: 'PlayDice', element: <PlayDice /> },

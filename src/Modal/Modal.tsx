@@ -1,15 +1,11 @@
 import {useEffect,useRef } from 'react'
 import ModalCSS from './Modal.module.css'
 
-interface modalGame{
-    Name:String,
-    Picture:String
-}
 type modalProps={
     modal:boolean,
     toggleModal:()=>void,
     numberOfGames:number,
-    modalGames:modalGame[]
+
 }
 
 function Modal({modal,toggleModal,numberOfGames}:modalProps){

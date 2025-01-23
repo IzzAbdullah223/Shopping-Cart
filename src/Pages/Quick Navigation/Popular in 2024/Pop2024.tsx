@@ -8,36 +8,21 @@ import Xbox from '../../../assets/icons/Xbox'
 import Nintendo from '../../../assets/icons/Nintendo'
 import IOS from '../../../assets/icons/iOS'
 import { useOutletContext } from 'react-router-dom'
+import {GamesDetails } from '../../../main'
 
-
- 
 
 function Pop2024(){
 
-  /*  const{setNumberOfGames,setModalGames} = useOutletContext<{
+  const{setNumberOfGames} = useOutletContext<{
         setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
-        setModalGames:    React.Dispatch<React.SetStateAction<number>>;
-    }>()*/
+    
+    }>()
     const Apikey = "2bcc24482f844476a6b3935319801e0c"
-    interface Platform{
-         name:string
-    }
-    interface Results{
-        name:String,
-        background_image:String,
-        parent_platforms:Platforms[]
-    }
-    interface GamesDetails{
-        GamesData:Results[]
-    }
-
-    interface Platforms{
-        platform:Platform
-    }
 
     const [Loading,setLoading] = useState(true)
 
     const [data,setData] = useState<GamesDetails | null>(null)
+
 
     const[Platforms,setPlatforms] = useState<JSX.Element[][] | null>(null)
 
@@ -98,7 +83,12 @@ function Pop2024(){
     
         setLoading(false)
       }
-     
+
+      function AddGame(index:number){
+        setNumberOfGames(G=>G+=1)
+    
+         
+      }
 
       useEffect(()=>{   
         if(data!=null){
@@ -124,7 +114,7 @@ function Pop2024(){
                                 </div>
                                 <div className={POPCSS.Below}>
                                     <div className={POPCSS.Left}>
-                                        <div className={POPCSS.LeftTop}>
+                                        <div className={POPCSS.LeftTop} onClick={()=>AddGame(index)}>
                                             <h3>Add to cart</h3>
                                             <Plus></Plus>
                                         </div>
