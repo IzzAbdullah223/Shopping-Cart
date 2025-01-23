@@ -10,7 +10,7 @@ import {Link} from 'react-router-dom'
 
 interface HeaderProps{
     numberOfGames:number,
-
+ 
 }
 
 function Header({numberOfGames}:HeaderProps){

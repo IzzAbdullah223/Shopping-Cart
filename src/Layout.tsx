@@ -2,11 +2,12 @@ import {Outlet,useLocation} from 'react-router-dom'
 import Header from './Header/Header'
 import LayoutCSS from './Layout.module.css'
 import PykeVideo from  './assets/Images/pyke.mp4'
+import { GamesDetails,GamesDetailsWithSelect } from './main'
 
 
 interface LayOutProps{
     numberOfGames:number,
-    setNumberOfGames: React.Dispatch<React.SetStateAction<number>>
+    setNumberOfGames: React.Dispatch<React.SetStateAction<number>>,
 }
 
 function Layout({numberOfGames,setNumberOfGames}: LayOutProps){

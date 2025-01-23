@@ -48,13 +48,14 @@ export interface Platforms{
 
 function App() {
   const [numberOfGames, setNumberOfGames] = useState<number>(0);
+ 
    
 
   const router = createBrowserRouter([
     {
       path: '/',
       element: <Layout numberOfGames={numberOfGames} setNumberOfGames={setNumberOfGames}
-                    />,
+ />,
       children: [
         { path: '/', element: <HomePage /> },
         { path: 'PlayDice', element: <PlayDice /> },

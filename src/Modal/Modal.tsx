@@ -1,11 +1,11 @@
 import {useEffect,useRef } from 'react'
 import ModalCSS from './Modal.module.css'
 
+
 type modalProps={
     modal:boolean,
     toggleModal:()=>void,
     numberOfGames:number,
-
 }
 
 function Modal({modal,toggleModal,numberOfGames}:modalProps){

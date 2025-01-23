@@ -8,14 +8,14 @@ import Xbox from '../../../assets/icons/Xbox'
 import Nintendo from '../../../assets/icons/Nintendo'
 import IOS from '../../../assets/icons/iOS'
 import { useOutletContext } from 'react-router-dom'
-import {GamesDetails } from '../../../main'
+import {GamesDetails,GamesDetailsWithSelect } from '../../../main'
 
 
 function Pop2024(){
 
-  const{setNumberOfGames} = useOutletContext<{
+  const{setNumberOfGames } = useOutletContext<{
         setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
-    
+      
     }>()
     const Apikey = "2bcc24482f844476a6b3935319801e0c"
 
