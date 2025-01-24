@@ -149,11 +149,23 @@ font-size: 1.2rem;
   gap: 13px;
 }
 
-.GameCard .LeftTop{
+.GameCard .LeftTopNotAdded{
   display: flex;
   align-items: center;
   cursor: pointer;
 }
+
+ 
+
+.GameCard .LeftTopAdded{
+  display: flex;
+  align-items: center;
+  color: #1fc4be;
+  letter-spacing: 1px;
+  gap: 5px;
+}
+
+ 
 
 .GameCard .Platforms{
   display: flex;

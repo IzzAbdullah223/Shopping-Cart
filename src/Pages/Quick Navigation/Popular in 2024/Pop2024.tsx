@@ -9,11 +9,12 @@ import Nintendo from '../../../assets/icons/Nintendo'
 import IOS from '../../../assets/icons/iOS'
 import { useOutletContext } from 'react-router-dom'
 import {GamesDetails,ModalGames} from '../../../main'
+import Checkmark from '../../../assets/icons/CheckMark'
 
 
 function Pop2024(){
 
-  const{setNumberOfGames,setModalGames,ModalGames} = useOutletContext<{
+  const{setNumberOfGames,setModalGames} = useOutletContext<{
         setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
         setModalGames:    React.Dispatch<React.SetStateAction<ModalGames[]>>;
         ModalGames: ModalGames[]
@@ -31,6 +32,8 @@ function Pop2024(){
     const [Loading,setLoading] = useState(true)
 
     const [data,setData] = useState<GamesDetails | null>(null)
+
+    const [gameAdded,setGameAdded] = useState<boolean[]>(Array(20).fill(false))
 
 
     const[Platforms,setPlatforms] = useState<JSX.Element[][] | null>(null)
@@ -97,6 +100,12 @@ function Pop2024(){
       function AddGame(index:number){
         setModalGames(G=>[...G, {Game: data!.GamesData[index]}])
         setNumberOfGames(G=>G+=1)
+        setGameAdded((prev)=>{
+            const updated =[...prev];
+            updated[index]=true
+            return updated;
+        })
+        
       }
 
       useEffect(()=>{   
@@ -123,10 +132,17 @@ function Pop2024(){
                                 </div>
                                 <div className={POPCSS.Below}>
                                     <div className={POPCSS.Left}>
-                                        <div className={POPCSS.LeftTop} onClick={()=>AddGame(index)}>
+                                     
+                                        <div style={{display:!gameAdded[index]===true? "": "none"}} className={POPCSS.LeftTopNotAdded} onClick={()=>AddGame(index)}>
                                             <h3>Add to cart</h3>
                                             <Plus></Plus>
                                         </div>
+                                              
+                                        <div style={{display:gameAdded[index]===true? "": "none"}}  className={POPCSS.LeftTopAdded} onClick={()=>AddGame(index)}>
+                                            <h3>Added</h3>
+                                            <Checkmark></Checkmark>
+                                        </div>
+
                                         <div className={POPCSS.Platforms}>
                                             {Platforms![index].map((platform,idx)=>(
                                                 React.cloneElement(platform,{key:idx})

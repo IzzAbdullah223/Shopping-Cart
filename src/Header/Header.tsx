@@ -12,14 +12,12 @@ import { ModalGames } from '../main'
 interface HeaderProps{
     numberOfGames:number,
     ModalGames:ModalGames[],
-    setModalGames: React.Dispatch<React.SetStateAction<ModalGames[]>>
+    setModalGames: React.Dispatch<React.SetStateAction<ModalGames[]>>,
+    setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function Header({numberOfGames,ModalGames,setModalGames}:HeaderProps){
-
-    console.log(numberOfGames)
-    console.log(setModalGames)
-    
+function Header({numberOfGames,ModalGames,setModalGames,setNumberOfGames}:HeaderProps){
+ 
 
     const[modal,setModal] = useState(false)
 
@@ -42,7 +40,7 @@ function Header({numberOfGames,ModalGames,setModalGames}:HeaderProps){
                 <Cart onClick={toggleModal}></Cart>
                 <div className={HeaderCSS.BlueDot} style={{display: numberOfGames==0? "none": ""}}></div>
             </div>
-            <Modal setModalGames={setModalGames} numberOfGames={numberOfGames} modal={modal} ModalGames={ModalGames} toggleModal={toggleModal}></Modal>
+            <Modal setNumberOfGames={setNumberOfGames} setModalGames={setModalGames} numberOfGames={numberOfGames} modal={modal} ModalGames={ModalGames} toggleModal={toggleModal}></Modal>
         </div>
     )
 

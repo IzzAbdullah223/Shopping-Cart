@@ -22,6 +22,7 @@ import Racing from './Pages/Quick Navigation/Genres/Racing';
 import Sports from './Pages/Quick Navigation/Genres/Sports';
 import Last30Days from './Pages/Quick Navigation/NewReleases/Last30Days';
 
+
 export interface Platform{
   name:string
 }

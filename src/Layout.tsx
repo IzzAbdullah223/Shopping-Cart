@@ -23,7 +23,7 @@ function Layout({numberOfGames,setNumberOfGames,ModalGames,setModalGames}: LayOu
                 Your browser does not support the video tag.
             </video>
       )     }
-            <Header numberOfGames={numberOfGames} setModalGames={setModalGames} ModalGames={ModalGames}></Header>
+            <Header setNumberOfGames={setNumberOfGames} numberOfGames={numberOfGames} setModalGames={setModalGames} ModalGames={ModalGames}></Header>
             <Outlet context={{setNumberOfGames,setModalGames,ModalGames}}></Outlet>
         </div>
     )

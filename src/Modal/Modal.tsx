@@ -7,11 +7,12 @@ type modalProps={
     modal:boolean,
     toggleModal:()=>void,
     numberOfGames:number,
+    setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
     ModalGames:ModalGames[],
     setModalGames: React.Dispatch<React.SetStateAction<ModalGames[]>>
 }
 
-function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames}:modalProps){
+function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumberOfGames}:modalProps){
  
   
 
@@ -37,7 +38,13 @@ function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames}:modalP
 
 
     function deleteGame(index:number){
-        console.log(setModalGames)
+         setModalGames(G=>G.filter((_,i)=>i!==index))
+         setNumberOfGames(G=>G-=1)    
+    }
+
+    function clearGames(){
+        setModalGames([])
+        setNumberOfGames(0)
     }
 
     return(
@@ -49,7 +56,7 @@ function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames}:modalP
                             <div ref={ModalArea} className={ModalCSS.ModalContent}>
                                 <div className={ModalCSS.Top}>
                                     <h2>Games: {numberOfGames}</h2>
-                                    <h3>Clear</h3>
+                                    <h3 onClick={clearGames}>Clear</h3>
                                 </div>
                                 <div className={ModalCSS.ModalGamesContainer}>
                                 {ModalGames.map((_,index)=>(
