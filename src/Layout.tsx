@@ -2,15 +2,17 @@ import {Outlet,useLocation} from 'react-router-dom'
 import Header from './Header/Header'
 import LayoutCSS from './Layout.module.css'
 import PykeVideo from  './assets/Images/pyke.mp4'
-import { GamesDetails,GamesDetailsWithSelect } from './main'
+import {ModalGames} from './main'
 
 
 interface LayOutProps{
     numberOfGames:number,
     setNumberOfGames: React.Dispatch<React.SetStateAction<number>>,
+    ModalGames:ModalGames[],
+    setModalGames: React.Dispatch<React.SetStateAction<ModalGames[]>>
 }
 
-function Layout({numberOfGames,setNumberOfGames}: LayOutProps){
+function Layout({numberOfGames,setNumberOfGames,ModalGames,setModalGames}: LayOutProps){
     const location = useLocation();
     const  isHomePage= location.pathname==='/'
     return(
@@ -21,8 +23,8 @@ function Layout({numberOfGames,setNumberOfGames}: LayOutProps){
                 Your browser does not support the video tag.
             </video>
       )     }
-            <Header numberOfGames={numberOfGames}></Header>
-            <Outlet context={{setNumberOfGames}}></Outlet>
+            <Header numberOfGames={numberOfGames} setModalGames={setModalGames} ModalGames={ModalGames}></Header>
+            <Outlet context={{setNumberOfGames,setModalGames,ModalGames}}></Outlet>
         </div>
     )
 }

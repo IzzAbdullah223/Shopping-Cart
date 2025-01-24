@@ -91,6 +91,27 @@
     fill: black;
   }
 
+  .ShoppingCartContainer{
+    position: relative;
+    padding-top: 10px;
+    transition: transform 0.2s;
+    cursor: pointer;
+  }
+
+  .BlueDot{
+    width: 10px;
+    min-height: 10px;
+    border-radius: 5px;
+    top: 0;
+    right: 0;
+    position: absolute;
+    background-color: #6bbbbb;
+  }
+
+  .ShoppingCartContainer:hover{
+    transform: scale(1.1);
+  }
+
 
  
 

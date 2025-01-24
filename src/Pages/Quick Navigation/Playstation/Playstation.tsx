@@ -96,6 +96,7 @@ function PlayStation(){
     
 
       function GamePlatforms(){
+ 
         const tempArray:JSX.Element[][]=Array.from({length:20},()=>[])// Initalzing 20 inner arrays
         for(let i=0;i<20;i++){
             for(let j=0;j<currentData![i].parent_platforms.length;j++){

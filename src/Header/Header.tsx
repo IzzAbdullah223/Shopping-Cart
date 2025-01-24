@@ -5,16 +5,20 @@ import Cart from '../assets/icons/Cart'
 import Modal from '../Modal/Modal'
 import {useState} from 'react'
 import {Link} from 'react-router-dom'
+import { ModalGames } from '../main'
 
  
 
 interface HeaderProps{
     numberOfGames:number,
- 
+    ModalGames:ModalGames[],
+    setModalGames: React.Dispatch<React.SetStateAction<ModalGames[]>>
 }
 
-function Header({numberOfGames}:HeaderProps){
+function Header({numberOfGames,ModalGames,setModalGames}:HeaderProps){
 
+    console.log(numberOfGames)
+    console.log(setModalGames)
     
 
     const[modal,setModal] = useState(false)
@@ -34,8 +38,11 @@ function Header({numberOfGames}:HeaderProps){
                 <input type='text' placeholder='Search games...'></input>
                 <Magnify></Magnify>
             </div>
-            <Cart onClick={toggleModal}></Cart>
-            <Modal numberOfGames={numberOfGames} modal={modal} toggleModal={toggleModal}></Modal>
+            <div className={HeaderCSS.ShoppingCartContainer}> 
+                <Cart onClick={toggleModal}></Cart>
+                <div className={HeaderCSS.BlueDot} style={{display: numberOfGames==0? "none": ""}}></div>
+            </div>
+            <Modal setModalGames={setModalGames} numberOfGames={numberOfGames} modal={modal} ModalGames={ModalGames} toggleModal={toggleModal}></Modal>
         </div>
     )
 

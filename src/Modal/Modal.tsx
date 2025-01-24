@@ -1,26 +1,24 @@
 import {useEffect,useRef } from 'react'
 import ModalCSS from './Modal.module.css'
+import { ModalGames } from '../main'
 
 
 type modalProps={
     modal:boolean,
     toggleModal:()=>void,
     numberOfGames:number,
+    ModalGames:ModalGames[],
+    setModalGames: React.Dispatch<React.SetStateAction<ModalGames[]>>
 }
 
-function Modal({modal,toggleModal,numberOfGames}:modalProps){
+function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames}:modalProps){
  
- 
-    const PicsTest:string[]=['https://media.rawg.io/media/games/bde/bdef96f7782fba0ff62dabc37ff4b1f0.jpg','https://media.rawg.io/media/games/bde/bdef96f7782fba0ff62dabc37ff4b1f0.jpg',
-    'https://media.rawg.io/media/games/bde/bdef96f7782fba0ff62dabc37ff4b1f0.jpg',
-    'https://media.rawg.io/media/games/bde/bdef96f7782fba0ff62dabc37ff4b1f0.jpg',
-    'https://media.rawg.io/media/games/bde/bdef96f7782fba0ff62dabc37ff4b1f0.jpg',
-    'https://media.rawg.io/media/games/bde/bdef96f7782fba0ff62dabc37ff4b1f0.jpg',
-    'https://media.rawg.io/media/games/bde/bdef96f7782fba0ff62dabc37ff4b1f0.jpg',
-    'https://media.rawg.io/media/games/bde/bdef96f7782fba0ff62dabc37ff4b1f0.jpg'    
-    ]
+  
 
     const ModalArea = useRef<HTMLDivElement>(null);
+
+
+  
 
   
 //From here to Line 27  
@@ -36,6 +34,12 @@ function Modal({modal,toggleModal,numberOfGames}:modalProps){
             document.removeEventListener("mousedown",handler)
         };
     },[toggleModal]);
+
+
+    function deleteGame(index:number){
+        console.log(setModalGames)
+    }
+
     return(
     
          <>
@@ -48,15 +52,15 @@ function Modal({modal,toggleModal,numberOfGames}:modalProps){
                                     <h3>Clear</h3>
                                 </div>
                                 <div className={ModalCSS.ModalGamesContainer}>
-                                {PicsTest.map((_,index)=>(
+                                {ModalGames.map((_,index)=>(
                                     <div className={ModalCSS.ModalGame} key={index}>
-                                        <button className={ModalCSS.DeleteGame}>x</button>
+                                        <button className={ModalCSS.DeleteGame} onClick={()=>deleteGame(index)}>X</button>
                                         <div className={ModalCSS.GameInfo}>
                                             <div className={ModalCSS.ImageContainer}>
-                                                <img src={PicsTest[index]}></img>
+                                                <img src={ModalGames[index].Game.background_image}></img>
                                             </div>
                                         <div className={ModalCSS.GameDetails}>
-                                            <h3>V Rising</h3>
+                                            <h3>{ModalGames[index].Game.name}</h3>
                                             <h3>12.98</h3>
                                         </div>
                                         </div>

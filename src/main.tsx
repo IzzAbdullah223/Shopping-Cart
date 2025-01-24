@@ -27,13 +27,17 @@ export interface Platform{
 }
 export interface Results{
  name:String,
- background_image:String,
+ background_image:string,
  parent_platforms:Platforms[]
 }
 export interface GamesDetails{
  GamesData:Results[]
 }
 
+
+export interface ModalGames{
+    Game:Results
+}
 export interface GamesDetailsWithSelect{
   PopularData:Results[],
   RatingData:Results[],
@@ -48,6 +52,7 @@ export interface Platforms{
 
 function App() {
   const [numberOfGames, setNumberOfGames] = useState<number>(0);
+  const [ModalGames,setModalGames] = useState<ModalGames[]>([])
  
    
 
@@ -55,6 +60,7 @@ function App() {
     {
       path: '/',
       element: <Layout numberOfGames={numberOfGames} setNumberOfGames={setNumberOfGames}
+                       ModalGames={ModalGames} setModalGames={setModalGames}
  />,
       children: [
         { path: '/', element: <HomePage /> },

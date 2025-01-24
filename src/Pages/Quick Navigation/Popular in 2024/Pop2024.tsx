@@ -8,15 +8,24 @@ import Xbox from '../../../assets/icons/Xbox'
 import Nintendo from '../../../assets/icons/Nintendo'
 import IOS from '../../../assets/icons/iOS'
 import { useOutletContext } from 'react-router-dom'
-import {GamesDetails,GamesDetailsWithSelect } from '../../../main'
+import {GamesDetails,ModalGames} from '../../../main'
 
 
 function Pop2024(){
 
-  const{setNumberOfGames } = useOutletContext<{
+  const{setNumberOfGames,setModalGames,ModalGames} = useOutletContext<{
         setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
-      
+        setModalGames:    React.Dispatch<React.SetStateAction<ModalGames[]>>;
+        ModalGames: ModalGames[]
     }>()
+   
+    
+ 
+      
+
+    
+
+ 
     const Apikey = "2bcc24482f844476a6b3935319801e0c"
 
     const [Loading,setLoading] = useState(true)
@@ -46,9 +55,10 @@ function Pop2024(){
         
     },[])
 
+ 
     
     function GamePlatforms(){
-       
+
         const tempArray:JSX.Element[][]=Array.from({length:20},()=>[])// Initalzing 20 inner arrays
         for(let i=0;i<20;i++){
             for(let j=0;j<data!.GamesData[i].parent_platforms.length;j++){
@@ -85,9 +95,8 @@ function Pop2024(){
       }
 
       function AddGame(index:number){
+        setModalGames(G=>[...G, {Game: data!.GamesData[index]}])
         setNumberOfGames(G=>G+=1)
-    
-         
       }
 
       useEffect(()=>{   
