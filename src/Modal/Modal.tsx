@@ -10,18 +10,14 @@ type modalProps={
     setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
     ModalGames:ModalGames[],
     setModalGames: React.Dispatch<React.SetStateAction<ModalGames[]>>
+    gameAdded: boolean[]
+    setGameAdded: React.Dispatch<React.SetStateAction<boolean[]>>
 }
 
-function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumberOfGames}:modalProps){
+function Modal({modal,toggleModal,numberOfGames,ModalGames,gameAdded,setModalGames,setNumberOfGames,setGameAdded}:modalProps){
  
-  
-
     const ModalArea = useRef<HTMLDivElement>(null);
 
-
-  
-
-  
 //From here to Line 27  
     useEffect(()=>{  // close modal when clicking outside
        let handler= (event:MouseEvent)=>{
@@ -39,12 +35,14 @@ function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumb
 
     function deleteGame(index:number){
          setModalGames(G=>G.filter((_,i)=>i!==index))
-         setNumberOfGames(G=>G-=1)    
+         setNumberOfGames(G=>G-=1)
+         gameAdded[ModalGames[index].gameIndex]=false
     }
 
     function clearGames(){
         setModalGames([])
         setNumberOfGames(0)
+        setGameAdded(gameAdded.map(()=>false))
     }
 
     return(

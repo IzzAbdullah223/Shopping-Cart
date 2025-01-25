@@ -14,18 +14,14 @@ import Checkmark from '../../../assets/icons/CheckMark'
 
 function Pop2024(){
 
-  const{setNumberOfGames,setModalGames} = useOutletContext<{
+  const{setNumberOfGames,setModalGames,gameAdded,setGameAdded} = useOutletContext<{
         setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
         setModalGames:    React.Dispatch<React.SetStateAction<ModalGames[]>>;
         ModalGames: ModalGames[]
+        gameAdded:boolean[]
+        setGameAdded: React.Dispatch<React.SetStateAction<boolean[]>>
     }>()
    
-    
- 
-      
-
-    
-
  
     const Apikey = "2bcc24482f844476a6b3935319801e0c"
 
@@ -33,7 +29,7 @@ function Pop2024(){
 
     const [data,setData] = useState<GamesDetails | null>(null)
 
-    const [gameAdded,setGameAdded] = useState<boolean[]>(Array(20).fill(false))
+     
 
 
     const[Platforms,setPlatforms] = useState<JSX.Element[][] | null>(null)
@@ -91,14 +87,14 @@ function Pop2024(){
             }
         }
 
-      
         setPlatforms(tempArray)
     
         setLoading(false)
+
       }
 
       function AddGame(index:number){
-        setModalGames(G=>[...G, {Game: data!.GamesData[index]}])
+        setModalGames(G=>[...G, {Game: data!.GamesData[index],gameIndex:index}])
         setNumberOfGames(G=>G+=1)
         setGameAdded((prev)=>{
             const updated =[...prev];

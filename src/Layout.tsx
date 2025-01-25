@@ -10,9 +10,14 @@ interface LayOutProps{
     setNumberOfGames: React.Dispatch<React.SetStateAction<number>>,
     ModalGames:ModalGames[],
     setModalGames: React.Dispatch<React.SetStateAction<ModalGames[]>>
+    gameAdded:boolean[]
+    setGameAdded: React.Dispatch<React.SetStateAction<boolean[]>>
 }
 
-function Layout({numberOfGames,setNumberOfGames,ModalGames,setModalGames}: LayOutProps){
+function Layout({numberOfGames,setNumberOfGames,ModalGames,setModalGames,gameAdded,setGameAdded}: LayOutProps){
+
+
+ 
     const location = useLocation();
     const  isHomePage= location.pathname==='/'
     return(
@@ -23,8 +28,8 @@ function Layout({numberOfGames,setNumberOfGames,ModalGames,setModalGames}: LayOu
                 Your browser does not support the video tag.
             </video>
       )     }
-            <Header setNumberOfGames={setNumberOfGames} numberOfGames={numberOfGames} setModalGames={setModalGames} ModalGames={ModalGames}></Header>
-            <Outlet context={{setNumberOfGames,setModalGames,ModalGames}}></Outlet>
+            <Header setGameAdded={setGameAdded} gameAdded={gameAdded} setNumberOfGames={setNumberOfGames} numberOfGames={numberOfGames} setModalGames={setModalGames} ModalGames={ModalGames}></Header>
+            <Outlet context={{setNumberOfGames,setModalGames,ModalGames,gameAdded,setGameAdded}}></Outlet>
         </div>
     )
 }

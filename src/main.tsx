@@ -37,7 +37,8 @@ export interface GamesDetails{
 
 
 export interface ModalGames{
-    Game:Results
+    Game:Results,
+    gameIndex:number
 }
 export interface GamesDetailsWithSelect{
   PopularData:Results[],
@@ -54,13 +55,13 @@ export interface Platforms{
 function App() {
   const [numberOfGames, setNumberOfGames] = useState<number>(0);
   const [ModalGames,setModalGames] = useState<ModalGames[]>([])
- 
-   
+
+  const [gameAdded,setGameAdded] = useState<boolean[]>(Array(20).fill(false))
 
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Layout numberOfGames={numberOfGames} setNumberOfGames={setNumberOfGames}
+      element: <Layout gameAdded={gameAdded} setGameAdded={setGameAdded} numberOfGames={numberOfGames} setNumberOfGames={setNumberOfGames}
                        ModalGames={ModalGames} setModalGames={setModalGames}
  />,
       children: [
