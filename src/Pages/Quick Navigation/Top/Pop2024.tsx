@@ -7,24 +7,37 @@ import Playstation from '../../../assets/icons/Playstation'
 import Xbox from '../../../assets/icons/Xbox'
 import Nintendo from '../../../assets/icons/Nintendo'
 import IOS from '../../../assets/icons/iOS'
-import { GamesDetails } from '../../../main'
+import { useOutletContext } from 'react-router-dom'
+import {GamesDetails,ModalGames} from '../../../main'
+import Checkmark from '../../../assets/icons/CheckMark'
 
 
+function Pop2024(){
+
+  const{setNumberOfGames,setModalGames,gamePopAdded,setPopGameAdded} = useOutletContext<{
+        setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
+        setModalGames:    React.Dispatch<React.SetStateAction<ModalGames[]>>;
+        ModalGames: ModalGames[]
+        gamePopAdded:boolean[]
+        setPopGameAdded: React.Dispatch<React.SetStateAction<boolean[]>>
+    }>()
+   
  
-
-function BestOfTheYear(){
     const Apikey = "2bcc24482f844476a6b3935319801e0c"
 
     const [Loading,setLoading] = useState(true)
 
     const [data,setData] = useState<GamesDetails | null>(null)
 
+     
+
+
     const[Platforms,setPlatforms] = useState<JSX.Element[][] | null>(null)
 
 
     useEffect(()=>{
         const fetchData = async ()=>{
-            const response = await fetch( `https://api.rawg.io/api/games?key=${Apikey}&dates=2025-01-01,2025-12-31&ordering=-added`)
+            const response = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&dates=2024-01-01,2024-12-31`)
             const result = await response.json()
 
 
@@ -33,6 +46,7 @@ function BestOfTheYear(){
             }
 
             setData(FormattedData)
+             
             
         }
         fetchData()
@@ -40,8 +54,10 @@ function BestOfTheYear(){
         
     },[])
 
+ 
     
     function GamePlatforms(){
+
         const tempArray:JSX.Element[][]=Array.from({length:20},()=>[])// Initalzing 20 inner arrays
         for(let i=0;i<20;i++){
             for(let j=0;j<data!.GamesData[i].parent_platforms.length;j++){
@@ -71,12 +87,22 @@ function BestOfTheYear(){
             }
         }
 
-      
         setPlatforms(tempArray)
     
         setLoading(false)
+
       }
-     
+
+      function AddGame(index:number){
+        setModalGames(G=>[...G, {Game: data!.GamesData[index],gameIndex:index}])
+        setNumberOfGames(G=>G+=1)
+        setPopGameAdded((prev)=>{
+            const updated =[...prev];
+            updated[index]=true
+            return updated;
+        })
+        
+      }
 
       useEffect(()=>{   
         if(data!=null){
@@ -93,7 +119,7 @@ function BestOfTheYear(){
                         <h1>Loading</h1>  
                 ):(
                     <div className={POPCSS.RightSideContainer}>
-                    <h1>Best of the year</h1>
+                    <h1>Popular in 2024</h1>
                     <div className={POPCSS.GameCardsContainer}>
                         {data?.GamesData.map((game,index)=>(
                             <div className={POPCSS.GameCard} key={index}>
@@ -102,10 +128,17 @@ function BestOfTheYear(){
                                 </div>
                                 <div className={POPCSS.Below}>
                                     <div className={POPCSS.Left}>
-                                        <div className={POPCSS.LeftTop}>
+                                     
+                                        <div style={{display:!gamePopAdded[index]===true? "": "none"}} className={POPCSS.LeftTopNotAdded} onClick={()=>AddGame(index)}>
                                             <h3>Add to cart</h3>
                                             <Plus></Plus>
                                         </div>
+                                              
+                                        <div style={{display:gamePopAdded[index]===true? "": "none"}}  className={POPCSS.LeftTopAdded} onClick={()=>AddGame(index)}>
+                                            <h3>Added</h3>
+                                            <Checkmark></Checkmark>
+                                        </div>
+
                                         <div className={POPCSS.Platforms}>
                                             {Platforms![index].map((platform,idx)=>(
                                                 React.cloneElement(platform,{key:idx})
@@ -127,4 +160,4 @@ function BestOfTheYear(){
 
 }
 
-export default BestOfTheYear
+export default Pop2024

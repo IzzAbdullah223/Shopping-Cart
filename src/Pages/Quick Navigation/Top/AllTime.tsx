@@ -12,14 +12,14 @@ import {GamesDetails,ModalGames} from '../../../main'
 import Checkmark from '../../../assets/icons/CheckMark'
 
 
-function Pop2024(){
+function AllTime(){
 
-  const{setNumberOfGames,setModalGames,gameAdded,setGameAdded} = useOutletContext<{
+  const{setNumberOfGames,setModalGames,gameAllAdded,setAllGameAdded} = useOutletContext<{
         setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
         setModalGames:    React.Dispatch<React.SetStateAction<ModalGames[]>>;
         ModalGames: ModalGames[]
-        gameAdded:boolean[]
-        setGameAdded: React.Dispatch<React.SetStateAction<boolean[]>>
+        gameAllAdded:boolean[]
+        setAllGameAdded: React.Dispatch<React.SetStateAction<boolean[]>>
     }>()
    
  
@@ -29,6 +29,8 @@ function Pop2024(){
 
     const [data,setData] = useState<GamesDetails | null>(null)
 
+    console.log(gameAllAdded)
+
      
 
 
@@ -37,8 +39,10 @@ function Pop2024(){
 
     useEffect(()=>{
         const fetchData = async ()=>{
-            const response = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&dates=2024-01-01,2024-12-31`)
+            const response = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&page_size=40`)
             const result = await response.json()
+
+         
 
 
             const FormattedData:GamesDetails={
@@ -58,8 +62,10 @@ function Pop2024(){
     
     function GamePlatforms(){
 
-        const tempArray:JSX.Element[][]=Array.from({length:20},()=>[])// Initalzing 20 inner arrays
-        for(let i=0;i<20;i++){
+            
+
+        const tempArray:JSX.Element[][]=Array.from({length:40},()=>[])// Initalzing 20 inner arrays
+        for(let i=0;i<40;i++){
             for(let j=0;j<data!.GamesData[i].parent_platforms.length;j++){
 
                switch(data!.GamesData[i].parent_platforms[j].platform.name){
@@ -96,7 +102,7 @@ function Pop2024(){
       function AddGame(index:number){
         setModalGames(G=>[...G, {Game: data!.GamesData[index],gameIndex:index}])
         setNumberOfGames(G=>G+=1)
-        setGameAdded((prev)=>{
+        setAllGameAdded((prev)=>{
             const updated =[...prev];
             updated[index]=true
             return updated;
@@ -129,12 +135,12 @@ function Pop2024(){
                                 <div className={POPCSS.Below}>
                                     <div className={POPCSS.Left}>
                                      
-                                        <div style={{display:!gameAdded[index]===true? "": "none"}} className={POPCSS.LeftTopNotAdded} onClick={()=>AddGame(index)}>
+                                        <div style={{display:!gameAllAdded[index]===true? "": "none"}} className={POPCSS.LeftTopNotAdded} onClick={()=>AddGame(index)}>
                                             <h3>Add to cart</h3>
                                             <Plus></Plus>
                                         </div>
                                               
-                                        <div style={{display:gameAdded[index]===true? "": "none"}}  className={POPCSS.LeftTopAdded} onClick={()=>AddGame(index)}>
+                                        <div style={{display:gameAllAdded[index]===true? "": "none"}}  className={POPCSS.LeftTopAdded} onClick={()=>AddGame(index)}>
                                             <h3>Added</h3>
                                             <Checkmark></Checkmark>
                                         </div>
@@ -160,4 +166,4 @@ function Pop2024(){
 
 }
 
-export default Pop2024
+export default AllTime

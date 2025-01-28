@@ -5,9 +5,9 @@ import { ring } from 'ldrs';
 import Layout from './Layout';
 import HomePage from './Pages/HomePage/HomePage';
 import PlayDice from './Pages/Quick Navigation/PlayDice/PlayDice';
-import BestOfTheYear from './Pages/Quick Navigation/BestOfTheYear/BestOfTheYear';
-import AllTime from './Pages/Quick Navigation/All time top/AllTime';
-import Pop2024 from './Pages/Quick Navigation/Popular in 2024/Pop2024';
+import BestOfTheYear from './Pages/Quick Navigation/Top/BestOfTheYear';
+import AllTime from './Pages/Quick Navigation/Top/AllTime';
+import Pop2024 from './Pages/Quick Navigation/Top/Pop2024';
 import PlayStation from './Pages/Quick Navigation/Playstation/Playstation';
 import PC from './Pages/Quick Navigation/PC/PC';
 import XboxOne from './Pages/Quick Navigation/Xbox One/XboxOne';
@@ -56,13 +56,20 @@ function App() {
   const [numberOfGames, setNumberOfGames] = useState<number>(0);
   const [ModalGames,setModalGames] = useState<ModalGames[]>([])
 
-  const [gameAdded,setGameAdded] = useState<boolean[]>(Array(20).fill(false))
+
+  const [gamePop,setPopGameAdded] = useState<boolean[]>(Array(20).fill(false))
+  const [gameAll,setAllGameAdded] = useState<boolean[]>(Array(40).fill(false))
+
+
+
+
 
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Layout gameAdded={gameAdded} setGameAdded={setGameAdded} numberOfGames={numberOfGames} setNumberOfGames={setNumberOfGames}
-                       ModalGames={ModalGames} setModalGames={setModalGames}
+      element: <Layout gamePopAdded={gamePop} setPopGameAdded={setPopGameAdded} numberOfGames={numberOfGames} setNumberOfGames={setNumberOfGames}
+                       gameAllAdded={gameAll} setAllGameAdded={setAllGameAdded} ModalGames={ModalGames} setModalGames={setModalGames}
+                        
  />,
       children: [
         { path: '/', element: <HomePage /> },
