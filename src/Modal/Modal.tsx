@@ -10,11 +10,11 @@ type modalProps={
     setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
     ModalGames:ModalGames[],
     setModalGames: React.Dispatch<React.SetStateAction<ModalGames[]>>
-    gameAdded: boolean[]
-    setGameAdded: React.Dispatch<React.SetStateAction<boolean[]>>
+    gameStates: boolean[][]
+    setGamesStates: React.Dispatch<React.SetStateAction<boolean[][]>>
 }
 
-function Modal({modal,toggleModal,numberOfGames,ModalGames,gameAdded,setModalGames,setNumberOfGames,setGameAdded}:modalProps){
+function Modal({modal,toggleModal,numberOfGames,ModalGames,gameStates,setGamesStates,setModalGames,setNumberOfGames}:modalProps){
  
     const ModalArea = useRef<HTMLDivElement>(null);
 
@@ -33,7 +33,7 @@ function Modal({modal,toggleModal,numberOfGames,ModalGames,gameAdded,setModalGam
     },[toggleModal]);
 
 
-    function deleteGame(index:number){
+   /* function deleteGame(index:number){
          setModalGames(G=>G.filter((_,i)=>i!==index))
          setNumberOfGames(G=>G-=1)
          gameAdded[ModalGames[index].gameIndex]=false
@@ -43,7 +43,7 @@ function Modal({modal,toggleModal,numberOfGames,ModalGames,gameAdded,setModalGam
         setModalGames([])
         setNumberOfGames(0)
         setGameAdded(gameAdded.map(()=>false))
-    }
+    }*/
 
     return(
     
@@ -54,12 +54,12 @@ function Modal({modal,toggleModal,numberOfGames,ModalGames,gameAdded,setModalGam
                             <div ref={ModalArea} className={ModalCSS.ModalContent}>
                                 <div className={ModalCSS.Top}>
                                     <h2>Games: {numberOfGames}</h2>
-                                    <h3 onClick={clearGames}>Clear</h3>
+                                    <h3 >Clear</h3>
                                 </div>
                                 <div className={ModalCSS.ModalGamesContainer}>
                                 {ModalGames.map((_,index)=>(
                                     <div className={ModalCSS.ModalGame} key={index}>
-                                        <button className={ModalCSS.DeleteGame} onClick={()=>deleteGame(index)}>X</button>
+                                        <button className={ModalCSS.DeleteGame}>X</button>
                                         <div className={ModalCSS.GameInfo}>
                                             <div className={ModalCSS.ImageContainer}>
                                                 <img src={ModalGames[index].Game.background_image}></img>

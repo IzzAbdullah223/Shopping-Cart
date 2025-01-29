@@ -10,16 +10,16 @@ interface LayOutProps{
     setNumberOfGames: React.Dispatch<React.SetStateAction<number>>,
     ModalGames:ModalGames[],
     setModalGames: React.Dispatch<React.SetStateAction<ModalGames[]>>
-    gamePopAdded:boolean[]
-    setPopGameAdded: React.Dispatch<React.SetStateAction<boolean[]>>
-    gameAllAdded:boolean[]
-    setAllGameAdded: React.Dispatch<React.SetStateAction<boolean[]>>
+    gamesState: boolean[][]
+    setGamesStates: React.Dispatch<React.SetStateAction<boolean[][]>>
 }
 
-function Layout({numberOfGames,setNumberOfGames,ModalGames,setModalGames,gamePopAdded,setPopGameAdded
-                                                                        ,gameAllAdded,setAllGameAdded
+function Layout({numberOfGames,setNumberOfGames,ModalGames,setModalGames,gamesState,setGamesStates
 }: LayOutProps){
 
+
+
+    console.log(gamesState[0])
  
     const location = useLocation();
     const  isHomePage= location.pathname==='/'
@@ -31,8 +31,8 @@ function Layout({numberOfGames,setNumberOfGames,ModalGames,setModalGames,gamePop
                 Your browser does not support the video tag.
             </video>
       )     }
-            <Header setGameAdded={setPopGameAdded} gameAdded={gamePopAdded} setNumberOfGames={setNumberOfGames} numberOfGames={numberOfGames} setModalGames={setModalGames}         ModalGames={ModalGames}></Header>
-            <Outlet context={{setNumberOfGames,setModalGames,ModalGames,gamePopAdded,setPopGameAdded,gameAllAdded,setAllGameAdded}}></Outlet>
+            <Header gamesState={gamesState} setGamesStates={setGamesStates} setNumberOfGames={setNumberOfGames} numberOfGames={numberOfGames} setModalGames={setModalGames}         ModalGames={ModalGames}></Header>
+            <Outlet context={{setNumberOfGames,setModalGames,ModalGames,gamesState,setGamesStates}}></Outlet>
         </div>
     )
 }

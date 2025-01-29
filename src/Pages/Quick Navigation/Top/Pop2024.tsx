@@ -14,15 +14,16 @@ import Checkmark from '../../../assets/icons/CheckMark'
 
 function Pop2024(){
 
-  const{setNumberOfGames,setModalGames,gamePopAdded,setPopGameAdded} = useOutletContext<{
+  const{setNumberOfGames,setModalGames,gamesState,setGamesStates} = useOutletContext<{
         setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
         setModalGames:    React.Dispatch<React.SetStateAction<ModalGames[]>>;
         ModalGames: ModalGames[]
-        gamePopAdded:boolean[]
-        setPopGameAdded: React.Dispatch<React.SetStateAction<boolean[]>>
+        gamesState:boolean[][]
+        setGamesStates: React.Dispatch<React.SetStateAction<boolean[][]>>
     }>()
    
  
+    console.log(gamesState[0])
     const Apikey = "2bcc24482f844476a6b3935319801e0c"
 
     const [Loading,setLoading] = useState(true)
@@ -57,8 +58,10 @@ function Pop2024(){
  
     
     function GamePlatforms(){
-
+ 
         const tempArray:JSX.Element[][]=Array.from({length:20},()=>[])// Initalzing 20 inner arrays
+ 
+
         for(let i=0;i<20;i++){
             for(let j=0;j<data!.GamesData[i].parent_platforms.length;j++){
 
@@ -96,11 +99,11 @@ function Pop2024(){
       function AddGame(index:number){
         setModalGames(G=>[...G, {Game: data!.GamesData[index],gameIndex:index}])
         setNumberOfGames(G=>G+=1)
-        setPopGameAdded((prev)=>{
-            const updated =[...prev];
-            updated[index]=true
-            return updated;
-        })
+       // setPopGameAdded((prev)=>{
+       //     const updated =[...prev];
+         //   updated[index]=true
+        //    return updated;
+      //  })
         
       }
 
@@ -129,12 +132,12 @@ function Pop2024(){
                                 <div className={POPCSS.Below}>
                                     <div className={POPCSS.Left}>
                                      
-                                        <div style={{display:!gamePopAdded[index]===true? "": "none"}} className={POPCSS.LeftTopNotAdded} onClick={()=>AddGame(index)}>
+                                        <div style={{display:!gamesState[0][index]===true? "": "none"}} className={POPCSS.LeftTopNotAdded} onClick={()=>AddGame(index)}>
                                             <h3>Add to cart</h3>
                                             <Plus></Plus>
                                         </div>
                                               
-                                        <div style={{display:gamePopAdded[index]===true? "": "none"}}  className={POPCSS.LeftTopAdded} onClick={()=>AddGame(index)}>
+                                        <div style={{display:gamesState[0][index]===true? "": "none"}}  className={POPCSS.LeftTopAdded} onClick={()=>AddGame(index)}>
                                             <h3>Added</h3>
                                             <Checkmark></Checkmark>
                                         </div>

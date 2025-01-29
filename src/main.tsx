@@ -60,6 +60,11 @@ function App() {
   const [gamePop,setPopGameAdded] = useState<boolean[]>(Array(20).fill(false))
   const [gameAll,setAllGameAdded] = useState<boolean[]>(Array(40).fill(false))
 
+  const [gamesState,setGamesStates] =useState<boolean[][]>([
+    Array(20).fill(false), // population
+    Array(40).fill(false),  // AllTime
+  ])
+
 
 
 
@@ -67,8 +72,8 @@ function App() {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Layout gamePopAdded={gamePop} setPopGameAdded={setPopGameAdded} numberOfGames={numberOfGames} setNumberOfGames={setNumberOfGames}
-                       gameAllAdded={gameAll} setAllGameAdded={setAllGameAdded} ModalGames={ModalGames} setModalGames={setModalGames}
+      element: <Layout gamesState={gamesState}          numberOfGames={numberOfGames} setNumberOfGames={setNumberOfGames}
+                       setGamesStates={setGamesStates}  ModalGames={ModalGames} setModalGames={setModalGames}
                         
  />,
       children: [

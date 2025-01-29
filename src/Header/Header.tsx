@@ -14,11 +14,11 @@ interface HeaderProps{
     ModalGames:ModalGames[],
     setModalGames: React.Dispatch<React.SetStateAction<ModalGames[]>>,
     setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
-    gameAdded:boolean[],
-    setGameAdded: React.Dispatch<React.SetStateAction<boolean[]>>
+    gamesState:boolean[][],
+    setGamesStates: React.Dispatch<React.SetStateAction<boolean[][]>>
 }
 
-function Header({numberOfGames,ModalGames,setModalGames,setNumberOfGames,gameAdded,setGameAdded}:HeaderProps){
+function Header({numberOfGames,ModalGames,setModalGames,setNumberOfGames,gamesState,setGamesStates}:HeaderProps){
  
 
       
@@ -44,7 +44,7 @@ function Header({numberOfGames,ModalGames,setModalGames,setNumberOfGames,gameAdd
                 <Cart onClick={toggleModal}></Cart>
                 <div className={HeaderCSS.BlueDot} style={{display: numberOfGames==0? "none": ""}}></div>
             </div>
-            <Modal gameAdded = {gameAdded} setGameAdded = {setGameAdded} setNumberOfGames={setNumberOfGames} setModalGames={setModalGames} numberOfGames={numberOfGames} modal={modal} ModalGames={ModalGames} toggleModal={toggleModal}></Modal>
+            <Modal gameStates = {gamesState} setGamesStates = {setGamesStates} setNumberOfGames={setNumberOfGames} setModalGames={setModalGames} numberOfGames={numberOfGames} modal={modal} ModalGames={ModalGames} toggleModal={toggleModal}></Modal>
         </div>
     )
 
