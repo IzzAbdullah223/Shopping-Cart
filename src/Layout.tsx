@@ -3,23 +3,28 @@ import Header from './Header/Header'
 import LayoutCSS from './Layout.module.css'
 import PykeVideo from  './assets/Images/pyke.mp4'
 import {ModalGames} from './main'
+import { gamesStates } from './main'
 
-
+ 
 interface LayOutProps{
     numberOfGames:number,
     setNumberOfGames: React.Dispatch<React.SetStateAction<number>>,
     ModalGames:ModalGames[],
     setModalGames: React.Dispatch<React.SetStateAction<ModalGames[]>>
-    gamesState: boolean[][]
-    setGamesStates: React.Dispatch<React.SetStateAction<boolean[][]>>
+    gamesStates:gamesStates[],
+    setGamesStates:React.Dispatch<React.SetStateAction<gamesStates[]>>
+    
+ 
 }
 
-function Layout({numberOfGames,setNumberOfGames,ModalGames,setModalGames,gamesState,setGamesStates
+function Layout({numberOfGames,setNumberOfGames,ModalGames,setModalGames,gamesStates,setGamesStates
 }: LayOutProps){
 
 
+         
+ 
 
-    console.log(gamesState[0])
+    
  
     const location = useLocation();
     const  isHomePage= location.pathname==='/'
@@ -31,8 +36,8 @@ function Layout({numberOfGames,setNumberOfGames,ModalGames,setModalGames,gamesSt
                 Your browser does not support the video tag.
             </video>
       )     }
-            <Header gamesState={gamesState} setGamesStates={setGamesStates} setNumberOfGames={setNumberOfGames} numberOfGames={numberOfGames} setModalGames={setModalGames}         ModalGames={ModalGames}></Header>
-            <Outlet context={{setNumberOfGames,setModalGames,ModalGames,gamesState,setGamesStates}}></Outlet>
+            <Header gamesStates={gamesStates} setGamesStates={setGamesStates}  setNumberOfGames={setNumberOfGames} numberOfGames={numberOfGames} setModalGames={setModalGames}         ModalGames={ModalGames}></Header>
+            <Outlet context={{setNumberOfGames,setModalGames,ModalGames,gamesStates,setGamesStates}}></Outlet>
         </div>
     )
 }

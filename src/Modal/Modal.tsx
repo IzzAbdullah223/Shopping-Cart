@@ -1,6 +1,6 @@
 import {useEffect,useRef } from 'react'
 import ModalCSS from './Modal.module.css'
-import { ModalGames } from '../main'
+import { ModalGames,gamesStates } from '../main'
 
 
 type modalProps={
@@ -10,14 +10,16 @@ type modalProps={
     setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
     ModalGames:ModalGames[],
     setModalGames: React.Dispatch<React.SetStateAction<ModalGames[]>>
-    gameStates: boolean[][]
-    setGamesStates: React.Dispatch<React.SetStateAction<boolean[][]>>
+    gamesStates:gamesStates[]
+    setGamesStates:React.Dispatch<React.SetStateAction<gamesStates[]>>
 }
 
-function Modal({modal,toggleModal,numberOfGames,ModalGames,gameStates,setGamesStates,setModalGames,setNumberOfGames}:modalProps){
+function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumberOfGames,gamesStates,setGamesStates}:modalProps){
  
     const ModalArea = useRef<HTMLDivElement>(null);
 
+
+   
 //From here to Line 27  
     useEffect(()=>{  // close modal when clicking outside
        let handler= (event:MouseEvent)=>{
@@ -33,17 +35,29 @@ function Modal({modal,toggleModal,numberOfGames,ModalGames,gameStates,setGamesSt
     },[toggleModal]);
 
 
-   /* function deleteGame(index:number){
-         setModalGames(G=>G.filter((_,i)=>i!==index))
-         setNumberOfGames(G=>G-=1)
-         gameAdded[ModalGames[index].gameIndex]=false
+    function deleteGame(index:number){
+        setNumberOfGames(G=>G-1)
+        console.log(ModalGames)
+     
     }
 
     function clearGames(){
         setModalGames([])
         setNumberOfGames(0)
-        setGameAdded(gameAdded.map(()=>false))
-    }*/
+        setGamesStates(prevGamesStates => 
+            prevGamesStates.map((gameState, index) => 
+              index === 2  
+                ? {
+                    ...gameState,
+                    gameIndexes: Array(40).fill(false)  
+                  }
+                : {
+                    ...gameState,
+                    gameIndexes: Array(20).fill(false)  
+                  }
+            )
+          );       
+    }
 
     return(
     
@@ -54,12 +68,12 @@ function Modal({modal,toggleModal,numberOfGames,ModalGames,gameStates,setGamesSt
                             <div ref={ModalArea} className={ModalCSS.ModalContent}>
                                 <div className={ModalCSS.Top}>
                                     <h2>Games: {numberOfGames}</h2>
-                                    <h3 >Clear</h3>
+                                    <h3 onClick={clearGames}>Clear</h3>
                                 </div>
                                 <div className={ModalCSS.ModalGamesContainer}>
                                 {ModalGames.map((_,index)=>(
                                     <div className={ModalCSS.ModalGame} key={index}>
-                                        <button className={ModalCSS.DeleteGame}>X</button>
+                                        <button className={ModalCSS.DeleteGame} onClick={()=>deleteGame(index)}>X</button>
                                         <div className={ModalCSS.GameInfo}>
                                             <div className={ModalCSS.ImageContainer}>
                                                 <img src={ModalGames[index].Game.background_image}></img>

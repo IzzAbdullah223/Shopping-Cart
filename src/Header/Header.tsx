@@ -5,7 +5,7 @@ import Cart from '../assets/icons/Cart'
 import Modal from '../Modal/Modal'
 import {useState} from 'react'
 import {Link} from 'react-router-dom'
-import { ModalGames } from '../main'
+import { ModalGames,gamesStates } from '../main'
 
  
 
@@ -14,11 +14,13 @@ interface HeaderProps{
     ModalGames:ModalGames[],
     setModalGames: React.Dispatch<React.SetStateAction<ModalGames[]>>,
     setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
-    gamesState:boolean[][],
-    setGamesStates: React.Dispatch<React.SetStateAction<boolean[][]>>
+    gamesStates:gamesStates[]
+    setGamesStates:React.Dispatch<React.SetStateAction<gamesStates[]>>
 }
 
-function Header({numberOfGames,ModalGames,setModalGames,setNumberOfGames,gamesState,setGamesStates}:HeaderProps){
+function Header({numberOfGames,ModalGames,setModalGames,setNumberOfGames,gamesStates,setGamesStates}:HeaderProps){
+ 
+ 
  
 
       
@@ -44,7 +46,7 @@ function Header({numberOfGames,ModalGames,setModalGames,setNumberOfGames,gamesSt
                 <Cart onClick={toggleModal}></Cart>
                 <div className={HeaderCSS.BlueDot} style={{display: numberOfGames==0? "none": ""}}></div>
             </div>
-            <Modal gameStates = {gamesState} setGamesStates = {setGamesStates} setNumberOfGames={setNumberOfGames} setModalGames={setModalGames} numberOfGames={numberOfGames} modal={modal} ModalGames={ModalGames} toggleModal={toggleModal}></Modal>
+            <Modal gamesStates={gamesStates} setGamesStates={setGamesStates} setNumberOfGames={setNumberOfGames} setModalGames={setModalGames} numberOfGames={numberOfGames} modal={modal} ModalGames={ModalGames} toggleModal={toggleModal}></Modal>
         </div>
     )
 

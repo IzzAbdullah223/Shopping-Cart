@@ -8,18 +8,19 @@ import Xbox from '../../../assets/icons/Xbox'
 import Nintendo from '../../../assets/icons/Nintendo'
 import IOS from '../../../assets/icons/iOS'
 import { useOutletContext } from 'react-router-dom'
-import {GamesDetails,ModalGames} from '../../../main'
+import {GamesDetails,ModalGames,gamesStates} from '../../../main'
 import Checkmark from '../../../assets/icons/CheckMark'
 
 
 function BestOfTheYear(){
 
-  const{setNumberOfGames,setModalGames,gameAdded,setGameAdded} = useOutletContext<{
+  const{setNumberOfGames,setModalGames,gamesStates,setGamesStates} = useOutletContext<{
         setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
         setModalGames:    React.Dispatch<React.SetStateAction<ModalGames[]>>;
         ModalGames: ModalGames[]
-        gameAdded:boolean[]
-        setGameAdded: React.Dispatch<React.SetStateAction<boolean[]>>
+        gamesStates:gamesStates[],
+        setGamesStates:React.Dispatch<React.SetStateAction<gamesStates[]>>
+ 
     }>()
    
  
@@ -93,14 +94,22 @@ function BestOfTheYear(){
 
       }
 
-      function AddGame(index:number){
-        setModalGames(G=>[...G, {Game: data!.GamesData[index],gameIndex:index}])
+      function AddGame(gameNumber:number){
+        setModalGames(G=>[...G, {Game: data!.GamesData[gameNumber],gameIndex:gameNumber}])
         setNumberOfGames(G=>G+=1)
-        setGameAdded((prev)=>{
-            const updated =[...prev];
-            updated[index]=true
-            return updated;
-        })
+        setGamesStates(prevGamesStates => 
+            prevGamesStates.map((gameState, index) => 
+              index === 1 // Check if it's the first index (index 0)
+                ? {
+                    ...gameState,
+                    gameIndexes: gameState.gameIndexes.map((value, i) => 
+                      i === gameNumber ? true : value // Update the 5th value (index 4) to `true`
+                    )
+                  }
+                : gameState
+            )
+          );
+       
         
       }
 
@@ -129,12 +138,12 @@ function BestOfTheYear(){
                                 <div className={POPCSS.Below}>
                                     <div className={POPCSS.Left}>
                                      
-                                        <div style={{display:!gameAdded[index]===true? "": "none"}} className={POPCSS.LeftTopNotAdded} onClick={()=>AddGame(index)}>
+                                        <div style={{display:!gamesStates[1].gameIndexes[index]===true? "": "none"}} className={POPCSS.LeftTopNotAdded} onClick={()=>AddGame(index)}>
                                             <h3>Add to cart</h3>
                                             <Plus></Plus>
                                         </div>
                                               
-                                        <div style={{display:gameAdded[index]===true? "": "none"}}  className={POPCSS.LeftTopAdded} onClick={()=>AddGame(index)}>
+                                        <div style={{display:gamesStates[1].gameIndexes[index]===true? "": "none"}}  className={POPCSS.LeftTopAdded} onClick={()=>AddGame(index)}>
                                             <h3>Added</h3>
                                             <Checkmark></Checkmark>
                                         </div>

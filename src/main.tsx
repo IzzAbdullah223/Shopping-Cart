@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ring } from 'ldrs';
 import Layout from './Layout';
 import HomePage from './Pages/HomePage/HomePage';
@@ -49,31 +49,50 @@ export interface GamesDetailsWithSelect{
 export interface Platforms{
  platform:Platform
 }
+
+ 
+
+export interface gamesStates{
+  gameIndexes: boolean[]
+  gameNames:  string[]
+}
+
+
  
 
 
 function App() {
+
+  const [gamesStates, setGamesStates] = useState<gamesStates[]>(
+    Array.from({ length: 20 }, () => ({ gameIndexes: [], gameNames: [] }))
+  );
+   
+  useEffect(() => {
+    setGamesStates(prevGamesStates => 
+      prevGamesStates.map((gameState, index) => 
+        index === 2  
+          ? {
+              ...gameState,
+              gameIndexes: Array(40).fill(false)  
+            }
+          : {
+              ...gameState,
+              gameIndexes: Array(20).fill(false)  
+            }
+      )
+    );
+  }, []);  
+   
   const [numberOfGames, setNumberOfGames] = useState<number>(0);
   const [ModalGames,setModalGames] = useState<ModalGames[]>([])
-
-
-  const [gamePop,setPopGameAdded] = useState<boolean[]>(Array(20).fill(false))
-  const [gameAll,setAllGameAdded] = useState<boolean[]>(Array(40).fill(false))
-
-  const [gamesState,setGamesStates] =useState<boolean[][]>([
-    Array(20).fill(false), // population
-    Array(40).fill(false),  // AllTime
-  ])
-
-
-
-
-
+ 
+ 
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Layout gamesState={gamesState}          numberOfGames={numberOfGames} setNumberOfGames={setNumberOfGames}
-                       setGamesStates={setGamesStates}  ModalGames={ModalGames} setModalGames={setModalGames}
+      element: <Layout    gamesStates={gamesStates}    numberOfGames={numberOfGames} setNumberOfGames={setNumberOfGames}
+                          ModalGames={ModalGames}       setModalGames={setModalGames}  setGamesStates={setGamesStates}
+                          
                         
  />,
       children: [
