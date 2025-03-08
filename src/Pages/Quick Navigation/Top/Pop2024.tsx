@@ -99,6 +99,7 @@ function Pop2024(){
       }
 
       function AddGame(gameNumber:number){
+         
         setModalGames(G=>[...G, {Game: data!.GamesData[gameNumber],gameIndex:gameNumber}])
         setNumberOfGames(G=>G+=1)
         setGamesStates(prevGamesStates => 
@@ -107,12 +108,14 @@ function Pop2024(){
                 ? {
                     ...gameState,
                     gameIndexes: gameState.gameIndexes.map((value, i) => 
-                      i === gameNumber ? true : value // Update the 5th value (index 4) to `true`
+                      i === gameNumber ? true : value, // Update the 5th value (index 4) to `true`
+                      gameState.gameNames[gameNumber] = data!.GamesData[gameNumber].name
+                      
                     )
                   }
                 : gameState
             )
-          );
+          ); 
       }
 
       useEffect(()=>{   

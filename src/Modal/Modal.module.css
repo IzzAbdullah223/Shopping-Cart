@@ -66,7 +66,7 @@
     background-color: #202020;
     height: 100vh;
     right: 0;
-    min-width: 20%;
+    width: 400px;
     padding: 40px 40px;
     animation: Slide 0.5s ease;
     font-family: 'GT Walsheim Pro BOLD';
@@ -98,13 +98,10 @@
     cursor: pointer;
 }
 
- 
-
-
-
-.ModalContent  h3,.Top h4{
+.Top  h3,.Top h4{
     color: #858585;
     font-family: 'GT Walsheim Pro THIN';
+    
 }
 
 .ModalContent h3{
@@ -120,43 +117,40 @@ margin-bottom: 10px;
 }
 
 .ModalGame{
-    font-family: 'GT Walsheim Pro THIN';
-    display: flex;
-    flex-direction: column;
     background-color: #31303079;
-    padding: 12px;
-    border-radius: 10px;
- 
-}
-
-.ImageContainer{
-    width: 190px;
-    height: 10vh;
-    border-radius: 10px;
-}
-.ImageContainer img{
-    object-fit: contain;
-    height: 100%;
-    width: 100%;
-    border-radius: 10px;
 }
 
 .GameInfo{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 30px;
 }
 
-.GameDetails{
+.RightSide{
     display: flex;
-    gap: 10px;
     flex-direction: column;
     align-items: center;
+    font-family: 'GT Walsheim pro Thin';
+    color: white;
+    outline: red solid;
+    width: 120px;
+    gap: 10px;
 }
 
-.GameDetails h3:first-of-type{
-    color: white;
+.RightSide button{
+    align-self: flex-end;
 }
+
+.RightSide p{
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+
+}
+
+
+ 
 .DeleteGame{
     background-color: rgba(0, 0, 0, 0.5);
     color: #f10c0c;
@@ -164,8 +158,20 @@ margin-bottom: 10px;
     border: none;
     padding: 5px 9px;
     border-radius: 50%;
-    align-self: self-end;
     cursor: pointer;
 }
+.ImageContainer{
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+}
+
+.ImageContainer img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
 
  

@@ -99,11 +99,12 @@ function BestOfTheYear(){
         setNumberOfGames(G=>G+=1)
         setGamesStates(prevGamesStates => 
             prevGamesStates.map((gameState, index) => 
-              index === 1 // Check if it's the first index (index 0)
+              index === 1  
                 ? {
                     ...gameState,
                     gameIndexes: gameState.gameIndexes.map((value, i) => 
-                      i === gameNumber ? true : value // Update the 5th value (index 4) to `true`
+                      i === gameNumber ? true : value, // Update the 5th value (index 4) to `true` 
+                    gameState.gameNames[gameNumber] = data!.GamesData[gameNumber].name
                     )
                   }
                 : gameState

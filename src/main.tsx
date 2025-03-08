@@ -54,7 +54,7 @@ export interface Platforms{
 
 export interface gamesStates{
   gameIndexes: boolean[]
-  gameNames:  string[]
+  gameNames:  String[]
 }
 
 
@@ -73,11 +73,13 @@ function App() {
         index === 2  
           ? {
               ...gameState,
-              gameIndexes: Array(40).fill(false)  
+              gameIndexes: Array(40).fill(false),
+              gameNames: Array(40).fill("")
             }
           : {
               ...gameState,
-              gameIndexes: Array(20).fill(false)  
+              gameIndexes: Array(20).fill(false),  
+              gameNames: Array(20).fill("")
             }
       )
     );
