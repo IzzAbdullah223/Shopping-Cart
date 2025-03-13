@@ -6,7 +6,7 @@
 
 @font-face {
     font-family: 'GT Walsheim Pro THIN';
-    src: url('../assets/font/GTWalsheimPro-Thin.woff2');
+    src: url('../assets/font/GTWalsheimPro-Regular.woff2');
 }
 
 
@@ -14,6 +14,13 @@
     font-family: 'GT Walsheim Pro BOLD';
     src: url('../assets/font/GTWalsheimPro-Bold.woff2');
     font-weight: 300;
+}
+
+
+@font-face {
+    font-family: 'GT Walsheim Pro LIGHT';
+    src: url('../assets/font/GTWalsheimPro-UltraLight.woff2');
+  
 }
 
 
@@ -40,8 +47,6 @@
     background: hsla(0, 0%, 3%, 0.568);
 }
 
- 
-
 @keyframes Slide{
 
     from{
@@ -52,7 +57,6 @@
         transform: translateX(0);
     }
     
-
 }
 
 .Modal{
@@ -63,115 +67,124 @@
     position: absolute;
     display: flex;
     flex-direction: column;
+    gap: --98;
     background-color: #202020;
     height: 100vh;
     right: 0;
     width: 400px;
-    padding: 40px 40px;
     animation: Slide 0.5s ease;
-    font-family: 'GT Walsheim Pro BOLD';
     overflow-y: auto;
     scrollbar-width: none;
+     
 }
-
-@keyframes Slide{
-    from{
-        transform: translateX(300px);
-    }
-
-    to{
-        transform: translateX(0px);
-    }
-}
-
 
 .Top{
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    color: white;
-    gap: 20px;
-    margin-bottom: 30px;
+    padding: 35px;
 }
-
-
-.Top h3:first-of-type{
+.Top>div:first-child{
+   color: white;
+   font-size: 1.7rem;
+   font-family: 'GT Walsheim Pro BOLD';
+}
+.Top>div:last-child{
+    color: #999999;
+    font-family: 'GT Walsheim Pro THIN';
+    font-size: 1.1rem;
     cursor: pointer;
 }
 
-.Top  h3,.Top h4{
-    color: #858585;
-    font-family: 'GT Walsheim Pro THIN';
+ 
+.Total{
+    margin-top: auto;
+    padding: 35px;
+    color: #999999;
+    font-family: 'GT Walsheim PRO LIGHT';
+    font-size: 1.2rem;
+}
+
+.ModalGamesContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     
 }
 
-.ModalContent h3{
-    margin-top: auto;
-}
-
-
-.ModalGamesContainer{
-display: flex;
-flex-direction: column;
-gap: 20px;
-margin-bottom: 10px;
-}
-
 .ModalGame{
-    background-color: #31303079;
+    background-color: #272727;
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding:  15px 10px;
+    border-radius: 10px;
+}
+
+
+.ModalGameTop{
+    display: flex;
+    justify-content: end;
+}
+
+button{
+    background-color: #0f1011;
+    color: #999999;
+    font-size: 1rem;
+    padding: 2px 6px;
+    border-radius: 50%;
+    
+    outline: none;
+    border: none;
+    cursor: pointer;
+ 
+}
+
+.GameImageContainer{
+    min-width: 150px;
+    height: 100px;
+   
+}
+
+.GameImageContainer img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.ModalGameBottom{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
 }
 
 .GameInfo{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 30px;
-}
-
-.RightSide{
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    font-family: 'GT Walsheim pro Thin';
-    color: white;
-    outline: red solid;
-    width: 120px;
     gap: 10px;
+    font-size: 1.2rem;
 }
 
-.RightSide button{
-    align-self: flex-end;
+.GameInfo>div:first-child{
+    color: white;
+    font-family: 'GT Walsheim Pro THIN';
+}
+.GameInfo>div:last-child{
+    margin-left: 60px;
+    color: #999999;
+    font-family: 'GT Walsheim Pro THIN';
 }
 
-.RightSide p{
-    text-align: center;
-    font-size: 1.3rem;
-    font-weight: bold;
-
+.GameNme{
+    margin-left: auto;
 }
-
 
  
-.DeleteGame{
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #f10c0c;
-    outline: none;
-    border: none;
-    padding: 5px 9px;
-    border-radius: 50%;
-    cursor: pointer;
-}
-.ImageContainer{
-    width: 100px;
-    height: 100px;
-    overflow: hidden;
-}
 
-.ImageContainer img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
+ 
+ 
 
-
+ 
  
