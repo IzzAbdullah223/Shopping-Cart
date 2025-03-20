@@ -45,31 +45,20 @@ function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumb
 
 
     function deleteGame(gameIndex:number){
-       /* console.log(ModalGames)
-        setNumberOfGames(G=>G-1)
-        setGamesStates(prevGamesStates => 
-            prevGamesStates.map((gameState) => {
-                for(let i=0;i<ModalGames.length;i++){
-                    if(ModalGames[i].Game.name === gameState.gameNames[gameIndex]){
-                        setModalGames((prevModalGame)=>prevModalGame.filter(game=>game.gameIndex!==gameIndex))
-                            return{
-                                ...gameState,
-                                gameNames: gameState.gameNames.map((name, i) =>
-                                    i === gameIndex ? "" : name // Change value at gameIndex
-                                ),
-                                gameIndexes: gameState.gameIndexes.map((state,i)=>
+        setModalGames(ModalGames.filter((_,index)=>index!==gameIndex))
+        setNumberOfGames(n=>n-1)
+      /*  if(gamesStates[0].gameNames[2]===ModalGames[gameIndex].Game.name){
+            gamesStates[0].gameIndexes[2]=false
+        }*/
 
-                                    i===gameIndex? false: state
-                                )
+        for(let i=0;i<gamesStates[0].gameNames.length;i++){
+            if(gamesStates[0].gameNames[i]===ModalGames[gameIndex].Game.name){
+                gamesStates[0].gameIndexes[i]=false
+                console.log("test")
+            }
+        }
 
-                            }   
-                    }
-                }
-              return gameState;  
-            })
-          );
-        
-     */
+
     }
 
     function clearGames(){
@@ -105,7 +94,7 @@ function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumb
                                 {ModalGames.map((ModalGame,index)=>(
                                     <div className={ModalCSS.ModalGame} key={index}>
                                         <div className={ModalCSS.ModalGameTop}>
-                                                <button>x</button>
+                                                <button onClick={()=>deleteGame(index)}>x</button>
                                         </div>
                                         <div className={ModalCSS.ModalGameBottom}>
                                             <div className={ModalCSS.GameImageContainer}>
