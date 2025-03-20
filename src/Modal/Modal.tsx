@@ -47,24 +47,17 @@ function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumb
     function deleteGame(gameIndex:number){
         setModalGames(ModalGames.filter((_,index)=>index!==gameIndex))
         setNumberOfGames(n=>n-1)
-      console.log(gamesStates)
-        
-
-        for(let i=0;i<gamesStates[0].gameNames.length;i++){
-            if(gamesStates[0].gameNames[i]===ModalGames[gameIndex].Game.name){
-                gamesStates[0].gameIndexes[i]=false
-                gamesStates[0].gameNames[i]=""
-                console.log("test")
-            }
-        }
-
-        for(let i=0;i<gamesStates[1].gameNames.length;i++){
-            if(gamesStates[1].gameNames[i]===ModalGames[gameIndex].Game.name){
-                gamesStates[1].gameIndexes[i]=false
-                gamesStates[1].gameNames[i]=""
-                console.log("test")
-            }
-        }
+        setGamesStates((prevStates) => {
+            return prevStates.map((state) => ({
+                ...state,
+                gameNames: state.gameNames.map((name, i) =>
+                    name === ModalGames[gameIndex].Game.name ? "" : name
+                ),
+                gameIndexes: state.gameIndexes.map((index, i) =>
+                    state.gameNames[i] === ModalGames[gameIndex].Game.name ? false : index
+                ),
+            }));
+        });
 
 
     }

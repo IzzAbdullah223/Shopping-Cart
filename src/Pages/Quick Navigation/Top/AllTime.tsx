@@ -149,12 +149,12 @@ function AllTime(){
                                 <div className={POPCSS.Below}>
                                     <div className={POPCSS.Left}>
                                      
-                                        <div style={{display:!gamesStates[1].gameIndexes[index]===true? "": "none"}} className={POPCSS.LeftTopNotAdded} onClick={()=>AddGame(index)}>
+                                        <div style={{display:!gamesStates[2].gameIndexes[index]===true? "": "none"}} className={POPCSS.LeftTopNotAdded} onClick={()=>AddGame(index)}>
                                             <h3>Add to cart</h3>
                                             <Plus></Plus>
                                         </div>
                                               
-                                        <div style={{display:gamesStates[1].gameIndexes[index]===true? "": "none"}}  className={POPCSS.LeftTopAdded} onClick={()=>AddGame(index)}>
+                                        <div style={{display:gamesStates[2].gameIndexes[index]===true? "": "none"}}  className={POPCSS.LeftTopAdded} onClick={()=>AddGame(index)}>
                                             <h3>Added</h3>
                                             <Checkmark></Checkmark>
                                         </div>
