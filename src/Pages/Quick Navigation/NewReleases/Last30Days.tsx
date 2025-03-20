@@ -8,8 +8,10 @@ import Xbox from '../../../assets/icons/Xbox'
 import Nintendo from '../../../assets/icons/Nintendo'
 import IOS from '../../../assets/icons/iOS'
 import ChevronDown from '../../../assets/icons/ChevronDown'
-import Checkmark from '../../../assets/icons/CheckMark'
 import LoadingComponent from '../../../LoadingComponent'
+import { useOutletContext } from 'react-router-dom'
+import {GamesDetails,ModalGames,gamesStates} from '../../../main'
+import Checkmark from '../../../assets/icons/CheckMark'
 
 
  
@@ -33,6 +35,14 @@ function Last30Days(){
     interface Platforms{
         platform:Platform
     }
+
+      const{setNumberOfGames,setModalGames,gamesStates,setGamesStates} = useOutletContext<{
+            setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
+            setModalGames:    React.Dispatch<React.SetStateAction<ModalGames[]>>;
+            ModalGames: ModalGames[]
+            gamesStates:gamesStates[],
+            setGamesStates:React.Dispatch<React.SetStateAction<gamesStates[]>>
+        }>()
 
     const [Loading,setLoading] = useState(true)
 
@@ -74,7 +84,7 @@ function Last30Days(){
             const FormattedData:GamesDetails={
                 PopularData:result.results,
                 RatingData:result2.results,
-                ReleaseData:result3.results
+                ReleaseData:result3.results,
             }
            
             setData(FormattedData)
@@ -113,13 +123,7 @@ function Last30Days(){
 
 
     
-      function getLast30Days():String{
-        return "test"
-
-      }
-
       function GamePlatforms():void{
-        console.log(data)
        const tempArray:JSX.Element[][]=Array.from({length:20},()=>[])// Initalzing 20 inner arrays
         for(let i=0;i<20;i++){
             for(let j=0;j<currentData![i].parent_platforms.length;j++){
@@ -182,6 +186,26 @@ function Last30Days(){
         setSelectorVisible(S=>S=!S)
         setMenuIsVisible(M=>M=!M)
         setShouldStartTimer(true)
+      }
+
+      function AddGame(gameNumber:number){
+        setModalGames(G=>[...G, {Game: currentData![gameNumber],gameIndex:gameNumber} as ModalGames])
+        setNumberOfGames(G=>G+1)
+        setGamesStates(prevGamesStates => 
+            prevGamesStates.map((gameState, index) => 
+              index === 3  
+                ? {
+                    ...gameState,
+                    gameIndexes: gameState.gameIndexes.map((value, i) => 
+                      i === gameNumber ? true : value,  
+                      gameState.gameNames[gameNumber] = currentData![gameNumber].name
+                      
+                    )
+                  }
+                : gameState
+            )
+          ); 
+        console.log(gamesStates)
       }
 
          useEffect(()=>{
@@ -250,18 +274,25 @@ function Last30Days(){
                                     <img src={game.background_image as string}></img>
                                 </div>
                                 <div className={POPCSS.Below}>
-                                    <div className={POPCSS.Left}>
-                                        <div className={POPCSS.LeftTop}>
-                                            <h3>Add to cart</h3>
-                                            <Plus></Plus>
-                                        </div>
-                                        <div className={POPCSS.Platforms}>
-                                            {Platforms![index].map((platform,idx)=>(
-                                                React.cloneElement(platform,{key:idx})
-                                            ))}
-                                        </div>
-                                        <h2>{game.name}</h2>
-                                    </div>
+                                <div className={POPCSS.Left}>
+                                     
+                                     <div style={{display:!gamesStates[3].gameIndexes[index]===true? "": "none"}} className={POPCSS.LeftTopNotAdded} onClick={()=>AddGame(index)}>
+                                         <h3>Add to cart</h3>
+                                         <Plus></Plus>
+                                     </div>
+                                           
+                                     <div style={{display:gamesStates[3].gameIndexes[index]===true? "": "none"}}  className={POPCSS.LeftTopAdded} onClick={()=>AddGame(index)}>
+                                         <h3>Added</h3>
+                                         <Checkmark></Checkmark>
+                                     </div>
+
+                                     <div className={POPCSS.Platforms}>
+                                         {Platforms![index].map((platform,idx)=>(
+                                             React.cloneElement(platform,{key:idx})
+                                         ))}
+                                     </div>
+                                     <h2>{game.name}</h2>
+                                 </div>
                                     
                                 </div>
                             </div>

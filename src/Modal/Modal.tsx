@@ -63,7 +63,7 @@ function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumb
     }
 
     function clearGames(){
-        setModalGames([]) // to remove the modal games 
+        setModalGames([]) 
         setNumberOfGames(0)
         setGamesStates(prevGamesStates => 
             prevGamesStates.map((gameState, index) => 
