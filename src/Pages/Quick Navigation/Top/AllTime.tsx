@@ -107,20 +107,35 @@ function AllTime(){
          
         setModalGames(G=>[...G, {Game: data!.GamesData[gameNumber],gameIndex:gameNumber}])
         setNumberOfGames(G=>G+=1)
-        setGamesStates(prevGamesStates => 
-            prevGamesStates.map((gameState, index) => 
-              index === 2 // Check if it's the first index (index 0)
-                ? {
-                    ...gameState,
-                    gameIndexes: gameState.gameIndexes.map((value, i) => 
-                      i === gameNumber ? true : value, // Update the 5th value (index 4) to `true`
-                      gameState.gameNames[gameNumber] = data!.GamesData[gameNumber].name
-                      
-                    )
-                  }
-                : gameState
-            )
-          ); 
+        setGamesStates(prevGamesStates =>
+            prevGamesStates.map((gameState, index) => {
+              if (index === 2) {
+                return {
+                  ...gameState,
+                  gameIndexes: Array.isArray(gameState.gameIndexes[0])
+                    ? (gameState.gameIndexes as boolean[][]).map((row, rowIndex) =>
+                        row.map((value, colIndex) =>
+                          colIndex === gameNumber ? true : value
+                        )
+                      )
+                    : (gameState.gameIndexes as boolean[]).map((value, i) =>
+                        i === gameNumber ? true : value
+                      ),
+          
+                  gameNames: Array.isArray(gameState.gameNames[0])
+                    ? (gameState.gameNames as string[][]).map((row, rowIndex) =>
+                        rowIndex === gameNumber
+                          ? row.map(name => data!.GamesData[gameNumber].name)
+                          : row
+                      )
+                    : (gameState.gameNames as string[]).map((name, i) =>
+                        i === gameNumber ? data!.GamesData[gameNumber].name : name
+                      )
+                };
+              }
+              return gameState;
+            })
+          );
       }
   
 
