@@ -191,35 +191,20 @@ function Last30Days(){
       function AddGame(gameNumber:number){
         setModalGames(G=>[...G, {Game: currentData![gameNumber],gameIndex:gameNumber} as ModalGames])
         setNumberOfGames(G=>G+1)
-        setGamesStates(prevGamesStates =>
-            prevGamesStates.map((gameState, index) => {
-              if (index === 0) {
-                return {
-                  ...gameState,
-                  gameIndexes: Array.isArray(gameState.gameIndexes[0])
-                    ? (gameState.gameIndexes as boolean[][]).map((row, rowIndex) =>
-                        row.map((value, colIndex) =>
-                          colIndex === gameNumber ? true : value
-                        )
-                      )
-                    : (gameState.gameIndexes as boolean[]).map((value, i) =>
-                        i === gameNumber ? true : value
-                      ),
-          
-                  gameNames: Array.isArray(gameState.gameNames[0])
-                    ? (gameState.gameNames as string[][]).map((row, rowIndex) =>
-                        rowIndex === gameNumber
-                          ? row.map(name => currentData![gameNumber].name)
-                          : row
-                      )
-                    : (gameState.gameNames as string[]).map((name, i) =>
-                        i === gameNumber ? currentData![gameNumber].name : name
-                      )
-                };
-              }
-              return gameState;
-            })
-          );
+        setGamesStates(prevGamesStates => 
+            prevGamesStates.map((gameState, index) => 
+              index === 3  
+                ? {
+                    ...gameState,
+                    gameIndexes: gameState.gameIndexes.map((value, i) => 
+                      i === gameNumber ? true : value,  
+                      gameState.gameNames[gameNumber] = currentData![gameNumber].name
+                      
+                    )
+                  }
+                : gameState
+            )
+          ); 
         console.log(gamesStates)
       }
 

@@ -53,8 +53,8 @@ export interface Platforms{
  
 
 export interface gamesStates{
-  gameIndexes: boolean[] | boolean[][]
-  gameNames:  String[]  | String[][]
+  gameIndexes: boolean[]  
+  gameNames:  String[]   
 }
 
 
@@ -68,22 +68,22 @@ function App() {
   );
    
   useEffect(() => {
-    setGamesStates(prevGamesStates =>
-      prevGamesStates.map((gameState, index) => {
-        if (index === 2) {
-          return { ...gameState, gameIndexes: Array(40).fill(false), gameNames: Array(40).fill("") };
-        } else if (index === 0 || index === 1) {
-          return { ...gameState, gameIndexes: Array(20).fill(false), gameNames: Array(20).fill("") };
-        } else {
-          return { 
-            ...gameState, 
-            gameIndexes: Array(3).fill(null).map(() => Array(20).fill(false)),  
-            gameNames: Array(3).fill(null).map(() => Array(20).fill("")) 
-          };
-        }
-      })
+    setGamesStates(prevGamesStates => 
+      prevGamesStates.map((gameState, index) => 
+        index === 2  
+          ? {
+              ...gameState,
+              gameIndexes: Array(40).fill(false),
+              gameNames: Array(40).fill("")
+            }
+          : {
+              ...gameState,
+              gameIndexes: Array(20).fill(false),  
+              gameNames: Array(20).fill("")
+            }
+      )
     );
-  }, []);
+  }, []);  
 
 
   const [numberOfGames, setNumberOfGames] = useState<number>(0);
