@@ -10,7 +10,7 @@ import IOS from '../../../assets/icons/iOS'
 import ChevronDown from '../../../assets/icons/ChevronDown'
 import LoadingComponent from '../../../LoadingComponent'
 import { useOutletContext } from 'react-router-dom'
-import {GamesDetails,ModalGames,gamesStates} from '../../../main'
+import {ModalGames,gamesStates} from '../../../main'
 import Checkmark from '../../../assets/icons/CheckMark'
 
 
@@ -46,8 +46,6 @@ function Last30Days(){
 
     const [Loading,setLoading] = useState(true)
 
-    const [last30Day,setLast30Day] = useState<String | null>(null)
-
     const [Loading2,setLoading2]= useState(true)
 
     const [shouldStartTimer,setShouldStartTimer] = useState(true)
@@ -74,7 +72,6 @@ function Last30Days(){
 
          const popularResponse = await fetch(`https://api.rawg.io/api/games?genres=adventure&key=${Apikey}`)
             const result = await popularResponse.json()
-                console.log(result)
 
            const ratingResponse = await fetch(`https://api.rawg.io/api/games?genres=adventure&ordering=-rating&key=${Apikey}`)
            const result2 = await ratingResponse.json()
@@ -194,7 +191,7 @@ function Last30Days(){
       }
 
       function AddGame(gameNumber:number){
-        console.log(gameStateIndex  )
+ 
         setModalGames(G=>[...G, {Game: currentData![gameNumber],gameIndex:gameNumber} as ModalGames])
         setNumberOfGames(G=>G+1)
         setGamesStates(prevGamesStates => 
@@ -211,7 +208,7 @@ function Last30Days(){
                 : gameState
             )
           ); 
-        console.log(gamesStates)
+   
       }
 
          useEffect(()=>{
