@@ -63,6 +63,8 @@ function Last30Days(){
     const [isMenuVisible,setMenuIsVisible] = useState(false)
 
     const [isSelectorVisible,setSelectorVisible] = useState(true)
+
+    let [gameStateIndex,setGameStateIndex]= useState(3)
     
 
 
@@ -169,6 +171,7 @@ function Last30Days(){
         setSelectorVisible(S=>S=!S)
         setMenuIsVisible(M=>M=!M)
         setShouldStartTimer(true)
+       setGameStateIndex(3)
       }
 
 
@@ -178,6 +181,7 @@ function Last30Days(){
         setSelectorVisible(S=>S=!S)
         setMenuIsVisible(M=>M=!M)
         setShouldStartTimer(true)
+        setGameStateIndex(4)
       }
 
       function setRating():void{
@@ -186,14 +190,16 @@ function Last30Days(){
         setSelectorVisible(S=>S=!S)
         setMenuIsVisible(M=>M=!M)
         setShouldStartTimer(true)
+        setGameStateIndex(5)
       }
 
       function AddGame(gameNumber:number){
+        console.log(gameStateIndex  )
         setModalGames(G=>[...G, {Game: currentData![gameNumber],gameIndex:gameNumber} as ModalGames])
         setNumberOfGames(G=>G+1)
         setGamesStates(prevGamesStates => 
             prevGamesStates.map((gameState, index) => 
-              index === 3  
+              index === gameStateIndex  
                 ? {
                     ...gameState,
                     gameIndexes: gameState.gameIndexes.map((value, i) => 
@@ -217,6 +223,9 @@ function Last30Days(){
            return ()=> clearTimeout(timer)
        }
        },[shouldStartTimer])
+
+
+
 
 
       
@@ -275,13 +284,14 @@ function Last30Days(){
                                 </div>
                                 <div className={POPCSS.Below}>
                                 <div className={POPCSS.Left}>
-                                     
-                                     <div style={{display:!gamesStates[3].gameIndexes[index]===true? "": "none"}} className={POPCSS.LeftTopNotAdded} onClick={()=>AddGame(index)}>
+                                    
+                                    
+                                     <div style={{display:!gamesStates[gameStateIndex].gameIndexes[index]===true? "": "none"}} className={POPCSS.LeftTopNotAdded} onClick={()=>AddGame(index)}>
                                          <h3>Add to cart</h3>
                                          <Plus></Plus>
                                      </div>
                                            
-                                     <div style={{display:gamesStates[3].gameIndexes[index]===true? "": "none"}}  className={POPCSS.LeftTopAdded} onClick={()=>AddGame(index)}>
+                                     <div style={{display:gamesStates[gameStateIndex].gameIndexes[index]===true? "": "none"}}  className={POPCSS.LeftTopAdded} onClick={()=>AddGame(index)}>
                                          <h3>Added</h3>
                                          <Checkmark></Checkmark>
                                      </div>
