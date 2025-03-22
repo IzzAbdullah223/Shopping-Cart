@@ -6,7 +6,7 @@ import Windows from '../../../assets/icons/Windows'
 import Playstation from '../../../assets/icons/Playstation'
 import Xbox from '../../../assets/icons/Xbox'
 import Nintendo from '../../../assets/icons/Nintendo'
-import IOS from '../../../assets/icons/iOS'
+import IOS from '../../../assets/icons/IOSPIC'
 import ChevronDown from '../../../assets/icons/ChevronDown'
 import LoadingComponent from '../../../LoadingComponent'
 import { useOutletContext } from 'react-router-dom'
@@ -36,13 +36,18 @@ function Last30Days(){
         platform:Platform
     }
 
-      const{setNumberOfGames,setModalGames,gamesStates,setGamesStates} = useOutletContext<{
+      const{setNumberOfGames,setModalGames,gamesStates,setGamesStates,gameStateIndex,setGameStateIndex} = useOutletContext<{
             setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
             setModalGames:    React.Dispatch<React.SetStateAction<ModalGames[]>>;
             ModalGames: ModalGames[]
-            gamesStates:gamesStates[],
+            gamesStates:gamesStates[]
             setGamesStates:React.Dispatch<React.SetStateAction<gamesStates[]>>
+            gameStateIndex:number
+            setGameStateIndex:React.Dispatch<React.SetStateAction<number>>
+
         }>()
+
+        console.log(gameStateIndex)
 
     const [Loading,setLoading] = useState(true)
 
@@ -62,7 +67,7 @@ function Last30Days(){
 
     const [isSelectorVisible,setSelectorVisible] = useState(true)
 
-    let [gameStateIndex,setGameStateIndex]= useState(3)
+ 
     
 
 
@@ -88,6 +93,7 @@ function Last30Days(){
            
             setData(FormattedData)
             setCurrentData(FormattedData.PopularData)
+            setGameStateIndex(3)
             
         }
         fetchData()

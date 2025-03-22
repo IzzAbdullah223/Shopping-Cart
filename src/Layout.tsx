@@ -13,21 +13,15 @@ interface LayOutProps{
     setModalGames: React.Dispatch<React.SetStateAction<ModalGames[]>>
     gamesStates:gamesStates[],
     setGamesStates:React.Dispatch<React.SetStateAction<gamesStates[]>>
-    gamestateIndex:number,
-    setgameStateIndex:React.Dispatch<React.SetStateAction<number>>
+    gameStateIndex:number,
+    setGameStateIndex:React.Dispatch<React.SetStateAction<number>>
     
  
 }
 
-function Layout({numberOfGames,setNumberOfGames,ModalGames,setModalGames,gamesStates,setGamesStates
+function Layout({numberOfGames,setNumberOfGames,ModalGames,setModalGames,gamesStates,setGamesStates,gameStateIndex,setGameStateIndex
 }: LayOutProps){
 
-
-         
- 
-
-    
- 
     const location = useLocation();
     const  isHomePage= location.pathname==='/'
     return(
@@ -39,7 +33,7 @@ function Layout({numberOfGames,setNumberOfGames,ModalGames,setModalGames,gamesSt
             </video>
       )     }
             <Header gamesStates={gamesStates} setGamesStates={setGamesStates}  setNumberOfGames={setNumberOfGames} numberOfGames={numberOfGames} setModalGames={setModalGames}         ModalGames={ModalGames}></Header>
-            <Outlet context={{setNumberOfGames,setModalGames,ModalGames,gamesStates,setGamesStates}}></Outlet>
+            <Outlet context={{setNumberOfGames,setModalGames,ModalGames,gamesStates,setGamesStates,gameStateIndex,setGameStateIndex}}></Outlet>
         </div>
     )
 }

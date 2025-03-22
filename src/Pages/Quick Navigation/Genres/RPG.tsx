@@ -17,7 +17,7 @@ import IOSPIC from '../../../assets/icons/IOSPIC'
 
  
 
-function Action(){
+function RPG(){
     const Apikey = "2bcc24482f844476a6b3935319801e0c"
     interface Platform{
          name:string
@@ -70,13 +70,13 @@ function Action(){
 
     useEffect(()=>{
         const fetchData = async ()=>{
-            const popularResponse = await fetch(`https://api.rawg.io/api/games?genres=action&key=${Apikey}`)
+            const popularResponse = await fetch(`https://api.rawg.io/api/games?genres=role-playing-games-rpg&key=${Apikey}`)
             const result = await popularResponse.json()
 
-           const ratingResponse = await fetch(`https://api.rawg.io/api/games?genres=action&ordering=-rating&key=${Apikey}`)
+           const ratingResponse = await fetch(`https://api.rawg.io/api/games?genres=role-playing-games-rpg&ordering=-rating&key=${Apikey}`)
            const result2 = await ratingResponse.json()
 
-           const releaseResponse = await fetch(`https://api.rawg.io/api/games?genres=action&ordering=released&key=${Apikey}`)
+           const releaseResponse = await fetch(`https://api.rawg.io/api/games?genres=role-playing-games-rpg&ordering=released&key=${Apikey}`)
            const result3 = await releaseResponse.json()
 
 
@@ -88,7 +88,7 @@ function Action(){
            
             setData(FormattedData)
             setCurrentData(FormattedData.PopularData)
-            setGameStateIndex(24)
+            setGameStateIndex(44)
             
         }
         fetchData()
@@ -172,7 +172,7 @@ function Action(){
         setSelectorVisible(S=>S=!S)
         setMenuIsVisible(M=>M=!M)
         setShouldStartTimer(true)
-       setGameStateIndex(24)
+       setGameStateIndex(44)
       }
 
 
@@ -182,7 +182,7 @@ function Action(){
         setSelectorVisible(S=>S=!S)
         setMenuIsVisible(M=>M=!M)
         setShouldStartTimer(true)
-        setGameStateIndex(25)
+        setGameStateIndex(45)
       }
 
       function setRating():void{
@@ -191,11 +191,10 @@ function Action(){
         setSelectorVisible(S=>S=!S)
         setMenuIsVisible(M=>M=!M)
         setShouldStartTimer(true)
-        setGameStateIndex(26)
+        setGameStateIndex(46)
       }
 
       function AddGame(gameNumber:number){
- 
         setModalGames(G=>[...G, {Game: currentData![gameNumber],gameIndex:gameNumber} as ModalGames])
         setNumberOfGames(G=>G+1)
         setGamesStates(prevGamesStates => 
@@ -311,4 +310,4 @@ function Action(){
         </div>
     )
 }
-export default Action
+export default RPG

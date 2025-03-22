@@ -8,11 +8,12 @@ import PlayDice from './Pages/Quick Navigation/PlayDice/PlayDice';
 import BestOfTheYear from './Pages/Quick Navigation/Top/BestOfTheYear';
 import AllTime from './Pages/Quick Navigation/Top/AllTime';
 import Pop2024 from './Pages/Quick Navigation/Top/Pop2024';
-import PlayStation from './Pages/Quick Navigation/Playstation/Playstation';
+import PlayStation from './Pages/Quick Navigation/Platforms/Playstation';
 import PC from './Pages/Quick Navigation/Platforms/PC';
-import XboxOne from './Pages/Quick Navigation/Xbox One/XboxOne';
-import NintendoSwitch from './Pages/Quick Navigation/Nintendo/NintendoSwitch';
-import Android from './Pages/Quick Navigation/Android/Android';
+import XboxOne from './Pages/Quick Navigation/Platforms/XboxOne';
+import NintendoSwitch from './Pages/Quick Navigation/Platforms/NintendoSwitch';
+import Android from './Pages/Quick Navigation/Platforms/Android';
+import IOS from './Pages/Quick Navigation/Platforms/iOS';
 import Action from './Pages/Quick Navigation/Genres/Action';
 import Strategy from './Pages/Quick Navigation/Genres/Strategy';
 import Shooter from './Pages/Quick Navigation/Genres/Shooter';
@@ -21,6 +22,7 @@ import Puzzle from './Pages/Quick Navigation/Genres/Puzzle';
 import Racing from './Pages/Quick Navigation/Genres/Racing';
 import Sports from './Pages/Quick Navigation/Genres/Sports';
 import Last30Days from './Pages/Quick Navigation/NewReleases/Last30Days';
+import RPG from './Pages/Quick Navigation/Genres/RPG';
 
 
 export interface Platform{
@@ -64,7 +66,7 @@ export interface gamesStates{
 function App() {
 
   const [gamesStates, setGamesStates] = useState<gamesStates[]>(
-    Array.from({ length: 20 }, () => ({ gameIndexes: [], gameNames: [] }))
+    Array.from({ length: 46 }, () => ({ gameIndexes: [], gameNames: [] }))
   );
    
   useEffect(() => {
@@ -94,8 +96,8 @@ function App() {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Layout    gamesStates={gamesStates}     numberOfGames={numberOfGames} setNumberOfGames={setNumberOfGames} gamestateIndex={gameStateIndex}
-                          ModalGames={ModalGames}       setModalGames={setModalGames}  setGamesStates={setGamesStates}    setgameStateIndex={setGameStateIndex}
+      element: <Layout    gamesStates={gamesStates}     numberOfGames={numberOfGames} setNumberOfGames={setNumberOfGames} gameStateIndex={gameStateIndex}
+                          ModalGames={ModalGames}       setModalGames={setModalGames}  setGamesStates={setGamesStates}    setGameStateIndex={setGameStateIndex}
                           
                         
  />,
@@ -110,9 +112,11 @@ function App() {
         { path: 'PC', element: <PC /> },
         { path: 'XboxOne', element: <XboxOne /> },
         { path: 'Nintendo', element: <NintendoSwitch /> },
+        {path: 'iOS', element: <IOS></IOS>},
         { path: 'Android', element: <Android /> },
         { path: 'Action', element: <Action /> },
         { path: 'Strategy', element: <Strategy /> },
+        {path: "Rpg", element: <RPG></RPG>},
         { path: 'Shooter', element: <Shooter /> },
         { path: 'Adventure', element: <Adventure /> },
         { path: 'Puzzle', element: <Puzzle /> },

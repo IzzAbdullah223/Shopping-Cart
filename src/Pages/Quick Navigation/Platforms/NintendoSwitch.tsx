@@ -17,7 +17,7 @@ import IOSPIC from '../../../assets/icons/IOSPIC'
 
  
 
-function Action(){
+function NintendoSwitch(){
     const Apikey = "2bcc24482f844476a6b3935319801e0c"
     interface Platform{
          name:string
@@ -70,17 +70,18 @@ function Action(){
 
     useEffect(()=>{
         const fetchData = async ()=>{
-            const popularResponse = await fetch(`https://api.rawg.io/api/games?genres=action&key=${Apikey}`)
+         const popularResponse = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&platforms=7`)
             const result = await popularResponse.json()
 
-           const ratingResponse = await fetch(`https://api.rawg.io/api/games?genres=action&ordering=-rating&key=${Apikey}`)
+           const ratingResponse = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&platforms=7&ordering=-metacritic`)
            const result2 = await ratingResponse.json()
 
-           const releaseResponse = await fetch(`https://api.rawg.io/api/games?genres=action&ordering=released&key=${Apikey}`)
+           const releaseResponse = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&platforms=7&ordering=-released`
+           )
            const result3 = await releaseResponse.json()
 
 
-            const FormattedData:GamesDetails={  
+            const FormattedData:GamesDetails={
                 PopularData:result.results,
                 RatingData:result2.results,
                 ReleaseData:result3.results
@@ -88,7 +89,7 @@ function Action(){
            
             setData(FormattedData)
             setCurrentData(FormattedData.PopularData)
-            setGameStateIndex(24)
+            setGameStateIndex(15)
             
         }
         fetchData()
@@ -172,7 +173,7 @@ function Action(){
         setSelectorVisible(S=>S=!S)
         setMenuIsVisible(M=>M=!M)
         setShouldStartTimer(true)
-       setGameStateIndex(24)
+       setGameStateIndex(15)
       }
 
 
@@ -182,7 +183,7 @@ function Action(){
         setSelectorVisible(S=>S=!S)
         setMenuIsVisible(M=>M=!M)
         setShouldStartTimer(true)
-        setGameStateIndex(25)
+        setGameStateIndex(16)
       }
 
       function setRating():void{
@@ -191,7 +192,7 @@ function Action(){
         setSelectorVisible(S=>S=!S)
         setMenuIsVisible(M=>M=!M)
         setShouldStartTimer(true)
-        setGameStateIndex(26)
+        setGameStateIndex(17)
       }
 
       function AddGame(gameNumber:number){
@@ -225,6 +226,12 @@ function Action(){
        }
        },[shouldStartTimer])
 
+
+
+
+
+      
+
       return(
         <div className={POPCSS.PageContainer}>
             <LeftColumn></LeftColumn>
@@ -233,7 +240,7 @@ function Action(){
                     <h1>Loading</h1>
                 ):(
                     <div className={POPCSS.RightSideContainer}>
-                    <h1>Action</h1>
+                    <h1>Nintendo Switch</h1>
 
                         <div className={POPCSS.SelectContainer} onClick={ShowDropDown} style={{display:isSelectorVisible? "flex":"none"}}>
                             <div>Order by: </div>
@@ -311,4 +318,4 @@ function Action(){
         </div>
     )
 }
-export default Action
+export default NintendoSwitch
