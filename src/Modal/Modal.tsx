@@ -14,7 +14,7 @@ type modalProps={
     setGamesStates:React.Dispatch<React.SetStateAction<gamesStates[]>>
 }
 
-function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumberOfGames,gamesStates,setGamesStates}:modalProps){
+function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumberOfGames,setGamesStates}:modalProps){
  
     const ModalArea = useRef<HTMLDivElement>(null);
 
