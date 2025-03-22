@@ -50,7 +50,7 @@ function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumb
         setGamesStates((prevStates) => {
             return prevStates.map((state) => ({
                 ...state,
-                gameNames: state.gameNames.map((name, i) =>
+                gameNames: state.gameNames.map((name, _) =>
                     name === ModalGames[gameIndex].Game.name ? "" : name
                 ),
                 gameIndexes: state.gameIndexes.map((index, i) =>
