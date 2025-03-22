@@ -14,9 +14,12 @@ import LoadingComponent from '../../../LoadingComponent'
 import {GamesDetailsWithSelect,Results} from '../../../main'
 
 
+
  
 
 function PC(){
+
+    
     const Apikey = "2bcc24482f844476a6b3935319801e0c"
  
     const [Loading,setLoading] = useState(true)

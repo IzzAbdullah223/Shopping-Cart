@@ -9,7 +9,7 @@ import BestOfTheYear from './Pages/Quick Navigation/Top/BestOfTheYear';
 import AllTime from './Pages/Quick Navigation/Top/AllTime';
 import Pop2024 from './Pages/Quick Navigation/Top/Pop2024';
 import PlayStation from './Pages/Quick Navigation/Playstation/Playstation';
-import PC from './Pages/Quick Navigation/PC/PC';
+import PC from './Pages/Quick Navigation/Platforms/PC';
 import XboxOne from './Pages/Quick Navigation/Xbox One/XboxOne';
 import NintendoSwitch from './Pages/Quick Navigation/Nintendo/NintendoSwitch';
 import Android from './Pages/Quick Navigation/Android/Android';
@@ -88,13 +88,14 @@ function App() {
 
   const [numberOfGames, setNumberOfGames] = useState<number>(0);
   const [ModalGames,setModalGames] = useState<ModalGames[]>([])
+  const [gameStateIndex,setGameStateIndex] = useState(3)
  
  
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Layout    gamesStates={gamesStates}    numberOfGames={numberOfGames} setNumberOfGames={setNumberOfGames}
-                          ModalGames={ModalGames}       setModalGames={setModalGames}  setGamesStates={setGamesStates}
+      element: <Layout    gamesStates={gamesStates}     numberOfGames={numberOfGames} setNumberOfGames={setNumberOfGames} gamestateIndex={gameStateIndex}
+                          ModalGames={ModalGames}       setModalGames={setModalGames}  setGamesStates={setGamesStates}    setgameStateIndex={setGameStateIndex}
                           
                         
  />,

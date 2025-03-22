@@ -13,6 +13,8 @@ interface LayOutProps{
     setModalGames: React.Dispatch<React.SetStateAction<ModalGames[]>>
     gamesStates:gamesStates[],
     setGamesStates:React.Dispatch<React.SetStateAction<gamesStates[]>>
+    gamestateIndex:number,
+    setgameStateIndex:React.Dispatch<React.SetStateAction<number>>
     
  
 }
