@@ -13,7 +13,7 @@ import PC from './Pages/Quick Navigation/Platforms/PC';
 import XboxOne from './Pages/Quick Navigation/Platforms/XboxOne';
 import NintendoSwitch from './Pages/Quick Navigation/Platforms/NintendoSwitch';
 import Android from './Pages/Quick Navigation/Platforms/Android';
-import IOS from './Pages/Quick Navigation/Platforms/iOS';
+import IOS from './Pages/Quick Navigation/Platforms/IOS';
 import Action from './Pages/Quick Navigation/Genres/Action';
 import Strategy from './Pages/Quick Navigation/Genres/Strategy';
 import Shooter from './Pages/Quick Navigation/Genres/Shooter';
