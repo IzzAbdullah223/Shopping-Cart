@@ -73,7 +73,7 @@ function PlayDice(){
   
     function LeftChevron(){
         
-        if(ImageIndex==0){
+        /*if(ImageIndex==0){
             setImageIndex(6)
         }
         
@@ -89,6 +89,26 @@ function PlayDice(){
         DotsArray[ImageIndex].classList.add(PLAYCSS.ActiveDot)
      
         }
+        */
+
+        setImageIndex(prevIndex=>{
+            const newIndex= prevIndex===0 ? 6:prevIndex-1
+
+            setTimeout(()=>{
+
+                const DotsContainer = document.querySelector<HTMLDivElement>(`.${PLAYCSS.DotsContainer}`)
+
+                if(DotsContainer){
+                const DotsArray = Array.from(DotsContainer.children)
+                    DotsArray.forEach(Dot=>{
+                        Dot.classList.remove(PLAYCSS.ActiveDot)
+                    })
+                    DotsArray[newIndex].classList.add(PLAYCSS.ActiveDot)
+                }
+            },0)
+
+            return newIndex
+        })
 
  
 
@@ -100,22 +120,22 @@ function PlayDice(){
     }
 
     function RightChevron(){
-        if(ImageIndex==6){
-            setImageIndex(0)
-        }
-        else{
-        setImageIndex(I=>I+=1)
-        }
+ 
 
-        
-        const DotsContainer = document.querySelector<HTMLDivElement>(`.${PLAYCSS.DotsContainer}`)
-        if(DotsContainer){
-         const DotsArray = Array.from(DotsContainer?.children)
-         console.log(DotsArray[ImageIndex])
-         console.log(ImageIndex)
-         DotsArray[ImageIndex].classList.add(PLAYCSS.ActiveDot)
-     
-        }
+         setImageIndex(prevIndex => {
+            const newIndex = prevIndex === 6 ? 0 : prevIndex + 1;
+            setTimeout(() => {
+                const DotsContainer = document.querySelector<HTMLDivElement>(`.${PLAYCSS.DotsContainer}`);
+                if (DotsContainer) {
+                    const DotsArray = Array.from(DotsContainer.children);
+                    
+                    DotsArray.forEach(dot => dot.classList.remove(PLAYCSS.ActiveDot));
+                    DotsArray[newIndex]?.classList.add(PLAYCSS.ActiveDot);
+                }
+            }, 0);
+    
+            return newIndex;  
+        });
     }
 
     function DisplayMore(){
