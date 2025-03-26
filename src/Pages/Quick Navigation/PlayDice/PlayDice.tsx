@@ -72,6 +72,7 @@ function PlayDice(){
  
   
     function LeftChevron(){
+        
         if(ImageIndex==0){
             setImageIndex(6)
         }
@@ -79,6 +80,23 @@ function PlayDice(){
         else{
         setImageIndex(I=>I-=1) 
         }
+
+        const DotsContainer = document.querySelector<HTMLDivElement>(`.${PLAYCSS.DotsContainer}`)
+
+        if(DotsContainer){
+        console.log(ImageIndex)
+         const DotsArray = Array.from(DotsContainer?.children)
+        DotsArray[ImageIndex].classList.add(PLAYCSS.ActiveDot)
+     
+        }
+
+ 
+
+        
+        
+
+
+         
     }
 
     function RightChevron(){
@@ -87,6 +105,16 @@ function PlayDice(){
         }
         else{
         setImageIndex(I=>I+=1)
+        }
+
+        
+        const DotsContainer = document.querySelector<HTMLDivElement>(`.${PLAYCSS.DotsContainer}`)
+        if(DotsContainer){
+         const DotsArray = Array.from(DotsContainer?.children)
+         console.log(DotsArray[ImageIndex])
+         console.log(ImageIndex)
+         DotsArray[ImageIndex].classList.add(PLAYCSS.ActiveDot)
+     
         }
     }
 
@@ -120,7 +148,7 @@ function PlayDice(){
                     <img src={gameImages[ImageIndex]}></img>
                     <ChevronRight onClick={RightChevron}></ChevronRight>
                     <div className={PLAYCSS.DotsContainer}>
-                        <div className={PLAYCSS.Dot}></div>
+                        <div className={`${PLAYCSS.Dot} ${PLAYCSS.ActiveDot}`}></div>
                         <div className={PLAYCSS.Dot}></div>
                         <div className={PLAYCSS.Dot}></div>
                         <div className={PLAYCSS.Dot}></div>

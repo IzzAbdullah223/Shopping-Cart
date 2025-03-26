@@ -1,5 +1,3 @@
-
-
 *{
     margin: 0;
     padding: 0;
@@ -28,11 +26,6 @@
     src: url('../../../assets/font/GTWalsheimPro-UltraLight.woff2');
     font-weight: 300;
 }
-
-
-
-
-
 
 body{
   background-color: #0f1011;
@@ -82,6 +75,36 @@ font-family: 'GT Walsheim Pro BOLD';
     height: 80vh;
     padding-bottom: 10px;
     overflow: hidden;
+}
+
+.DotsContainer{
+    background-color: #111111;
+    width: 170px;
+    height: 35px;
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+}
+
+.Dot{
+    width: 55px;
+    height: 9px;
+    background-color: grey;
+    border-radius: 5px;
+    transform: scale(1);
+}
+
+.ActiveDot{
+    background-color: #1aada6;
+    transform: scale(1.5);
+    transition: Scale 0.2s ease;
 }
 
 .ImageContainer img{
@@ -193,7 +216,7 @@ font-family: 'GT Walsheim Pro BOLD';
     transition-duration: 0.5s;
 }
 
-
+ 
 
 .AddToCartContainer{
     background-color: #242424;
@@ -210,15 +233,11 @@ font-family: 'GT Walsheim Pro BOLD';
 .AddToCartContainer h2{
     cursor: pointer;
 }
-
- 
-
- 
- 
- 
  
  
 
  
+
+
  
  

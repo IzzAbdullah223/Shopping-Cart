@@ -66,7 +66,14 @@ function Last30Days(){
     const [isMenuVisible,setMenuIsVisible] = useState(false)
 
     const [isSelectorVisible,setSelectorVisible] = useState(true)
+    const currentDate = new Date() 
+    const past30daysDate = new Date() 
+        past30daysDate.setDate(currentDate.getDate()-30)
 
+    const FormattedCurrentDate = currentDate.toISOString().split("T")[0]
+    const FormattedPast30DaysDate = past30daysDate.toISOString().split("T")[0]
+
+    
  
     
 
@@ -75,13 +82,13 @@ function Last30Days(){
         const fetchData = async ()=>{
 
 
-         const popularResponse = await fetch(`https://api.rawg.io/api/games?genres=adventure&key=${Apikey}`)
+         const popularResponse = await fetch(  `https://api.rawg.io/api/games?dates=${FormattedPast30DaysDate},${FormattedCurrentDate}&genres=adventure&key=${Apikey}`)
             const result = await popularResponse.json()
 
-           const ratingResponse = await fetch(`https://api.rawg.io/api/games?genres=adventure&ordering=-rating&key=${Apikey}`)
+           const ratingResponse = await fetch(`https://api.rawg.io/api/games?dates=${FormattedPast30DaysDate},${FormattedCurrentDate}&genres=adventure&ordering=-rating&key=${Apikey}`)
            const result2 = await ratingResponse.json()
 
-           const releaseResponse = await fetch(`https://api.rawg.io/api/games?genres=adventure&ordering=-released&key=${Apikey}`)
+           const releaseResponse = await fetch(`https://api.rawg.io/api/games?dates=${FormattedPast30DaysDate},${FormattedCurrentDate}&genres=adventure&ordering=-released&key=${Apikey}`)
            const result3 = await releaseResponse.json()
 
 
@@ -129,6 +136,7 @@ function Last30Days(){
 
     
       function GamePlatforms():void{
+        console.log(currentData)
        const tempArray:JSX.Element[][]=Array.from({length:20},()=>[])// Initalzing 20 inner arrays
         for(let i=0;i<20;i++){
             for(let j=0;j<currentData![i].parent_platforms.length;j++){

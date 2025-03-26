@@ -15,8 +15,6 @@ interface LayOutProps{
     setGamesStates:React.Dispatch<React.SetStateAction<gamesStates[]>>
     gameStateIndex:number,
     setGameStateIndex:React.Dispatch<React.SetStateAction<number>>
-    
- 
 }
 
 function Layout({numberOfGames,setNumberOfGames,ModalGames,setModalGames,gamesStates,setGamesStates,gameStateIndex,setGameStateIndex

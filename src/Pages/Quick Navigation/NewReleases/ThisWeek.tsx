@@ -12,7 +12,7 @@ import {GamesDetails,ModalGames,gamesStates} from '../../../main'
 import Checkmark from '../../../assets/icons/CheckMark'
 
 
-function Pop2024(){
+function ThisWeek(){
 
   const{setNumberOfGames,setModalGames,gamesStates,setGamesStates} = useOutletContext<{
         setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
@@ -32,6 +32,17 @@ function Pop2024(){
 
     const [data,setData] = useState<GamesDetails | null>(null)
 
+    const currentDate = new Date()
+    const ThisWeekDate = new Date(currentDate)
+    const dayOfWeek = currentDate.getDay();
+    const daysToSubtract = dayOfWeek === 0 ? 6 : dayOfWeek - 1; // Adjust for Sunday
+    ThisWeekDate.setDate(currentDate.getDate() - daysToSubtract);
+
+    const formattedThisWeek = ThisWeekDate.toISOString().split("T")[0];
+    const formattedCurrentDate = currentDate.toISOString().split("T")[0];
+
+
+
      
 
 
@@ -40,7 +51,7 @@ function Pop2024(){
 
     useEffect(()=>{
         const fetchData = async ()=>{
-            const response = await fetch(`https://api.rawg.io/api/games?key=${Apikey}&dates=2024-01-01,2024-12-31`)
+            const response = await fetch(`https://api.rawg.io/api/games?dates=${formattedThisWeek},${formattedCurrentDate}&key=${Apikey}`)
             const result = await response.json()
 
 
@@ -61,12 +72,12 @@ function Pop2024(){
     
     function GamePlatforms(){
 
-        console.log(data)
+        console.log(data?.GamesData[0].parent_platforms.length)
  
         const tempArray:JSX.Element[][]=Array.from({length:20},()=>[])// Initalzing 20 inner arrays
  
 
-        for(let i=0;i<20;i++){
+        for(let i=0;i<10;i++){
             for(let j=0;j<data!.GamesData[i].parent_platforms.length;j++){
 
                switch(data!.GamesData[i].parent_platforms[j].platform.name){
@@ -176,4 +187,4 @@ function Pop2024(){
 
 }
 
-export default Pop2024
+export default ThisWeek
