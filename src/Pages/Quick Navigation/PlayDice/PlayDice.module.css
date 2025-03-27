@@ -32,17 +32,42 @@ body{
 }
 
 
-.Top{
+.Top {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0px 20px;
 }
 
-.TopLeft{
+.TopLeft {
     display: flex;
     align-items: center;
     gap: 10px;
     cursor: pointer;
+ 
 }
+
+.TopLeft h2{
+    transition: color 0.3s ease;
+}
+
+.TopLeft svg{
+    transition: fill 0.3s ease;
+}
+
+.TopLeft:hover h2,
+.TopLeft:hover svg {
+    color: #1aada6;   
+    fill: #1aada6;   
+}
+.TopRight {
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;  
+    text-align: right;
+    padding: 0px 20px;
+}
+ 
 
 .TopLeft h2, svg{
 color: #cccccc;
@@ -53,28 +78,44 @@ fill: #cccccc;
 
 .TopRight h1{
 color: white;
-font-size: 3.5rem;
+font-size: 3.3rem;
 font-family: 'GT Walsheim Pro BOLD';
 }
-
-
-
-.Top,.Below{
-    padding: 0px 40px;
- }
- 
 
  .Below{
     display: flex;
     gap: 50px;
+    padding: 20px;
  }
+ 
+ 
  
 .ImageContainer{
     position: relative;
-    max-width: 100%;
+    max-width: 1500px;
     height: 80vh;
     padding-bottom: 10px;
     overflow: hidden;
+}
+
+@media(max-width:880px){
+    .Below{
+        display: flex;
+        flex-direction: column;
+        align-items: stretch
+    }
+
+    .BelowRight{
+      gap: 20px;
+      flex-grow: 1;
+    }
+
+    .TopRight h1{
+        white-space: nowrap;
+        font-size: 2rem;
+    }
+
+ 
 }
 
 .DotsContainer{
@@ -93,18 +134,23 @@ font-family: 'GT Walsheim Pro BOLD';
     padding: 10px;
 }
 
-.Dot{
+.Dot {
     width: 55px;
     height: 9px;
     background-color: grey;
     border-radius: 5px;
     transform: scale(1);
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-.ActiveDot{
+.ActiveDot {
     background-color: #1aada6;
     transform: scale(1.5);
-    transition: Scale 0.2s ease;
+}
+
+.NextActiveDot {
+    transform: scale(0.5);
+    transition: transform 0.3s ease;
 }
 
 .ImageContainer img{
@@ -113,6 +159,14 @@ font-family: 'GT Walsheim Pro BOLD';
     height: 100%;
     border-radius: 30px;
     transition: transform 0.5s ease-in-out;
+}
+
+
+@media(max-width:880px){
+    .ImageContainer{
+         height: 60%;
+         margin-bottom: -50px;
+    }
 }
 
 .MoveImageRight{
@@ -138,20 +192,32 @@ font-family: 'GT Walsheim Pro BOLD';
 .BelowRight{
     display: flex;
     flex-direction: column;
+    padding: 0px 40px;
     padding-bottom: 10px;
 }
 
 .GameDescriptionContainer{
     background-color: #191919;
-    width: 550px;
-    min-width: 310px;
-    padding: 40px 10px;
+    max-width: 550px;
+    min-width: 350px;
+    padding: 20px 15px;
     border-radius: 15px;
     mask-image: linear-gradient(to bottom, black 70%, transparent);
     overflow: hidden;
-    height: 28vh;
+    max-height: 28vh;
     scrollbar-width: none;
+}
 
+@media(max-width:880px){
+    .GameDescriptionContainer{
+        max-width:100%;
+        order: 2;
+    }
+
+    .BelowRight{
+        padding: 0px;
+    }
+ 
 }
 
 .GameDescriptionContainer:hover{
@@ -216,8 +282,6 @@ font-family: 'GT Walsheim Pro BOLD';
     transition-duration: 0.5s;
 }
 
- 
-
 .AddToCartContainer{
     background-color: #242424;
     color: white;
@@ -228,6 +292,22 @@ font-family: 'GT Walsheim Pro BOLD';
     padding: 15px;
     margin-top: auto;
     border-radius: 10px;
+     
+}
+
+@media(max-width:880px){
+    .AddToCartContainer{
+        order: 1;
+   
+    }
+    .GameContainerDescription{
+        order: 2;
+    }
+
+    .MoreContainer{
+        order: 3;
+    }
+    
 }
 
 .AddToCartContainer h2{

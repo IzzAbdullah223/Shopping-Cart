@@ -29,10 +29,10 @@ function PlayDice(){
         const   fetchData= async()=>{
 
         
-            const response = await fetch(`https://api.rawg.io/api/games/11859?key=${Apikey}`)
+            const response = await fetch(`https://api.rawg.io/api/games/981791?key=${Apikey}`)
             const result = await response.json()
 
-            const response1 = await fetch(`https://api.rawg.io/api/games/11859/screenshots?key=${Apikey}`)
+            const response1 = await fetch(`https://api.rawg.io/api/games/981791/screenshots?key=${Apikey}`)
             const result1 = await response1.json()
            setgameImages(g=>[...g,result.background_image])
            for(let i=0;i<6;i++){
@@ -72,50 +72,27 @@ function PlayDice(){
  
   
     function LeftChevron(){
-        
-        /*if(ImageIndex==0){
-            setImageIndex(6)
-        }
-        
-        else{
-        setImageIndex(I=>I-=1) 
-        }
-
-        const DotsContainer = document.querySelector<HTMLDivElement>(`.${PLAYCSS.DotsContainer}`)
-
-        if(DotsContainer){
-        console.log(ImageIndex)
-         const DotsArray = Array.from(DotsContainer?.children)
-        DotsArray[ImageIndex].classList.add(PLAYCSS.ActiveDot)
-     
-        }
-        */
 
         setImageIndex(prevIndex=>{
             const newIndex= prevIndex===0 ? 6:prevIndex-1
 
             setTimeout(()=>{
-
-                const DotsContainer = document.querySelector<HTMLDivElement>(`.${PLAYCSS.DotsContainer}`)
-
-                if(DotsContainer){
-                const DotsArray = Array.from(DotsContainer.children)
-                    DotsArray.forEach(Dot=>{
-                        Dot.classList.remove(PLAYCSS.ActiveDot)
-                    })
-                    DotsArray[newIndex].classList.add(PLAYCSS.ActiveDot)
+                const DotsContainer = document.querySelector<HTMLDivElement>(`.${PLAYCSS.DotsContainer}`);
+                if (DotsContainer) {
+                    const DotsArray = Array.from(DotsContainer.children);
+                    DotsArray.forEach(Dot => Dot.classList.remove(PLAYCSS.ActiveDot, PLAYCSS.ShrinkDot));
+             
+                    DotsArray[newIndex].classList.add(PLAYCSS.ShrinkDot);
+        
+                    setTimeout(() => {
+                        DotsArray[newIndex].classList.remove(PLAYCSS.ShrinkDot);
+                        DotsArray[newIndex].classList.add(PLAYCSS.ActiveDot);
+                    }, 100); 
                 }
             },0)
 
             return newIndex
         })
-
- 
-
-        
-        
-
-
          
     }
 
@@ -128,9 +105,18 @@ function PlayDice(){
                 const DotsContainer = document.querySelector<HTMLDivElement>(`.${PLAYCSS.DotsContainer}`);
                 if (DotsContainer) {
                     const DotsArray = Array.from(DotsContainer.children);
-                    
-                    DotsArray.forEach(dot => dot.classList.remove(PLAYCSS.ActiveDot));
-                    DotsArray[newIndex]?.classList.add(PLAYCSS.ActiveDot);
+        
+            
+                    DotsArray.forEach(Dot => Dot.classList.remove(PLAYCSS.ActiveDot, PLAYCSS.ShrinkDot));
+        
+             
+                    DotsArray[newIndex].classList.add(PLAYCSS.ShrinkDot);
+        
+                    setTimeout(() => {
+                        // Remove shrink and apply active class
+                        DotsArray[newIndex].classList.remove(PLAYCSS.ShrinkDot);
+                        DotsArray[newIndex].classList.add(PLAYCSS.ActiveDot);
+                    }, 100); // Short delay for effect
                 }
             }, 0);
     
@@ -141,7 +127,7 @@ function PlayDice(){
     function DisplayMore(){
         const MoreTop = document.querySelector<HTMLDivElement>(`.${PLAYCSS.MoreTop}`)
         
-        if(MoreTop){//To ensure that MoreTop exist
+        if(MoreTop){
             MoreTop.style.display= MoreTop.style.display === "flex"? "none": "flex";
     }
         const Chevron = document.querySelector<SVGSVGElement>(`.${PLAYCSS.ChevronDown}`)
