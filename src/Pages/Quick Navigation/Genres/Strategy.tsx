@@ -10,7 +10,7 @@ import Androids from '../../../assets/icons/Android'
 import ChevronDown from '../../../assets/icons/ChevronDown'
 import LoadingComponent from '../../../LoadingComponent'
 import { useOutletContext } from 'react-router-dom'
-import {ModalGames,gamesStates} from '../../../main'
+import {ModalGames,gamesStates,PlayDiceGame} from '../../../main'
 import Checkmark from '../../../assets/icons/CheckMark'
 import IOSPIC from '../../../assets/icons/IOSPIC'
 
@@ -37,10 +37,11 @@ function Strategy(){
         platform:Platform
     }
 
-      const{setNumberOfGames,setModalGames,gamesStates,setGamesStates,gameStateIndex,setGameStateIndex} = useOutletContext<{
+      const{setNumberOfGames,setModalGames,gamesStates,setGamesStates,gameStateIndex,setGameStateIndex,ModalGames,PlayDiceGames} = useOutletContext<{
             setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
             setModalGames:    React.Dispatch<React.SetStateAction<ModalGames[]>>;
             ModalGames: ModalGames[]
+            PlayDiceGames:PlayDiceGame[]
             gamesStates:gamesStates[],
             setGamesStates:React.Dispatch<React.SetStateAction<gamesStates[]>>
             gameStateIndex:number
@@ -94,6 +95,52 @@ function Strategy(){
         fetchData()
          
     },[])
+
+                                            useEffect(()=>{
+                                                if(data)
+                                                CheckIfGameInCart()
+                                            },[ModalGames,PlayDiceGames,data])
+                                        
+                                        
+                                            function CheckIfGameInCart(){
+                                                const ModalGamesSet = new Set(ModalGames.map(game=>game.Game.name))
+                                                const PlayDiceGamesSet = new Set(PlayDiceGames.map(game=>game.name))
+                                        
+                                                const allGames= new Set([
+                                                    ...ModalGamesSet,
+                                                    ...PlayDiceGamesSet
+                                                ])
+                                        
+                                                setGamesStates(prevState => 
+                                                    prevState.map((item, i) => {
+                                                      if (i === 35 && data?.PopularData) {
+                                                        return { 
+                                                          ...item, 
+                                                          gameIndexes: item.gameIndexes.map((value, index) => 
+                                                            allGames.has(data.PopularData[index]?.name) ? true : value
+                                                          ) 
+                                                        };
+                                                      } 
+                                                      if (i === 37 && data?.RatingData) {
+                                                        return { 
+                                                          ...item, 
+                                                          gameIndexes: item.gameIndexes.map((value, index) => 
+                                                            allGames.has(data.RatingData[index]?.name) ? true : value
+                                                          ) 
+                                                        };
+                                                      } 
+                                                      if (i === 36 && data?.ReleaseData) {
+                                                        return { 
+                                                          ...item, 
+                                                          gameIndexes: item.gameIndexes.map((value, index) => 
+                                                            allGames.has(data.ReleaseData[index]?.name) ? true : value
+                                                          ) 
+                                                        };
+                                                      }
+                                                      return item;
+                                                    })
+                                                  );
+                                            }
 
 
 
