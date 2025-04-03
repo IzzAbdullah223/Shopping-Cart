@@ -2,8 +2,9 @@ import {Outlet,useLocation} from 'react-router-dom'
 import Header from './Header/Header'
 import LayoutCSS from './Layout.module.css'
 import PykeVideo from  './assets/Images/pyke.mp4'
-import {ModalGames} from './main'
-import { gamesStates } from './main'
+import {ModalGames,gamesStates,PlayDiceGame} from './main'
+ 
+
 
  
 interface LayOutProps{
@@ -14,11 +15,17 @@ interface LayOutProps{
     gamesStates:gamesStates[],
     setGamesStates:React.Dispatch<React.SetStateAction<gamesStates[]>>
     gameStateIndex:number,
-    setGameStateIndex:React.Dispatch<React.SetStateAction<number>>
+    setGameStateIndex:React.Dispatch<React.SetStateAction<number>>,
+    PlayDiceGames: PlayDiceGame[],
+    setPlayDiceGames: React.Dispatch<React.SetStateAction<PlayDiceGame[]>>
 }
 
-function Layout({numberOfGames,setNumberOfGames,ModalGames,setModalGames,gamesStates,setGamesStates,gameStateIndex,setGameStateIndex
-}: LayOutProps){
+
+function Layout({numberOfGames,setNumberOfGames,ModalGames,setModalGames,gamesStates,setGamesStates,gameStateIndex,setGameStateIndex,
+PlayDiceGames,setPlayDiceGames}: LayOutProps){
+
+
+ 
 
     const location = useLocation();
     const  isHomePage= location.pathname==='/'
@@ -30,8 +37,8 @@ function Layout({numberOfGames,setNumberOfGames,ModalGames,setModalGames,gamesSt
                 Your browser does not support the video tag.
             </video>
       )     }
-            <Header gamesStates={gamesStates} setGamesStates={setGamesStates}  setNumberOfGames={setNumberOfGames} numberOfGames={numberOfGames} setModalGames={setModalGames}         ModalGames={ModalGames}></Header>
-            <Outlet context={{setNumberOfGames,setModalGames,ModalGames,gamesStates,setGamesStates,gameStateIndex,setGameStateIndex}}></Outlet>
+            <Header gamesStates={gamesStates} setGamesStates={setGamesStates}  setNumberOfGames={setNumberOfGames} numberOfGames={numberOfGames} setModalGames={setModalGames}         ModalGames={ModalGames} PlayDiceGames={PlayDiceGames} setPlayDiceGames={setPlayDiceGames}></Header>
+            <Outlet context={{setNumberOfGames,setModalGames,ModalGames,gamesStates,setGamesStates,gameStateIndex,setGameStateIndex,PlayDiceGames,setPlayDiceGames}}></Outlet>
         </div>
     )
 }

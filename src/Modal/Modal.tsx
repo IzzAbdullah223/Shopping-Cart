@@ -1,6 +1,6 @@
 import {useEffect,useRef } from 'react'
 import ModalCSS from './Modal.module.css'
-import { ModalGames,gamesStates } from '../main'
+import { ModalGames,gamesStates,PlayDiceGame} from '../main'
 
 
 type modalProps={
@@ -12,9 +12,11 @@ type modalProps={
     setModalGames: React.Dispatch<React.SetStateAction<ModalGames[]>>
     gamesStates:gamesStates[]
     setGamesStates:React.Dispatch<React.SetStateAction<gamesStates[]>>
+    PlayDiceGames:PlayDiceGame[]
+    setPlayDiceGames:React.Dispatch<React.SetStateAction<PlayDiceGame[]>>
 }
 
-function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumberOfGames,setGamesStates}:modalProps){
+function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumberOfGames,setGamesStates,PlayDiceGames,setPlayDiceGames}:modalProps){
  
     const ModalArea = useRef<HTMLDivElement>(null);
 
@@ -25,6 +27,7 @@ function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumb
        let handler= (event:MouseEvent)=>{
             if(ModalArea.current && !ModalArea.current.contains(event.target as Node)){
             toggleModal();
+            console.log(PlayDiceGames)
             }
         };
         document.addEventListener("mousedown",handler);
@@ -32,6 +35,7 @@ function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumb
         return()=>{  //Cleaning up the event listener 
             document.removeEventListener("mousedown",handler)
         };
+     
     },[toggleModal]);
 
 
@@ -63,7 +67,8 @@ function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumb
     }
 
     function clearGames(){
-        setModalGames([]) 
+        setModalGames([])
+        setPlayDiceGames([])
         setNumberOfGames(0)
         setGamesStates(prevGamesStates => 
             prevGamesStates.map((gameState, index) => 
@@ -103,6 +108,22 @@ function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumb
                                             </div>
                                             <div className={ModalCSS.GameInfo}>
                                                 <div className={ModalCSS.GameNme}>{ModalGame.Game.name}</div>
+                                                <div className="">12.98</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                                    {PlayDiceGames.map((ModalGame,index)=>(
+                                    <div className={ModalCSS.ModalGame} key={index}>
+                                        <div className={ModalCSS.ModalGameTop}>
+                                                <button onClick={()=>deleteGame(index)}>x</button>
+                                        </div>
+                                        <div className={ModalCSS.ModalGameBottom}>
+                                            <div className={ModalCSS.GameImageContainer}>
+                                                <img src={ModalGame.background_image}></img>
+                                            </div>
+                                            <div className={ModalCSS.GameInfo}>
+                                                <div className={ModalCSS.GameNme}>{ModalGame.name}</div>
                                                 <div className="">12.98</div>
                                             </div>
                                         </div>

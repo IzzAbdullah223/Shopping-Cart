@@ -34,10 +34,16 @@ export interface Results{
  background_image:string,
  parent_platforms:Platforms[]
 }
-export interface GamesDetails{
- GamesData:Results[]
-}
 
+export interface PlayDiceGame{
+  name:String,
+  background_image:string,
+  number:number
+}
+export interface GamesDetails{
+ GamesData:Results[],
+
+}
 
 export interface ModalGames{
     Game:Results,
@@ -92,6 +98,7 @@ function App() {
   const [numberOfGames, setNumberOfGames] = useState<number>(0);
   const [ModalGames,setModalGames] = useState<ModalGames[]>([])
   const [gameStateIndex,setGameStateIndex] = useState(3)
+  const [PlayDiceGames,setPlayDiceGames] = useState<PlayDiceGame[]>([])
  
  
   const router = createBrowserRouter([
@@ -99,6 +106,7 @@ function App() {
       path: '/',
       element: <Layout    gamesStates={gamesStates}     numberOfGames={numberOfGames} setNumberOfGames={setNumberOfGames} gameStateIndex={gameStateIndex}
                           ModalGames={ModalGames}       setModalGames={setModalGames}  setGamesStates={setGamesStates}    setGameStateIndex={setGameStateIndex}
+                          PlayDiceGames={PlayDiceGames} setPlayDiceGames={setPlayDiceGames}
                           
                         
  />,

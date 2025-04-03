@@ -61,7 +61,7 @@ function Pop2024(){
     
     function GamePlatforms(){
 
-        console.log(data)
+      
  
         const tempArray:JSX.Element[][]=Array.from({length:20},()=>[])// Initalzing 20 inner arrays
  
@@ -101,7 +101,7 @@ function Pop2024(){
       }
 
       function AddGame(gameNumber:number){
-         
+  
         setModalGames(G=>[...G, {Game: data!.GamesData[gameNumber],gameIndex:gameNumber}])
         setNumberOfGames(G=>G+=1)
         setGamesStates(prevGamesStates => 

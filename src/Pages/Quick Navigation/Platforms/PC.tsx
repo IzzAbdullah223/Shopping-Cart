@@ -10,7 +10,7 @@ import Androids from '../../../assets/icons/Android'
 import ChevronDown from '../../../assets/icons/ChevronDown'
 import LoadingComponent from '../../../LoadingComponent'
 import { useOutletContext } from 'react-router-dom'
-import {ModalGames,gamesStates} from '../../../main'
+import {ModalGames,gamesStates,PlayDiceGame} from '../../../main'
 import Checkmark from '../../../assets/icons/CheckMark'
 import IOSPIC from '../../../assets/icons/IOSPIC'
 
@@ -37,7 +37,7 @@ function Last30Days(){
         platform:Platform
     }
 
-      const{setNumberOfGames,setModalGames,gamesStates,setGamesStates,gameStateIndex,setGameStateIndex} = useOutletContext<{
+      const{setNumberOfGames,setModalGames,gamesStates,setGamesStates,gameStateIndex,setGameStateIndex,ModalGames,PlayDiceGames} = useOutletContext<{
             setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
             setModalGames:    React.Dispatch<React.SetStateAction<ModalGames[]>>;
             ModalGames: ModalGames[]
@@ -45,6 +45,8 @@ function Last30Days(){
             setGamesStates:React.Dispatch<React.SetStateAction<gamesStates[]>>
             gameStateIndex:number
             setGameStateIndex:React.Dispatch<React.SetStateAction<number>>
+            PlayDiceGames:PlayDiceGame[]
+            setPlayDiceGames:React.Dispatch<React.SetStateAction<PlayDiceGame[]>>
         }>()
 
     const [Loading,setLoading] = useState(true)
@@ -94,6 +96,53 @@ function Last30Days(){
         fetchData()
          
     },[])
+
+
+                useEffect(()=>{
+                    if(data)
+                    CheckIfGameInCart()
+                },[ModalGames,PlayDiceGames,data])
+            
+            
+                function CheckIfGameInCart(){
+                    const ModalGamesSet = new Set(ModalGames.map(game=>game.Game.name))
+                    const PlayDiceGamesSet = new Set(PlayDiceGames.map(game=>game.name))
+            
+                    const allGames= new Set([
+                        ...ModalGamesSet,
+                        ...PlayDiceGamesSet
+                    ])
+            
+                    setGamesStates(prevState => 
+                        prevState.map((item, i) => {
+                          if (i === 6 && data?.PopularData) {
+                            return { 
+                              ...item, 
+                              gameIndexes: item.gameIndexes.map((value, index) => 
+                                allGames.has(data.PopularData[index]?.name) ? true : value
+                              ) 
+                            };
+                          } 
+                          if (i === 8 && data?.RatingData) {
+                            return { 
+                              ...item, 
+                              gameIndexes: item.gameIndexes.map((value, index) => 
+                                allGames.has(data.RatingData[index]?.name) ? true : value
+                              ) 
+                            };
+                          } 
+                          if (i === 7 && data?.ReleaseData) {
+                            return { 
+                              ...item, 
+                              gameIndexes: item.gameIndexes.map((value, index) => 
+                                allGames.has(data.ReleaseData[index]?.name) ? true : value
+                              ) 
+                            };
+                          }
+                          return item;
+                        })
+                      );
+                }
 
 
 
@@ -195,7 +244,6 @@ function Last30Days(){
       }
 
       function AddGame(gameNumber:number){
- 
         setModalGames(G=>[...G, {Game: currentData![gameNumber],gameIndex:gameNumber} as ModalGames])
         setNumberOfGames(G=>G+1)
         setGamesStates(prevGamesStates => 
@@ -212,8 +260,9 @@ function Last30Days(){
                 : gameState
             )
           ); 
-   
       }
+
+ 
 
          useEffect(()=>{
            if(shouldStartTimer){

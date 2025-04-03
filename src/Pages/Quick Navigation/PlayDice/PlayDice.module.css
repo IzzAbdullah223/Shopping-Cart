@@ -295,10 +295,30 @@ font-family: 'GT Walsheim Pro BOLD';
      
 }
 
+.AlreadyAdded{
+    background-color: #1d1c1c93;
+    color: #1aada6;
+    font-family: 'GT Walsheim Pro REGULAR';
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    margin-top: auto;
+    border-radius: 10px;
+}
+
+.AlreadyAdded h2{
+    font-family: 'GT Walsheim Pro Bold';
+}
+
+.AlreadyAdded h3{
+    color: white;
+    
+}
+
 @media(max-width:880px){
     .AddToCartContainer{
         order: 1;
-   
     }
     .GameContainerDescription{
         order: 2;

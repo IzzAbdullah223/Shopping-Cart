@@ -4,9 +4,19 @@ import LeftArrow from '../../../assets/icons/LeftArrow'
 import ChevronLeft from '../../../assets/icons/ChevronLeft'
 import ChevronRight from '../../../assets/icons/ChevronRight'
 import ChevronDown from '../../../assets/icons/ChevronDown'
-
+import { useOutletContext } from 'react-router-dom'
+import {ModalGames,PlayDiceGame} from '../../../main'
 
 function PlayDice(){
+
+
+       const{setNumberOfGames,ModalGames,setPlayDiceGames} = useOutletContext<{
+            setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
+            setModalGames:    React.Dispatch<React.SetStateAction<ModalGames[]>>;
+            ModalGames: ModalGames[]
+            setPlayDiceGames: React.Dispatch<React.SetStateAction<PlayDiceGame[]>>
+        }>()
+    
 
     interface GameInfo{
         GameTitle: string,
@@ -20,19 +30,34 @@ function PlayDice(){
     }
 
     const[data,setData]=useState<GameInfo|null>(null)
+    const [data2,setData2]=useState<PlayDiceGame>()
     const[gameImages,setgameImages]=useState<string[]>([])    
     const Apikey = "2bcc24482f844476a6b3935319801e0c"
     const [ImageIndex,setImageIndex] = useState(0)
     const [Loading,seLoading] = useState(false)
+    const [GameAdded,setGameAdded] = useState(false)
 
     useEffect(()=>{
         const   fetchData= async()=>{
 
         
-            const response = await fetch(`https://api.rawg.io/api/games/981791?key=${Apikey}`)
+            const response = await fetch(`https://api.rawg.io/api/games/3328?key=${Apikey}`)
             const result = await response.json()
 
-            const response1 = await fetch(`https://api.rawg.io/api/games/981791/screenshots?key=${Apikey}`)
+ 
+             const FormattedData2:PlayDiceGame={
+                name:result.name,
+                background_image:result.background_image,
+                number:result.id
+            }
+
+            setData2(FormattedData2)
+
+             
+
+            
+
+            const response1 = await fetch(`https://api.rawg.io/api/games/3328/screenshots?key=${Apikey}`)
             const result1 = await response1.json()
            setgameImages(g=>[...g,result.background_image])
            for(let i=0;i<6;i++){
@@ -60,17 +85,41 @@ function PlayDice(){
                 Developers:`Developers: ${result.developers[0].name}`,
                 Publishers:`Publishers: ${result.publishers[0].name}`,
            }
+
  
+          
             setData(formattedData)
             seLoading(true)
         }
+       
         fetchData()
 
     },[])
 
   
- 
-  
+    useEffect(()=>{
+        CheckIfGameInCart()
+    },[data])
+
+
+    useEffect(()=>{
+        CheckIfGameInCart()
+    },[ModalGames])
+
+
+    function CheckIfGameInCart(){
+        let found=false
+   
+        for(let i=0;i<ModalGames.length;i++){
+            if(ModalGames[i].Game.name===data?.GameTitle){
+                found=true;
+            } 
+        }
+        setTimeout(()=>{
+            setGameAdded(found)
+        },0)
+    }
+    
     function LeftChevron(){
 
         setImageIndex(prevIndex=>{
@@ -134,6 +183,13 @@ function PlayDice(){
         Chevron?.classList.toggle(PLAYCSS.ChevronUp)
 }
 
+    function AddGame(){
+        if(data2)
+            setPlayDiceGames(Prev=>[...Prev,data2])
+        setNumberOfGames(G=>G+1)
+        setGameAdded(true)
+    }
+
 
     if(Loading){
     return(
@@ -183,9 +239,13 @@ function PlayDice(){
                             <ChevronDown className={PLAYCSS.ChevronDown}></ChevronDown>
                         </div>
                 </div>
-                <div className={PLAYCSS.AddToCartContainer}>
+                <div className={PLAYCSS.AddToCartContainer} onClick={AddGame} style={{display:GameAdded==false? "flex":"none"}}>
                     <h3>$12.98</h3>
                     <h2>Add to cart +</h2>
+                </div>
+                <div className={PLAYCSS.AlreadyAdded} onClick={AddGame} style={{display:GameAdded==true? "flex":"none"}}>
+                    <h3>$12.98</h3>
+                    <h2>Added ✔</h2>
                 </div>
             </div>
         </div>
