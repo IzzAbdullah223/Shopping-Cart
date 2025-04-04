@@ -8,16 +8,17 @@ import Xbox from '../../../assets/icons/Xbox'
 import Nintendo from '../../../assets/icons/Nintendo'
 import IOS from '../../../assets/icons/IOSPIC'
 import { useOutletContext } from 'react-router-dom'
-import {GamesDetails,ModalGames,gamesStates} from '../../../main'
+import {GamesDetails,ModalGames,gamesStates,PlayDiceGame} from '../../../main'
 import Checkmark from '../../../assets/icons/CheckMark'
 
 
 function Pop2024(){
 
-  const{setNumberOfGames,setModalGames,gamesStates,setGamesStates} = useOutletContext<{
+  const{setNumberOfGames,setModalGames,gamesStates,setGamesStates,ModalGames,PlayDiceGames} = useOutletContext<{
         setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
         setModalGames:    React.Dispatch<React.SetStateAction<ModalGames[]>>;
-        ModalGames: ModalGames[]
+        ModalGames: ModalGames[],
+        PlayDiceGames:PlayDiceGame[]
         gamesStates:gamesStates[],
         setGamesStates:React.Dispatch<React.SetStateAction<gamesStates[]>>
     }>()
@@ -56,6 +57,42 @@ function Pop2024(){
          
         
     },[])
+
+
+        useEffect(() => {
+            if (data)
+                CheckIfGameInCart()
+        }, [ModalGames, PlayDiceGames, data])
+
+    
+    function CheckIfGameInCart() {
+        
+        const ModalGamesSet = ModalGames.map(game=>game.Game.name)
+        const PlayDiceGamesSet = PlayDiceGames.map(game=>game.name)
+
+        const allGamesSet = new Set([
+            ...ModalGamesSet,
+            ...PlayDiceGamesSet
+        ])
+
+        data?.GamesData.map(game=>{
+             if(allGamesSet.has(game.name)){
+                setGamesStates(prevState => 
+                    prevState.map((item, i) => {
+                      if (i === 0 && data) {
+                        return { 
+                          ...item, 
+                          gameIndexes: item.gameIndexes.map((value, index) => 
+                            allGamesSet.has(data.GamesData[index]?.name) ? true : value
+                          ) 
+                        };
+                      }
+                      return item;
+                    })
+                  );
+             }
+        })
+    }
 
  
     
