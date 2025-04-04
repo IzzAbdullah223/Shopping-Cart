@@ -1,6 +1,6 @@
 import POPCSS from '../../Quick Navigation/Popular in 2024/Pop2024.module.css'
 import LeftColumn from '../LeftColumn/LeftColumn'
-import React, { useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import Plus from '../../../assets/icons/Plus'
 import Windows from '../../../assets/icons/Windows'
 import Playstation from '../../../assets/icons/Playstation'
@@ -10,109 +10,156 @@ import IOS from '../../../assets/icons/IOSPIC'
 import ChevronDown from '../../../assets/icons/ChevronDown'
 import LoadingComponent from '../../../LoadingComponent'
 import { useOutletContext } from 'react-router-dom'
-import {ModalGames,gamesStates} from '../../../main'
+import { ModalGames, gamesStates, PlayDiceGame } from '../../../main'
 import Checkmark from '../../../assets/icons/CheckMark'
 
 
- 
 
-function Last30Days(){
+
+function Last30Days() {
     const Apikey = "2bcc24482f844476a6b3935319801e0c"
-    interface Platform{
-         name:string
+    interface Platform {
+        name: string
     }
-    interface Results{
-        name:String,
-        background_image:String,
-        parent_platforms:Platforms[]
+    interface Results {
+        name: String,
+        background_image: String,
+        parent_platforms: Platforms[]
     }
-    interface GamesDetails{
-        PopularData:Results[],
-        RatingData:Results[],
-        ReleaseData:Results[]
-    }
-
-    interface Platforms{
-        platform:Platform
+    interface GamesDetails {
+        PopularData: Results[],
+        RatingData: Results[],
+        ReleaseData: Results[]
     }
 
-      const{setNumberOfGames,setModalGames,gamesStates,setGamesStates,gameStateIndex,setGameStateIndex} = useOutletContext<{
-            setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
-            setModalGames:    React.Dispatch<React.SetStateAction<ModalGames[]>>;
-            ModalGames: ModalGames[]
-            gamesStates:gamesStates[]
-            setGamesStates:React.Dispatch<React.SetStateAction<gamesStates[]>>
-            gameStateIndex:number
-            setGameStateIndex:React.Dispatch<React.SetStateAction<number>>
+    interface Platforms {
+        platform: Platform
+    }
 
-        }>()
+    const { setNumberOfGames, setModalGames, gamesStates, setGamesStates, gameStateIndex, setGameStateIndex, ModalGames, PlayDiceGames } = useOutletContext<{
+        setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
+        setModalGames: React.Dispatch<React.SetStateAction<ModalGames[]>>;
+        ModalGames: ModalGames[]
+        PlayDiceGames: PlayDiceGame[]
+        gamesStates: gamesStates[]
+        setGamesStates: React.Dispatch<React.SetStateAction<gamesStates[]>>
+        gameStateIndex: number
+        setGameStateIndex: React.Dispatch<React.SetStateAction<number>>
 
-        console.log(gameStateIndex)
+    }>()
 
-    const [Loading,setLoading] = useState(true)
 
-    const [Loading2,setLoading2]= useState(true)
 
-    const [shouldStartTimer,setShouldStartTimer] = useState(true)
+    const [Loading, setLoading] = useState(true)
 
-    const [data,setData] = useState<GamesDetails | null>(null)
+    const [Loading2, setLoading2] = useState(true)
 
-    const [currentData,setCurrentData] = useState<Results[]|null>(null)
+    const [shouldStartTimer, setShouldStartTimer] = useState(true)
 
-    const[Platforms,setPlatforms] = useState<JSX.Element[][] | null>(null)
+    const [data, setData] = useState<GamesDetails | null>(null)
 
-    const[selectedItem,setSelectedItem] = useState<String>("Popularity")
+    const [currentData, setCurrentData] = useState<Results[] | null>(null)
 
-    const [isMenuVisible,setMenuIsVisible] = useState(false)
+    const [Platforms, setPlatforms] = useState<JSX.Element[][] | null>(null)
 
-    const [isSelectorVisible,setSelectorVisible] = useState(true)
-    const currentDate = new Date() 
-    const past30daysDate = new Date() 
-        past30daysDate.setDate(currentDate.getDate()-30)
+    const [selectedItem, setSelectedItem] = useState<String>("Popularity")
+
+    const [isMenuVisible, setMenuIsVisible] = useState(false)
+
+    const [isSelectorVisible, setSelectorVisible] = useState(true)
+    const currentDate = new Date()
+    const past30daysDate = new Date()
+    past30daysDate.setDate(currentDate.getDate() - 30)
 
     const FormattedCurrentDate = currentDate.toISOString().split("T")[0]
     const FormattedPast30DaysDate = past30daysDate.toISOString().split("T")[0]
 
-    
- 
-    
 
 
-    useEffect(()=>{
-        const fetchData = async ()=>{
 
 
-         const popularResponse = await fetch(  `https://api.rawg.io/api/games?dates=${FormattedPast30DaysDate},${FormattedCurrentDate}&genres=adventure&key=${Apikey}`)
+
+    useEffect(() => {
+        const fetchData = async () => {
+
+
+            const popularResponse = await fetch(`https://api.rawg.io/api/games?dates=${FormattedPast30DaysDate},${FormattedCurrentDate}&genres=adventure&key=${Apikey}`)
             const result = await popularResponse.json()
 
-           const ratingResponse = await fetch(`https://api.rawg.io/api/games?dates=${FormattedPast30DaysDate},${FormattedCurrentDate}&genres=adventure&ordering=-rating&key=${Apikey}`)
-           const result2 = await ratingResponse.json()
+            const ratingResponse = await fetch(`https://api.rawg.io/api/games?dates=${FormattedPast30DaysDate},${FormattedCurrentDate}&genres=adventure&ordering=-rating&key=${Apikey}`)
+            const result2 = await ratingResponse.json()
 
-           const releaseResponse = await fetch(`https://api.rawg.io/api/games?dates=${FormattedPast30DaysDate},${FormattedCurrentDate}&genres=adventure&ordering=-released&key=${Apikey}`)
-           const result3 = await releaseResponse.json()
+            const releaseResponse = await fetch(`https://api.rawg.io/api/games?dates=${FormattedPast30DaysDate},${FormattedCurrentDate}&genres=adventure&ordering=-released&key=${Apikey}`)
+            const result3 = await releaseResponse.json()
 
 
-            const FormattedData:GamesDetails={
-                PopularData:result.results,
-                RatingData:result2.results,
-                ReleaseData:result3.results,
+            const FormattedData: GamesDetails = {
+                PopularData: result.results,
+                RatingData: result2.results,
+                ReleaseData: result3.results,
             }
-           
+
             setData(FormattedData)
             setCurrentData(FormattedData.PopularData)
             setGameStateIndex(3)
-            
+
         }
         fetchData()
-         
-    },[])
+
+    }, [])
+
+    useEffect(() => {
+        if (data)
+            CheckIfGameInCart()
+    }, [ModalGames, PlayDiceGames, data])
+
+
+    function CheckIfGameInCart() {
+        const ModalGamesSet = new Set(ModalGames.map(game => game.Game.name))
+        const PlayDiceGamesSet = new Set(PlayDiceGames.map(game => game.name))
+
+        const allGames = new Set([
+            ...ModalGamesSet,
+            ...PlayDiceGamesSet
+        ])
+
+        setGamesStates(prevState =>
+            prevState.map((item, i) => {
+                if (i === 3 && data?.PopularData) {
+                    return {
+                        ...item,
+                        gameIndexes: item.gameIndexes.map((_, index) =>
+                            allGames.has(data.PopularData[index]?.name) ? true : false
+                        )
+                    };
+                }
+                if (i === 5 && data?.RatingData) {
+                    return {
+                        ...item,
+                        gameIndexes: item.gameIndexes.map((_, index) =>
+                            allGames.has(data.RatingData[index]?.name) ? true : false
+                        )
+                    };
+                }
+                if (i === 4 && data?.ReleaseData) {
+                    return {
+                        ...item,
+                        gameIndexes: item.gameIndexes.map((_, index) =>
+                            allGames.has(data.ReleaseData[index]?.name) ? true : false
+                        )
+                    };
+                }
+                return item;
+            })
+        );
+    }
 
 
 
-      useEffect(()=>{   
-        if(data!=null){
-             GamePlatforms()
-              switch(selectedItem){
+    useEffect(() => {
+        if (data != null) {
+            GamePlatforms()
+            switch (selectedItem) {
 
                 case "Popularity":
                     setCurrentData(data.PopularData)
@@ -125,23 +172,25 @@ function Last30Days(){
                 case "Release Date":
                     setCurrentData(data.ReleaseData)
                     break;
-              }
+            }
 
 
         }
 
-           
-      },[currentData,selectedItem])
+
+    }, [currentData, selectedItem])
 
 
-    
-      function GamePlatforms():void{
-        console.log(currentData)
-       const tempArray:JSX.Element[][]=Array.from({length:20},()=>[])// Initalzing 20 inner arrays
-        for(let i=0;i<20;i++){
-            for(let j=0;j<currentData![i].parent_platforms.length;j++){
 
-               switch(currentData![i].parent_platforms[j].platform.name){
+    function GamePlatforms(): void {
+
+
+        
+        const tempArray: JSX.Element[][] = Array.from({ length: 20 }, () => [])// Initalzing 20 inner arrays
+        for (let i = 0; i < 20; i++) {
+            for (let j = 0; j < currentData![i].parent_platforms.length; j++) {
+
+                switch (currentData![i].parent_platforms[j].platform.name) {
                     case "PC":
                         tempArray[i].push(<Windows></Windows>)
                         break;
@@ -153,7 +202,7 @@ function Last30Days(){
                     case "Xbox":
                         tempArray[i].push(<Xbox></Xbox>)
                         break;
-                    
+
                     case "Apple Macintosh":
                         tempArray[i].push(<IOS></IOS>)
                         break;
@@ -167,113 +216,107 @@ function Last30Days(){
         }
 
         setPlatforms(tempArray)
-    
+
         setLoading(false)
-      }
+    }
 
-      function ShowDropDown():void{
-        setSelectorVisible(S=>S=!S)
-        setMenuIsVisible(M=>M=!M)
-      }
+    function ShowDropDown(): void {
+        setSelectorVisible(S => S = !S)
+        setMenuIsVisible(M => M = !M)
+    }
 
-      function setPopularity():void{
+    function setPopularity(): void {
         setLoading2(true)
         setSelectedItem("Popularity")
-        setSelectorVisible(S=>S=!S)
-        setMenuIsVisible(M=>M=!M)
+        setSelectorVisible(S => S = !S)
+        setMenuIsVisible(M => M = !M)
         setShouldStartTimer(true)
-       setGameStateIndex(3)
-      }
+        setGameStateIndex(3)
+    }
 
 
-      function setReleaseDate():void{
+    function setReleaseDate(): void {
         setLoading2(true)
         setSelectedItem("Release Date")
-        setSelectorVisible(S=>S=!S)
-        setMenuIsVisible(M=>M=!M)
+        setSelectorVisible(S => S = !S)
+        setMenuIsVisible(M => M = !M)
         setShouldStartTimer(true)
         setGameStateIndex(4)
-      }
+    }
 
-      function setRating():void{
+    function setRating(): void {
         setLoading2(true)
         setSelectedItem("Rating")
-        setSelectorVisible(S=>S=!S)
-        setMenuIsVisible(M=>M=!M)
+        setSelectorVisible(S => S = !S)
+        setMenuIsVisible(M => M = !M)
         setShouldStartTimer(true)
         setGameStateIndex(5)
-      }
+    }
 
-      function AddGame(gameNumber:number){
- 
-        setModalGames(G=>[...G, {Game: currentData![gameNumber],gameIndex:gameNumber} as ModalGames])
-        setNumberOfGames(G=>G+1)
-        setGamesStates(prevGamesStates => 
-            prevGamesStates.map((gameState, index) => 
-              index === gameStateIndex  
-                ? {
-                    ...gameState,
-                    gameIndexes: gameState.gameIndexes.map((value, i) => 
-                      i === gameNumber ? true : value,  
-                      gameState.gameNames[gameNumber] = currentData![gameNumber].name
-                      
-                    )
-                  }
-                : gameState
+    function AddGame(gameNumber: number) {
+
+        setModalGames(G => [...G, { Game: currentData![gameNumber], gameIndex: gameNumber } as ModalGames])
+        setNumberOfGames(G => G + 1)
+        setGamesStates(prevGamesStates =>
+            prevGamesStates.map((gameState, index) =>
+                index === gameStateIndex
+                    ? {
+                        ...gameState,
+                        gameIndexes: gameState.gameIndexes.map((value, i) =>
+                            i === gameNumber ? true : value,
+                            gameState.gameNames[gameNumber] = currentData![gameNumber].name
+
+                        )
+                    }
+                    : gameState
             )
-          ); 
-   
-      }
+        );
 
-         useEffect(()=>{
-           if(shouldStartTimer){
-           const timer = setTimeout(()=>{
-               setLoading2(false)
-               setShouldStartTimer(false)
-           },1500)
-           return ()=> clearTimeout(timer)
-       }
-       },[shouldStartTimer])
+    }
 
+    useEffect(() => {
+        if (shouldStartTimer) {
+            const timer = setTimeout(() => {
+                setLoading2(false)
+                setShouldStartTimer(false)
+            }, 1500)
+            return () => clearTimeout(timer)
+        }
+    }, [shouldStartTimer])
 
-
-
-
-      
-
-      return(
+    return (
         <div className={POPCSS.PageContainer}>
             <LeftColumn></LeftColumn>
             <div className={POPCSS.RightSide}>
-                {Loading? (
+                {Loading ? (
                     <h1>Loading</h1>
-                ):(
+                ) : (
                     <div className={POPCSS.RightSideContainer}>
-                    <h1>Last 30 Days</h1>
+                        <h1>Last 30 Days</h1>
 
-                        <div className={POPCSS.SelectContainer} onClick={ShowDropDown} style={{display:isSelectorVisible? "flex":"none"}}>
+                        <div className={POPCSS.SelectContainer} onClick={ShowDropDown} style={{ display: isSelectorVisible ? "flex" : "none" }}>
                             <div>Order by: </div>
                             <h3>{selectedItem}</h3>
                             <ChevronDown></ChevronDown>
                         </div>
 
-                        <div className={POPCSS.CustomDropDown} style={{display: isMenuVisible? "flex": "none"}}>
-                    
-                            <div className={POPCSS.ItemContainer} onClick={setReleaseDate}> 
+                        <div className={POPCSS.CustomDropDown} style={{ display: isMenuVisible ? "flex" : "none" }}>
+
+                            <div className={POPCSS.ItemContainer} onClick={setReleaseDate}>
                                 <div>
                                     <div>Release date</div>
                                     <Checkmark></Checkmark>
                                 </div>
                             </div>
 
-                            <div className={POPCSS.ItemContainer} onClick={setPopularity}> 
+                            <div className={POPCSS.ItemContainer} onClick={setPopularity}>
                                 <div>
                                     <div>Popularity</div>
                                     <Checkmark></Checkmark>
                                 </div>
                             </div>
 
-                            <div className={POPCSS.ItemContainer} onClick={setRating}> 
+                            <div className={POPCSS.ItemContainer} onClick={setRating}>
                                 <div>
                                     <div>Rating</div>
                                     <Checkmark></Checkmark>
@@ -281,46 +324,46 @@ function Last30Days(){
                             </div>
                         </div>
 
-                        
-                        {Loading2 ? (
-                        <div className={POPCSS.LoadingContainer}>
-                                <LoadingComponent></LoadingComponent>
-                        </div>
-                    ) :(
-                        <div className={POPCSS.GameCardsContainer}>
-                        {currentData?.map((game,index)=>(
-                            <div className={POPCSS.GameCard} key={index}>
-                                <div className={POPCSS.Top}>
-                                    <img src={game.background_image as string}></img>
-                                </div>
-                                <div className={POPCSS.Below}>
-                                <div className={POPCSS.Left}>
-                                    
-                                    
-                                     <div style={{display:!gamesStates[gameStateIndex].gameIndexes[index]===true? "": "none"}} className={POPCSS.LeftTopNotAdded} onClick={()=>AddGame(index)}>
-                                         <h3>Add to cart</h3>
-                                         <Plus></Plus>
-                                     </div>
-                                           
-                                     <div style={{display:gamesStates[gameStateIndex].gameIndexes[index]===true? "": "none"}}  className={POPCSS.LeftTopAdded} onClick={()=>AddGame(index)}>
-                                         <h3>Added</h3>
-                                         <Checkmark></Checkmark>
-                                     </div>
 
-                                     <div className={POPCSS.Platforms}>
-                                         {Platforms![index].map((platform,idx)=>(
-                                             React.cloneElement(platform,{key:idx})
-                                         ))}
-                                     </div>
-                                     <h2>{game.name}</h2>
-                                 </div>
-                                    
-                                </div>
+                        {Loading2 ? (
+                            <div className={POPCSS.LoadingContainer}>
+                                <LoadingComponent></LoadingComponent>
                             </div>
-                        ))}
-                    </div>
-                    )}
-             
+                        ) : (
+                            <div className={POPCSS.GameCardsContainer}>
+                                {currentData?.map((game, index) => (
+                                    <div className={POPCSS.GameCard} key={index}>
+                                        <div className={POPCSS.Top}>
+                                            <img src={game.background_image as string}></img>
+                                        </div>
+                                        <div className={POPCSS.Below}>
+                                            <div className={POPCSS.Left}>
+
+
+                                                <div style={{ display: !gamesStates[gameStateIndex].gameIndexes[index] === true ? "" : "none" }} className={POPCSS.LeftTopNotAdded} onClick={() => AddGame(index)}>
+                                                    <h3>Add to cart</h3>
+                                                    <Plus></Plus>
+                                                </div>
+
+                                                <div style={{ display: gamesStates[gameStateIndex].gameIndexes[index] === true ? "" : "none" }} className={POPCSS.LeftTopAdded} onClick={() => AddGame(index)}>
+                                                    <h3>Added</h3>
+                                                    <Checkmark></Checkmark>
+                                                </div>
+
+                                                <div className={POPCSS.Platforms}>
+                                                    {Platforms![index].map((platform, idx) => (
+                                                        React.cloneElement(platform, { key: idx })
+                                                    ))}
+                                                </div>
+                                                <h2>{game.name}</h2>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+
                     </div>
                 )}
             </div>

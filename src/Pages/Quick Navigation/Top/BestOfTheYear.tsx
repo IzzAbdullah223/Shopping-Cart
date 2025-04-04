@@ -79,8 +79,8 @@ function BestOfTheYear(){
                           if (i === 1 && data) {
                             return { 
                               ...item, 
-                              gameIndexes: item.gameIndexes.map((value, index) => 
-                                allGamesSet.has(data.GamesData[index]?.name) ? true : value
+                              gameIndexes: item.gameIndexes.map((_, index) => 
+                                allGamesSet.has(data.GamesData[index]?.name) ? true : false
                               ) 
                             };
                           }

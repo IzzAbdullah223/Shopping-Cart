@@ -82,8 +82,8 @@ function Pop2024(){
                       if (i === 0 && data) {
                         return { 
                           ...item, 
-                          gameIndexes: item.gameIndexes.map((value, index) => 
-                            allGamesSet.has(data.GamesData[index]?.name) ? true : value
+                          gameIndexes: item.gameIndexes.map((_, index) => 
+                            allGamesSet.has(data.GamesData[index]?.name) ? true : false
                           ) 
                         };
                       }

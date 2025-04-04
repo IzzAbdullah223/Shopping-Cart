@@ -22,7 +22,6 @@ import Puzzle from './Pages/Quick Navigation/Genres/Puzzle';
 import Racing from './Pages/Quick Navigation/Genres/Racing';
 import Sports from './Pages/Quick Navigation/Genres/Sports';
 import Last30Days from './Pages/Quick Navigation/NewReleases/Last30Days';
-import ThisWeek from './Pages/Quick Navigation/NewReleases/ThisWeek';
 import RPG from './Pages/Quick Navigation/Genres/RPG';
 
 
@@ -117,7 +116,6 @@ function App() {
         { path: 'AllTimeTop', element: <AllTime /> },
         { path: 'PopularIn2024', element: <Pop2024 /> },
         { path: 'Last30Days', element: <Last30Days /> },
-        {path: "ThisWeek",element: <ThisWeek></ThisWeek>},
         { path: 'PlayStation', element: <PlayStation /> },
         { path: 'PC', element: <PC /> },
         { path: 'XboxOne', element: <XboxOne /> },

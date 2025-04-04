@@ -30,11 +30,6 @@ function AllTime() {
 
     const [data, setData] = useState<GamesDetails | null>(null)
 
-
-
-
-
-
     const [Platforms, setPlatforms] = useState<JSX.Element[][] | null>(null)
 
 
@@ -83,8 +78,8 @@ function AllTime() {
                       if (i === 2 && data) {
                         return { 
                           ...item, 
-                          gameIndexes: item.gameIndexes.map((value, index) => 
-                            allGamesSet.has(data.GamesData[index]?.name) ? true : value
+                          gameIndexes: item.gameIndexes.map((_, index) => 
+                            allGamesSet.has(data.GamesData[index]?.name) ? true : false
                           ) 
                         };
                       }

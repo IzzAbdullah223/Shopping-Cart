@@ -117,24 +117,24 @@ function NintendoSwitch(){
                               if (i === 15 && data?.PopularData) {
                                 return { 
                                   ...item, 
-                                  gameIndexes: item.gameIndexes.map((value, index) => 
-                                    allGames.has(data.PopularData[index]?.name) ? true : value
+                                  gameIndexes: item.gameIndexes.map((_, index) => 
+                                    allGames.has(data.PopularData[index]?.name) ? true : false
                                   ) 
                                 };
                               } 
                               if (i === 17 && data?.RatingData) {
                                 return { 
                                   ...item, 
-                                  gameIndexes: item.gameIndexes.map((value, index) => 
-                                    allGames.has(data.RatingData[index]?.name) ? true : value
+                                  gameIndexes: item.gameIndexes.map((_, index) => 
+                                    allGames.has(data.RatingData[index]?.name) ? true : false
                                   ) 
                                 };
                               } 
                               if (i === 16 && data?.ReleaseData) {
                                 return { 
                                   ...item, 
-                                  gameIndexes: item.gameIndexes.map((value, index) => 
-                                    allGames.has(data.ReleaseData[index]?.name) ? true : value
+                                  gameIndexes: item.gameIndexes.map((_, index) => 
+                                    allGames.has(data.ReleaseData[index]?.name) ? true : false
                                   ) 
                                 };
                               }

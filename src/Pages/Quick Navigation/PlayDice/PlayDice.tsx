@@ -41,7 +41,7 @@ function PlayDice(){
         const   fetchData= async()=>{
 
         
-            const response = await fetch(`https://api.rawg.io/api/games/3328?key=${Apikey}`)
+            const response = await fetch(`https://api.rawg.io/api/games/981791?key=${Apikey}`)
             const result = await response.json()
 
  
@@ -57,7 +57,7 @@ function PlayDice(){
 
             
 
-            const response1 = await fetch(`https://api.rawg.io/api/games/3328/screenshots?key=${Apikey}`)
+            const response1 = await fetch(`https://api.rawg.io/api/games/981791/screenshots?key=${Apikey}`)
             const result1 = await response1.json()
            setgameImages(g=>[...g,result.background_image])
            for(let i=0;i<6;i++){
