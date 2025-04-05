@@ -49,6 +49,7 @@ function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumb
 
 
     function deleteGame(gameIndex:number){
+        console.log("Test")
         setModalGames(ModalGames.filter((_,index)=>index!==gameIndex))
         setNumberOfGames(n=>n-1)
         setGamesStates((prevStates) => {
@@ -62,8 +63,11 @@ function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumb
                 ),
             }));
         });
+    }
 
-
+    function DeletePlayDiceGame(GameName:String){
+        setNumberOfGames(n=>n-1)
+        setPlayDiceGames(PlayDiceGames.filter((Game)=>Game.name!==GameName))
     }
 
     function clearGames(){
@@ -116,7 +120,7 @@ function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumb
                                     {PlayDiceGames.map((ModalGame,index)=>(
                                     <div className={ModalCSS.ModalGame} key={index}>
                                         <div className={ModalCSS.ModalGameTop}>
-                                                <button onClick={()=>deleteGame(index)}>x</button>
+                                                <button onClick={()=>DeletePlayDiceGame(ModalGame.name)}>x</button>
                                         </div>
                                         <div className={ModalCSS.ModalGameBottom}>
                                             <div className={ModalCSS.GameImageContainer}>
