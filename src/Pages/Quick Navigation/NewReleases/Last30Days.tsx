@@ -8,6 +8,7 @@ import Xbox from '../../../assets/icons/Xbox'
 import Nintendo from '../../../assets/icons/Nintendo'
 import IOS from '../../../assets/icons/IOSPIC'
 import ChevronDown from '../../../assets/icons/ChevronDown'
+import Menu from '../../../assets/icons/Menu'
 import LoadingComponent from '../../../LoadingComponent'
 import { useOutletContext } from 'react-router-dom'
 import { ModalGames, gamesStates, PlayDiceGame } from '../../../main'
@@ -292,7 +293,7 @@ function Last30Days() {
                     <h1>Loading</h1>
                 ) : (
                     <div className={POPCSS.RightSideContainer}>
-                        <h1>Last 30 Days</h1>
+                        <h1>Last 30 days</h1>
 
                         <div className={POPCSS.SelectContainer} onClick={ShowDropDown} style={{ display: isSelectorVisible ? "flex" : "none" }}>
                             <div>Order by: </div>
@@ -366,6 +367,9 @@ function Last30Days() {
 
                     </div>
                 )}
+            </div>
+            <div className={POPCSS.MenuContainer}>
+                <Menu></Menu>
             </div>
         </div>
     )

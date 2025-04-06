@@ -146,4 +146,11 @@ gap: 10px;
 .Strategy svg{
     padding: 4px;
 }
+
+@media(max-width:736px){
+    .LeftColumn{
+        display: none;
+        
+    }
+}
  

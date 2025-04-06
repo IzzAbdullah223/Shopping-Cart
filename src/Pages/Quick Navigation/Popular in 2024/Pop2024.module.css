@@ -105,7 +105,7 @@ font-size: 1.2rem;
   display: flex;
   flex-wrap: wrap;
   gap: 40px;
-  padding-right: 30px;
+  padding-right: 50px;
   padding-bottom: 40px;
 }
  
@@ -116,6 +116,7 @@ font-size: 1.2rem;
   border-radius: 5%;
   transition: transform 0.4s ease-out;
   flex: 1;
+  
  
 }
 
@@ -185,13 +186,52 @@ font-size: 1.2rem;
   cursor: pointer;
 }
 
+.MenuContainer{
+  background-color: white;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+ 
+  border-radius: 50%;
+  display: none;
+}
+
+.MenuContainer:hover{
+  cursor: pointer;
+}
+
+.MenuContainer svg{
+  fill: black;
+}
+
+
+
 
 .LoadingContainer{
 display: flex;
 justify-content: center;
 margin: 0 auto;
-  
 }
+
+ 
+
+
+ 
+
+@media(max-width:736px){
+  .RightSideContainer{
+  align-items: center;
+  margin-top: 20px;
+  }
+  .RightSideContainer h1{
+    font-size: 2.9rem;
+  }
+
+  .MenuContainer{
+   display: block;
+  }
+}
+
 
  
 
