@@ -134,7 +134,7 @@ function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumb
                                     </div>
                                 ))}
                                 </div>
-                                <h3 className={ModalCSS.Total}>Total: $ 0</h3>
+                                <h3 className={ModalCSS.Total}>Total: $120</h3>
                             </div>
                     </div>
             )}

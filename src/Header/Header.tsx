@@ -35,7 +35,7 @@ function Header({numberOfGames,ModalGames,setModalGames,setNumberOfGames,gamesSt
         <div className={HeaderCSS.HeaderContainer}>
             <Link to="/" className={HeaderCSS.LeftSide}>
                 <img src={Logo}></img>
-                <h1>Game Harbor</h1>
+                <h1>Game Port</h1>
             </Link>
             <div className={HeaderCSS.SearchBarContainer}>
                 <input type='text' placeholder='Search games...'></input>

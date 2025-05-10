@@ -16,7 +16,7 @@ function HomePage() {
   <div className={ContentCSS.MiddleContainer}>
       <div className={ContentCSS.LeftSide}>
         <div className={ContentCSS.LeftTop}>
-            <h1>Game Harbor</h1>
+            <h1>Game Port</h1>
             <p>It's not a commercial project. you can't buy any games here <span> and all of the prices are generated to imitate a real game shop.</span></p>
             <div>Enjoy 😉</div>
         </div>
@@ -24,7 +24,7 @@ function HomePage() {
           
             <a className={ContentCSS.BottomGit} href='https://github.com/IzzAbdullah223'>
                 <img src={github}></img>
-                <div >Izz Abdallah</div>
+                <div >Link to GitHub</div>
             </a>
              
             <a className={ContentCSS.BottomR} href='https://rawg.io/apidocs'>
