@@ -4,10 +4,13 @@ import LeftArrow from '../../../assets/icons/LeftArrow'
 import ChevronLeft from '../../../assets/icons/ChevronLeft'
 import ChevronRight from '../../../assets/icons/ChevronRight'
 import ChevronDown from '../../../assets/icons/ChevronDown'
-import { useOutletContext } from 'react-router-dom'
+import { useOutletContext,useParams } from 'react-router-dom'
+ 
 import {ModalGames,PlayDiceGame} from '../../../main'
 
 function PlayDice(){
+
+
 
 
        const{setNumberOfGames,ModalGames,setPlayDiceGames} = useOutletContext<{
@@ -16,6 +19,14 @@ function PlayDice(){
             ModalGames: ModalGames[]
             setPlayDiceGames: React.Dispatch<React.SetStateAction<PlayDiceGame[]>>
         }>()
+
+ 
+        const id=useParams().gameID
+        
+     
+
+        
+
     
 
     interface GameInfo{
@@ -40,10 +51,16 @@ function PlayDice(){
     useEffect(()=>{
         const   fetchData= async()=>{
 
-        
-            const response = await fetch(`https://api.rawg.io/api/games/981791?key=${Apikey}`)
-            const result = await response.json()
+            let response;
+            let result;
 
+            if(id)
+                response = await fetch(`https://api.rawg.io/api/games/${id}?key=${Apikey}`)
+            else
+                response = await fetch(`https://api.rawg.io/api/games/981791?key=${Apikey}`)
+
+            result = await response.json()
+            
  
              const FormattedData2:PlayDiceGame={
                 name:result.name,
@@ -55,14 +72,35 @@ function PlayDice(){
 
              
 
-            
+            let response1;
+            let result1;
+            if(id)
+                response1 =  await fetch(`https://api.rawg.io/api/games/${id}/screenshots?key=${Apikey}`)
+            else
+                response1 = await fetch(`https://api.rawg.io/api/games/981791/screenshots?key=${Apikey}`)
 
-            const response1 = await fetch(`https://api.rawg.io/api/games/981791/screenshots?key=${Apikey}`)
-            const result1 = await response1.json()
+            result1 = await response1.json()
+
+ 
+         
+
+          
+          
+            
            setgameImages(g=>[...g,result.background_image])
-           for(let i=0;i<6;i++){
+           if(result1.results.length===1){
+            //Do nothing
+           
+           }
+ 
+         else{
+           for(let i=0;i<result1.results.length;i++){
            setgameImages(g=>[...g,result1.results[i].image])
            }
+        } 
+        
+
+ 
 
            const Platforms : string[]=[]
            const Genres: string[]=[]        
@@ -74,6 +112,8 @@ function PlayDice(){
            for(let i=0;i<result.genres.length;i++){
                 Genres.push(result.genres[i].name)
            }
+
+            
      
            const formattedData: GameInfo={
                 GameTitle:result.name_original,
@@ -99,13 +139,7 @@ function PlayDice(){
   
     useEffect(()=>{
         CheckIfGameInCart()
-    },[data])
-
-
-    useEffect(()=>{
-        CheckIfGameInCart()
-    },[ModalGames])
-
+    },[data,ModalGames])
 
     function CheckIfGameInCart(){
         let found=false
@@ -121,9 +155,10 @@ function PlayDice(){
     }
     
     function LeftChevron(){
+         
 
         setImageIndex(prevIndex=>{
-            const newIndex= prevIndex===0 ? 6:prevIndex-1
+            const newIndex= prevIndex===0 ? gameImages.length-1:prevIndex-1
 
             setTimeout(()=>{
                 const DotsContainer = document.querySelector<HTMLDivElement>(`.${PLAYCSS.DotsContainer}`);
@@ -146,10 +181,11 @@ function PlayDice(){
     }
 
     function RightChevron(){
+    
  
 
          setImageIndex(prevIndex => {
-            const newIndex = prevIndex === 6 ? 0 : prevIndex + 1;
+            const newIndex = prevIndex === gameImages.length-1 ? 0 : prevIndex + 1;
             setTimeout(() => {
                 const DotsContainer = document.querySelector<HTMLDivElement>(`.${PLAYCSS.DotsContainer}`);
                 if (DotsContainer) {
@@ -210,13 +246,12 @@ function PlayDice(){
                     <img src={gameImages[ImageIndex]}></img>
                     <ChevronRight onClick={RightChevron}></ChevronRight>
                     <div className={PLAYCSS.DotsContainer}>
-                        <div className={`${PLAYCSS.Dot} ${PLAYCSS.ActiveDot}`}></div>
-                        <div className={PLAYCSS.Dot}></div>
-                        <div className={PLAYCSS.Dot}></div>
-                        <div className={PLAYCSS.Dot}></div>
-                        <div className={PLAYCSS.Dot}></div>
-                        <div className={PLAYCSS.Dot}></div>
-                        <div className={PLAYCSS.Dot}></div>
+                        {gameImages.map((_,i)=>{
+                            if(i==0)
+                                return <div key={i} className={`${PLAYCSS.Dot} ${PLAYCSS.ActiveDot}`}></div>
+
+                                return <div key={i} className={PLAYCSS.Dot}></div>
+                        })}
                     </div>
                 </div>
             </div>

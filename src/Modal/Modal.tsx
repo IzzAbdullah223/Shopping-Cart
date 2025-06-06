@@ -27,7 +27,7 @@ function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumb
        let handler= (event:MouseEvent)=>{
             if(ModalArea.current && !ModalArea.current.contains(event.target as Node)){
             toggleModal();
-            console.log(PlayDiceGames)
+            
             }
         };
         document.addEventListener("mousedown",handler);
@@ -49,7 +49,7 @@ function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumb
 
 
     function deleteGame(gameIndex:number){
-        console.log("Test")
+       
         setModalGames(ModalGames.filter((_,index)=>index!==gameIndex))
         setNumberOfGames(n=>n-1)
         setGamesStates((prevStates) => {

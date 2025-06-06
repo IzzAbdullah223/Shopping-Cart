@@ -31,7 +31,8 @@ export interface Platform{
 export interface Results{
  name:String,
  background_image:string,
- parent_platforms:Platforms[]
+ parent_platforms:Platforms[],
+ id:number
 }
 
 export interface PlayDiceGame{
@@ -112,6 +113,7 @@ function App() {
       children: [
         { path: '/', element: <HomePage /> },
         { path: 'PlayDice', element: <PlayDice /> },
+        { path: 'PlayDice/:gameID', element: <PlayDice /> },
         { path: 'BestOfTheYear', element: <BestOfTheYear /> },
         { path: 'AllTimeTop', element: <AllTime /> },
         { path: 'PopularIn2024', element: <Pop2024 /> },
