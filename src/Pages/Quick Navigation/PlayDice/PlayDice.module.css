@@ -4,9 +4,15 @@
     box-sizing: border-box;
 }
 
+.PageContainer{
+    display: flex;
+    flex-direction: column;
+  
+}
+
 @font-face {
     font-family: 'GT Walsheim Pro REGULAR';
-    src: url('../../../assets/font/GTWalsheimPro-Bold.woff2');
+    src: url('../../../assets/font/GTWalsheimPro-Regular.woff2');
 }
 
 @font-face {
@@ -31,20 +37,28 @@ body{
   background-color: #0f1011;
 }
 
-
-.Top {
+.PageContainer{
     display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 0px 20px;
+    flex-direction: column;
+    outline: blue solid;
+   
 }
 
-.TopLeft {
+.Top{
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 40px;
+    margin-bottom: 20px;
+  
+}
+
+.TopLeft{
     display: flex;
     align-items: center;
-    gap: 10px;
+    font-family: 'GT Walsheim Pro THIN';
+    color: #cccccc;
     cursor: pointer;
- 
+    gap: 10px;
 }
 
 .TopLeft h2{
@@ -60,63 +74,156 @@ body{
     color: #1aada6;   
     fill: #1aada6;   
 }
-.TopRight {
-    display: flex;
-    justify-content: flex-end;
-    flex-grow: 1;  
-    text-align: right;
-    padding: 0px 20px;
-}
- 
 
-.TopLeft h2, svg{
-color: #cccccc;
-font-family: 'GT Walsheim Pro REGULAR';
-fill: #cccccc;
+.TopRight{
+    font-family: 'GT Walsheim Pro BOLD';
+    color: white;
+    font-size: 1.5rem;
+    text-align: right;
+    
 }
- 
 
 .TopRight h1{
-color: white;
-font-size: 3.3rem;
-font-family: 'GT Walsheim Pro BOLD';
+    
+
+}
+@media(max-width:902px){
+    .TopRight h1{
+    max-width: 560px;    
+}
 }
 
- .Below{
+.Bottom{
     display: flex;
-    gap: 50px;
-    padding: 20px;
- }
- 
- 
- 
+    justify-content: space-between;
+    padding: 0px 30px;
+    gap: 30px;
+    outline: red solid;
+}
+
+.BottomRight{
+    outline: red;
+}
+
 .ImageContainer{
     position: relative;
-    max-width: 1500px;
-    height: 80vh;
-    padding-bottom: 10px;
-    overflow: hidden;
+    width: 100%;
+    max-width: 1340px;
+    min-width: 400px;
+    height: 78vh;
 }
 
-@media(max-width:880px){
-    .Below{
-        display: flex;
-        flex-direction: column;
-        align-items: stretch
-    }
+.ImageContainer img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
 
-    .BelowRight{
-      gap: 20px;
-      flex-grow: 1;
-    }
+.ImageContainer svg{
+    position: absolute;
+    top: 50%;
+    cursor: pointer;
+}
 
-    .TopRight h1{
-        white-space: nowrap;
-        font-size: 2rem;
-    }
+.ImageContainer svg:last-of-type{
+    right: 5px;
+}
 
+
+.BottomRight{
+       display: flex;
+       flex-direction: column;
  
 }
+
+.GameDescContainer{
+    background-color: #191919;
+    padding: 10px;
+    border-radius: 10px;
+    mask-image: linear-gradient(to bottom, black 70%, transparent);
+    scrollbar-width: none;
+    overflow: hidden;
+    height: 190px;
+}
+
+.GameDescContainer:hover{
+    overflow-y: auto;
+}
+
+.GameDescContainer h3{
+    color: white;
+    font-family: 'GT Walsheim Pro BOLD';
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.GameDescContainer p{
+    color: #dddadaa8;
+    font-family: 'GT Walsheim Pro THIN';
+    max-width: 460px;
+}
+
+.MoreContainer{
+    background-color: #1a181813;
+    color: #cccccc;
+    font-family: 'GT Walsheim Pro THIN2';
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 450px;
+    font-size: 0.9rem;
+}
+
+.MoreTop{
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    mask-image: linear-gradient(to top, rgb(26, 23, 23) 95%, transparent);
+}
+
+.MoreTop a{
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+}
+.More{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: end;
+    cursor: pointer;
+ }
+
+.AddToCartContainer{
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #2424243d;
+    color: white;
+    font-family: 'GT Walsheim Pro REGULAR';
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.GameAddedContainer{
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #2424243d;
+    color: white;
+    font-family: 'GT Walsheim Pro REGULAR';
+    padding: 15px;
+    border-radius: 10px;
+}
+
+
+
+.AddToCartContainer h2{
+    cursor: pointer;
+}
+
 
 .DotsContainer{
     background-color: #111111;
@@ -152,189 +259,13 @@ font-family: 'GT Walsheim Pro BOLD';
     transform: scale(0.5);
     transition: transform 0.3s ease;
 }
-
-.ImageContainer img{
-    object-fit: cover;
-    max-width: 100%;
-    height: 100%;
-    border-radius: 30px;
-    transition: transform 0.5s ease-in-out;
-}
+ 
 
 
-@media(max-width:880px){
-    .ImageContainer{
-         height: 60%;
-         margin-bottom: -50px;
-    }
-}
 
-.MoveImageRight{
-    transform: translateX(100%);
-}
-
-.MoveImageRight{
-    transform: translateX(-100%);
-}
-
-.ImageContainer svg{
-    position: absolute;
-    top: 50%;
-    cursor: pointer;
-    
-}
-
-.ImageContainer svg:last-of-type{
-   right: 5px;
-}
 
  
-.BelowRight{
-    display: flex;
-    flex-direction: column;
-    padding: 0px 40px;
-    padding-bottom: 10px;
-}
 
-.GameDescriptionContainer{
-    background-color: #191919;
-    max-width: 550px;
-    min-width: 350px;
-    padding: 20px 15px;
-    border-radius: 15px;
-    mask-image: linear-gradient(to bottom, black 70%, transparent);
-    overflow: hidden;
-    max-height: 28vh;
-    scrollbar-width: none;
-}
-
-@media(max-width:880px){
-    .GameDescriptionContainer{
-        max-width:100%;
-        order: 2;
-    }
-
-    .BelowRight{
-        padding: 0px;
-    }
- 
-}
-
-.GameDescriptionContainer:hover{
-    overflow-y: auto;
-}
-
-.GameDescriptionContainer h2{
-    color: white;
-    font-family: 'GT Walsheim Pro REGULAR';
-    margin-bottom: 10px;
-}
-
-.GameDescriptionContainer p{
-    color: #f5efef;
-    font-family: 'GT Walsheim Pro THIN';
-    font-size: 1.1em;
-}
-
-.MoreContainer{
-    background-color: #242424;
-    color: #cccccc;
-    font-family: 'GT Walsheim Pro THIN2';
-    gap: 10px;
-    padding: 20px 20px;
-    border-radius: 9px;
-    mask-image: linear-gradient(to top, black 80%, transparent);
- 
-}
-
-.MoreTop{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    font-family: 'GT Walsheim Pro THIN2';
-    font-size: 0.9rem;
-    display: none;
-}
-
-.MoreTop a{
-    text-decoration: none;
-    color: inherit;
-    font-size: 1.2rem;
-    font-weight: bold;
-    display: inline-block;
-}
-
-.More{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    justify-content: end;
-    cursor: pointer;
-}
-
-.ChevronDown{
-        transform: rotate(0deg);
-        transition-duration: 0.5s;
-}
-
-.ChevronUp{
-    transform: rotate(180deg);
-    transition-duration: 0.5s;
-}
-
-.AddToCartContainer{
-    background-color: #242424;
-    color: white;
-    font-family: 'GT Walsheim Pro REGULAR';
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px;
-    margin-top: auto;
-    border-radius: 10px;
-     
-}
-
-.AlreadyAdded{
-    background-color: #1d1c1c93;
-    color: #1aada6;
-    font-family: 'GT Walsheim Pro REGULAR';
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px;
-    margin-top: auto;
-    border-radius: 10px;
-}
-
-.AlreadyAdded h2{
-    font-family: 'GT Walsheim Pro Bold';
-}
-
-.AlreadyAdded h3{
-    color: white;
-    
-}
-
-@media(max-width:880px){
-    .AddToCartContainer{
-        order: 1;
-    }
-    .GameContainerDescription{
-        order: 2;
-    }
-
-    .MoreContainer{
-        order: 3;
-    }
-    
-}
-
-.AddToCartContainer h2{
-    cursor: pointer;
-}
- 
- 
 
  
 

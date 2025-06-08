@@ -263,7 +263,7 @@ function Last30Days() {
     }
 
     function AddGame(gameNumber: number) {
-
+         
         setModalGames(G => [...G, { Game: currentData![gameNumber], gameIndex: gameNumber, } as ModalGames])
         setNumberOfGames(G => G + 1)
         setGamesStates(prevGamesStates =>

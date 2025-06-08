@@ -13,11 +13,12 @@ function PlayDice(){
 
 
 
-       const{setNumberOfGames,ModalGames,setPlayDiceGames} = useOutletContext<{
+       const{setNumberOfGames,ModalGames,setPlayDiceGames,PlayDiceGames} = useOutletContext<{
             setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
             setModalGames:    React.Dispatch<React.SetStateAction<ModalGames[]>>;
             ModalGames: ModalGames[]
             setPlayDiceGames: React.Dispatch<React.SetStateAction<PlayDiceGame[]>>
+            PlayDiceGames:PlayDiceGame[]
         }>()
 
  
@@ -25,7 +26,7 @@ function PlayDice(){
         
      
 
-        
+     
 
     
 
@@ -136,6 +137,7 @@ function PlayDice(){
 
     },[])
 
+   
   
     useEffect(()=>{
         CheckIfGameInCart()
@@ -143,14 +145,13 @@ function PlayDice(){
 
     function CheckIfGameInCart(){
         let found=false
-   
         for(let i=0;i<ModalGames.length;i++){
             if(ModalGames[i].Game.name===data?.GameTitle){
                 found=true;
             } 
         }
         setTimeout(()=>{
-            setGameAdded(found)
+            setGameAdded(false)
         },0)
     }
     
@@ -221,7 +222,7 @@ function PlayDice(){
 
     function AddGame(){
         if(data2)
-            setPlayDiceGames(Prev=>[...Prev,data2])
+        setPlayDiceGames(Prev=>[...Prev,data2])
         setNumberOfGames(G=>G+1)
         setGameAdded(true)
     }
@@ -229,7 +230,7 @@ function PlayDice(){
 
     if(Loading){
     return(
-    <div style={PLAYCSS}>
+    <div className={PLAYCSS.PageContainer}>
         <div className={PLAYCSS.Top}>
            <div className={PLAYCSS.TopLeft}>
                <LeftArrow></LeftArrow>
@@ -239,12 +240,12 @@ function PlayDice(){
                <h1>{data?.GameTitle}</h1>
            </div>
         </div>
-        <div className={PLAYCSS.Below}>
-            <div className={PLAYCSS.BelowLeft}>
+        <div className={PLAYCSS.Bottom}>
+            
                 <div className={PLAYCSS.ImageContainer}>
                     <ChevronLeft onClick={LeftChevron}></ChevronLeft>
                     <img src={gameImages[ImageIndex]}></img>
-                    <ChevronRight onClick={RightChevron}></ChevronRight>
+                     <ChevronRight onClick={RightChevron}></ChevronRight>
                     <div className={PLAYCSS.DotsContainer}>
                         {gameImages.map((_,i)=>{
                             if(i==0)
@@ -254,37 +255,35 @@ function PlayDice(){
                         })}
                     </div>
                 </div>
-            </div>
-            <div className={PLAYCSS.BelowRight}>
-                <div className={PLAYCSS.GameDescriptionContainer}>
-                    <h2>Description</h2>
+           
+            <div className={PLAYCSS.BottomRight}>
+                <div className={PLAYCSS.GameDescContainer}>
+                    <h3>Description</h3>
                     <p>{data?.GameDesc}</p>
                 </div>
                 <div className={PLAYCSS.MoreContainer}>
-                        <div className={PLAYCSS.MoreTop}> 
-                          <a>{data?.Website}</a>  
-                            <h3>{data?.Released}</h3>
-                            <h3>{data?.Genres}</h3>
-                            <h3>{data?.Platforms}</h3>
-                            <h3>{data?.Developers}</h3>
-                            <h3>{data?.Publishers}</h3>
-                        </div>
-                        <div className={PLAYCSS.More} onClick={DisplayMore}>
-                            <h3>More</h3>
-                            <ChevronDown className={PLAYCSS.ChevronDown}></ChevronDown>
-                        </div>
+                    <div className={PLAYCSS.MoreTop}> 
+                        <h3>Website: <a href=''>{data?.Website}</a></h3> 
+                        <h3>{data?.Released}</h3>
+                        <h3>{data?.Genres}</h3>
+                        <h3>{data?.Platforms}</h3>
+                        <h3>{data?.Developers}</h3>
+                        <h3>{data?.Publishers}</h3>
+                    </div>
+                    <div className={PLAYCSS.More} onClick={DisplayMore}>
+                        <h3>More</h3>
+                        <ChevronDown className={PLAYCSS.ChevronDown}></ChevronDown>
+                    </div>
                 </div>
-                <div className={PLAYCSS.AddToCartContainer} onClick={AddGame} style={{display:GameAdded==false? "flex":"none"}}>
+                <div className={PLAYCSS.AddToCartContainer} onClick={!GameAdded ? AddGame : () => {}}>
                     <h3>$12.98</h3>
-                    <h2>Add to cart +</h2>
-                </div>
-                <div className={PLAYCSS.AlreadyAdded} onClick={AddGame} style={{display:GameAdded==true? "flex":"none"}}>
-                    <h3>$12.98</h3>
-                    <h2>Added ✔</h2>
-                </div>
+                    <h2 style={{color:GameAdded?"#1aada6":"white",cursor:GameAdded?"default":'pointer'}}>{GameAdded? "Added": "  Add to cart +"}</h2>
+                </div>  
             </div>
         </div>
-   </div>
+ 
+        </div>
+ 
         
     )
 }
