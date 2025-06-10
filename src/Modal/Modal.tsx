@@ -1,7 +1,7 @@
 import React, {useEffect,useRef } from 'react'
 import ModalCSS from './Modal.module.css'
 import { ModalGames,gamesStates,PlayDiceGame} from '../main'
-import { useOutletContext } from 'react-router-dom'
+ 
 
 
 type modalProps={
@@ -20,7 +20,7 @@ type modalProps={
  
 }
 
-function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumberOfGames,setGamesStates,PlayDiceGames,setPlayDiceGames,GameAdded,setGameAdded}:modalProps){
+function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumberOfGames,setGamesStates,PlayDiceGames,setPlayDiceGames,setGameAdded}:modalProps){
 
 
      
