@@ -13,12 +13,14 @@ function PlayDice(){
 
 
 
-       const{setNumberOfGames,ModalGames,setPlayDiceGames,PlayDiceGames} = useOutletContext<{
+       const{setNumberOfGames,ModalGames,setPlayDiceGames,GameAdded,setGameAdded} = useOutletContext<{
             setNumberOfGames: React.Dispatch<React.SetStateAction<number>>;
             setModalGames:    React.Dispatch<React.SetStateAction<ModalGames[]>>;
             ModalGames: ModalGames[]
             setPlayDiceGames: React.Dispatch<React.SetStateAction<PlayDiceGame[]>>
             PlayDiceGames:PlayDiceGame[]
+            GameAdded:boolean
+            setGameAdded: React.Dispatch<React.SetStateAction<boolean>>
         }>()
 
  
@@ -47,8 +49,6 @@ function PlayDice(){
     const Apikey = "2bcc24482f844476a6b3935319801e0c"
     const [ImageIndex,setImageIndex] = useState(0)
     const [Loading,seLoading] = useState(false)
-    const [GameAdded,setGameAdded] = useState(false)
-
     useEffect(()=>{
         const   fetchData= async()=>{
 
@@ -123,7 +123,7 @@ function PlayDice(){
                 Released:`Released: ${result.released}`,
                 Genres:`Genres: ${Genres.join(', ')}`,
                 Platforms:`Platforms: ${Platforms.join(', ')}`,
-                Developers:`Developers: ${result.developers[0].name}`,
+                  Developers:`Developers: ${result.developers[0].name}`,
                 Publishers:`Publishers: ${result.publishers[0].name}`,
            }
 
@@ -151,7 +151,7 @@ function PlayDice(){
             } 
         }
         setTimeout(()=>{
-            setGameAdded(false)
+            setGameAdded(found)
         },0)
     }
     

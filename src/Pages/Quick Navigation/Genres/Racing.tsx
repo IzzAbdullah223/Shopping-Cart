@@ -9,7 +9,7 @@ import Nintendo from '../../../assets/icons/Nintendo'
 import Androids from '../../../assets/icons/Android'
 import ChevronDown from '../../../assets/icons/ChevronDown'
 import LoadingComponent from '../../../LoadingComponent'
-import { useOutletContext } from 'react-router-dom'
+import { useOutletContext,useNavigate } from 'react-router-dom'
 import {ModalGames,gamesStates,PlayDiceGame} from '../../../main'
 import Checkmark from '../../../assets/icons/CheckMark'
 import IOSPIC from '../../../assets/icons/IOSPIC'
@@ -25,7 +25,8 @@ function Racing(){
     interface Results{
         name:String,
         background_image:String,
-        parent_platforms:Platforms[]
+        parent_platforms:Platforms[],
+        id:number
     }
     interface GamesDetails{
         PopularData:Results[],
@@ -65,6 +66,12 @@ function Racing(){
     const [isMenuVisible,setMenuIsVisible] = useState(false)
 
     const [isSelectorVisible,setSelectorVisible] = useState(true)
+
+        const navigate = useNavigate()
+    
+                function GoToPlayDice(gameID:number){
+                navigate(`/PlayDice/${gameID}`)
+            }
  
     
 
@@ -77,9 +84,12 @@ function Racing(){
            const ratingResponse = await fetch(`https://api.rawg.io/api/games?genres=racing&ordering=-rating&key=${Apikey}`)
            const result2 = await ratingResponse.json()
 
+         
+
            const releaseResponse = await fetch(`https://api.rawg.io/api/games?genres=racing&ordering=released&key=${Apikey}`)
            const result3 = await releaseResponse.json()
 
+       
 
             const FormattedData:GamesDetails={  
                 PopularData:result.results,
@@ -171,6 +181,7 @@ function Racing(){
 
     
       function GamePlatforms():void{
+   
        const tempArray:JSX.Element[][]=Array.from({length:20},()=>[])// Initalzing 20 inner arrays
         for(let i=0;i<20;i++){
             for(let j=0;j<currentData![i].parent_platforms.length;j++){
@@ -280,7 +291,7 @@ function Racing(){
                     <h1>Loading</h1>
                 ):(
                     <div className={POPCSS.RightSideContainer}>
-                    <h1>Action</h1>
+                    <h1>Racing</h1>
 
                         <div className={POPCSS.SelectContainer} onClick={ShowDropDown} style={{display:isSelectorVisible? "flex":"none"}}>
                             <div>Order by: </div>
@@ -321,7 +332,7 @@ function Racing(){
                         <div className={POPCSS.GameCardsContainer}>
                         {currentData?.map((game,index)=>(
                             <div className={POPCSS.GameCard} key={index}>
-                                <div className={POPCSS.Top}>
+                                <div className={POPCSS.Top} onClick={()=>GoToPlayDice(game.id)}>
                                     <img src={game.background_image as string}></img>
                                 </div>
                                 <div className={POPCSS.Below}>
@@ -343,7 +354,7 @@ function Racing(){
                                              React.cloneElement(platform,{key:idx})
                                          ))}
                                      </div>
-                                     <h2>{game.name}</h2>
+                                     <h2 onClick={()=>GoToPlayDice(game.id)}>{game.name}</h2>
                                  </div>
                                     
                                 </div>

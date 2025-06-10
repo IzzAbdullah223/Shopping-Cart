@@ -40,8 +40,6 @@ body{
 .PageContainer{
     display: flex;
     flex-direction: column;
-    outline: blue solid;
-   
 }
 
 .Top{
@@ -82,11 +80,6 @@ body{
     text-align: right;
     
 }
-
-.TopRight h1{
-    
-
-}
 @media(max-width:902px){
     .TopRight h1{
     max-width: 560px;    
@@ -98,11 +91,7 @@ body{
     justify-content: space-between;
     padding: 0px 30px;
     gap: 30px;
-    outline: red solid;
-}
-
-.BottomRight{
-    outline: red;
+  
 }
 
 .ImageContainer{

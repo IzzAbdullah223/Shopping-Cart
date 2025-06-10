@@ -1,6 +1,7 @@
-import {useEffect,useRef } from 'react'
+import React, {useEffect,useRef } from 'react'
 import ModalCSS from './Modal.module.css'
 import { ModalGames,gamesStates,PlayDiceGame} from '../main'
+import { useOutletContext } from 'react-router-dom'
 
 
 type modalProps={
@@ -14,14 +15,21 @@ type modalProps={
     setGamesStates:React.Dispatch<React.SetStateAction<gamesStates[]>>
     PlayDiceGames:PlayDiceGame[]
     setPlayDiceGames:React.Dispatch<React.SetStateAction<PlayDiceGame[]>>
+    GameAdded:boolean
+    setGameAdded:React.Dispatch<React.SetStateAction<boolean>>
+ 
 }
 
-function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumberOfGames,setGamesStates,PlayDiceGames,setPlayDiceGames}:modalProps){
- 
+function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumberOfGames,setGamesStates,PlayDiceGames,setPlayDiceGames,GameAdded,setGameAdded}:modalProps){
+
+
+     
     const ModalArea = useRef<HTMLDivElement>(null);
+ 
 
 
-   
+ 
+ 
 //From here to Line 27  
     useEffect(()=>{  // close modal when clicking outside
        let handler= (event:MouseEvent)=>{
@@ -68,6 +76,7 @@ function Modal({modal,toggleModal,numberOfGames,ModalGames,setModalGames,setNumb
     function DeletePlayDiceGame(GameName:String){
         setNumberOfGames(n=>n-1)
         setPlayDiceGames(PlayDiceGames.filter((Game)=>Game.name!==GameName))
+        setGameAdded(false)
     }
 
     function clearGames(){

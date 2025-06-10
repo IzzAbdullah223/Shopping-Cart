@@ -17,12 +17,14 @@ interface LayOutProps{
     gameStateIndex:number,
     setGameStateIndex:React.Dispatch<React.SetStateAction<number>>,
     PlayDiceGames: PlayDiceGame[],
-    setPlayDiceGames: React.Dispatch<React.SetStateAction<PlayDiceGame[]>>
+    setPlayDiceGames: React.Dispatch<React.SetStateAction<PlayDiceGame[]>>,
+    GameAdded:boolean
+    setGameAdded: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 
 function Layout({numberOfGames,setNumberOfGames,ModalGames,setModalGames,gamesStates,setGamesStates,gameStateIndex,setGameStateIndex,
-PlayDiceGames,setPlayDiceGames}: LayOutProps){
+PlayDiceGames,setPlayDiceGames, GameAdded,setGameAdded}: LayOutProps){
 
 
  
@@ -37,8 +39,10 @@ PlayDiceGames,setPlayDiceGames}: LayOutProps){
                 Your browser does not support the video tag.
             </video>
       )     }
-            <Header gamesStates={gamesStates} setGamesStates={setGamesStates}  setNumberOfGames={setNumberOfGames} numberOfGames={numberOfGames} setModalGames={setModalGames}         ModalGames={ModalGames} PlayDiceGames={PlayDiceGames} setPlayDiceGames={setPlayDiceGames}></Header>
-            <Outlet context={{setNumberOfGames,setModalGames,ModalGames,gamesStates,setGamesStates,gameStateIndex,setGameStateIndex,PlayDiceGames,setPlayDiceGames}}></Outlet>
+            <Header gamesStates={gamesStates} setGamesStates={setGamesStates}  setNumberOfGames={setNumberOfGames} numberOfGames={numberOfGames} setModalGames={setModalGames}ModalGames={ModalGames} PlayDiceGames={PlayDiceGames} setPlayDiceGames={setPlayDiceGames} GameAdded={GameAdded} setGameAdded={setGameAdded}></Header>
+            <Outlet context={{setNumberOfGames,setModalGames,ModalGames,gamesStates,setGamesStates,gameStateIndex,setGameStateIndex,PlayDiceGames,setPlayDiceGames,
+                             GameAdded,setGameAdded,
+            }}></Outlet>
         </div>
     )
 }

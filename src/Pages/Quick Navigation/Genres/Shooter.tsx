@@ -9,7 +9,7 @@ import Nintendo from '../../../assets/icons/Nintendo'
 import Androids from '../../../assets/icons/Android'
 import ChevronDown from '../../../assets/icons/ChevronDown'
 import LoadingComponent from '../../../LoadingComponent'
-import { useOutletContext } from 'react-router-dom'
+import { useOutletContext,useNavigate } from 'react-router-dom'
 import {ModalGames,gamesStates,PlayDiceGame} from '../../../main'
 import Checkmark from '../../../assets/icons/CheckMark'
 import IOSPIC from '../../../assets/icons/IOSPIC'
@@ -26,6 +26,7 @@ function Shooter(){
         name:String,
         background_image:String,
         parent_platforms:Platforms[]
+        id:number
     }
     interface GamesDetails{
         PopularData:Results[],
@@ -65,6 +66,11 @@ function Shooter(){
     const [isMenuVisible,setMenuIsVisible] = useState(false)
 
     const [isSelectorVisible,setSelectorVisible] = useState(true)
+        const navigate = useNavigate()
+    
+                function GoToPlayDice(gameID:number){
+                navigate(`/PlayDice/${gameID}`)
+            }
  
     
 
@@ -321,7 +327,7 @@ function Shooter(){
                         <div className={POPCSS.GameCardsContainer}>
                         {currentData?.map((game,index)=>(
                             <div className={POPCSS.GameCard} key={index}>
-                                <div className={POPCSS.Top}>
+                                <div className={POPCSS.Top} onClick={()=>GoToPlayDice(game.id)}>
                                     <img src={game.background_image as string}></img>
                                 </div>
                                 <div className={POPCSS.Below}>
@@ -343,7 +349,7 @@ function Shooter(){
                                              React.cloneElement(platform,{key:idx})
                                          ))}
                                      </div>
-                                     <h2>{game.name}</h2>
+                                     <h2 onClick={()=>GoToPlayDice(game.id)}>{game.name}</h2>
                                  </div>
                                     
                                 </div>

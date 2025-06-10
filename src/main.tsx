@@ -73,7 +73,7 @@ export interface gamesStates{
 function App() {
 
   const [gamesStates, setGamesStates] = useState<gamesStates[]>(
-    Array.from({ length: 46 }, () => ({ gameIndexes: [], gameNames: [] }))
+    Array.from({ length: 47 }, () => ({ gameIndexes: [], gameNames: [] }))
   );
    
   useEffect(() => {
@@ -99,6 +99,7 @@ function App() {
   const [ModalGames,setModalGames] = useState<ModalGames[]>([])
   const [gameStateIndex,setGameStateIndex] = useState(3)
   const [PlayDiceGames,setPlayDiceGames] = useState<PlayDiceGame[]>([])
+  const [GameAdded,setGameAdded]=useState<boolean>(false)
  
  
  
@@ -107,7 +108,7 @@ function App() {
       path: '/',
       element: <Layout    gamesStates={gamesStates}     numberOfGames={numberOfGames} setNumberOfGames={setNumberOfGames} gameStateIndex={gameStateIndex}
                           ModalGames={ModalGames}       setModalGames={setModalGames}  setGamesStates={setGamesStates}    setGameStateIndex={setGameStateIndex}
-                          PlayDiceGames={PlayDiceGames} setPlayDiceGames={setPlayDiceGames}
+                          PlayDiceGames={PlayDiceGames} setPlayDiceGames={setPlayDiceGames} GameAdded={GameAdded} setGameAdded={setGameAdded}
                           
                         
  />,

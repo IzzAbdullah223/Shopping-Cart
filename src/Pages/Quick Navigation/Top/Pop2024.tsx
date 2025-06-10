@@ -7,7 +7,7 @@ import Playstation from '../../../assets/icons/Playstation'
 import Xbox from '../../../assets/icons/Xbox'
 import Nintendo from '../../../assets/icons/Nintendo'
 import IOS from '../../../assets/icons/IOSPIC'
-import { useOutletContext } from 'react-router-dom'
+import { useOutletContext,useNavigate } from 'react-router-dom'
 import {GamesDetails,ModalGames,gamesStates,PlayDiceGame} from '../../../main'
 import Checkmark from '../../../assets/icons/CheckMark'
 
@@ -22,6 +22,13 @@ function Pop2024(){
         gamesStates:gamesStates[],
         setGamesStates:React.Dispatch<React.SetStateAction<gamesStates[]>>
     }>()
+
+
+    const navigate = useNavigate()
+
+            function GoToPlayDice(gameID:number){
+            navigate(`/PlayDice/${gameID}`)
+        }
    
  
 
@@ -176,7 +183,7 @@ function Pop2024(){
                     <div className={POPCSS.GameCardsContainer}>
                         {data?.GamesData.map((game,index)=>(
                             <div className={POPCSS.GameCard} key={index}>
-                                <div className={POPCSS.Top}>
+                                <div className={POPCSS.Top} onClick={()=>GoToPlayDice(game.id)}>
                                     <img src={game.background_image as string}></img>
                                 </div>
                                 <div className={POPCSS.Below}>
@@ -197,7 +204,7 @@ function Pop2024(){
                                                 React.cloneElement(platform,{key:idx})
                                             ))}
                                         </div>
-                                        <h2>{game.name}</h2>
+                                        <h2 onClick={()=>GoToPlayDice(game.id)}>{game.name}</h2>
                                     </div>
                                     
                                 </div>
