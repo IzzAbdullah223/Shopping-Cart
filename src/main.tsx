@@ -23,6 +23,8 @@ import Racing from './Pages/Quick Navigation/Genres/Racing';
 import Sports from './Pages/Quick Navigation/Genres/Sports';
 import Last30Days from './Pages/Quick Navigation/NewReleases/Last30Days';
 import RPG from './Pages/Quick Navigation/Genres/RPG';
+import ThisWeek from './Pages/Quick Navigation/NewReleases/ThisWeek';
+import NextWeek from './Pages/Quick Navigation/NewReleases/NextWeek';
 
 
 export interface Platform{
@@ -73,7 +75,7 @@ export interface gamesStates{
 function App() {
 
   const [gamesStates, setGamesStates] = useState<gamesStates[]>(
-    Array.from({ length: 47 }, () => ({ gameIndexes: [], gameNames: [] }))
+    Array.from({ length: 53 }, () => ({ gameIndexes: [], gameNames: [] }))
   );
    
   useEffect(() => {
@@ -120,6 +122,8 @@ function App() {
         { path: 'AllTimeTop', element: <AllTime /> },
         { path: 'PopularIn2024', element: <Pop2024 /> },
         { path: 'Last30Days', element: <Last30Days /> },
+        { path: 'ThisWeek',element: <ThisWeek></ThisWeek>},
+        { path: 'NextWeek',element: <NextWeek></NextWeek>},
         { path: 'PlayStation', element: <PlayStation /> },
         { path: 'PC', element: <PC /> },
         { path: 'XboxOne', element: <XboxOne /> },

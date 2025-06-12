@@ -59,6 +59,7 @@ width: 100%;
   border-radius: 15px;
   font-family: 'GT Walsheim Regular';
   cursor: pointer;
+  align-self: start;
 }
 
 .SelectContainer div{
@@ -78,6 +79,7 @@ font-size: 1.2rem;
   min-width: 240px;
   padding-bottom: 10px;
   display: none;
+  align-self: start;
 }
 
 
@@ -106,7 +108,6 @@ font-size: 1.2rem;
   gap: 40px;
   padding-right: 50px;
   padding-bottom: 40px;
-  
 }
  
 
@@ -126,7 +127,7 @@ font-size: 1.2rem;
 
 .Top img{
   width: 100%;
-  height: 30vh;
+  height: 22vh;
   object-fit: cover;
   border-top-left-radius: 5%;
   border-top-right-radius: 5%;

@@ -17,7 +17,7 @@ import Checkmark from '../../../assets/icons/CheckMark'
 
 
 
-function Last30Days() {
+function NextWeek() {
     const Apikey = "2bcc24482f844476a6b3935319801e0c"
     interface Platform {
         name: string
@@ -77,15 +77,18 @@ function Last30Days() {
     const [isMenuVisible, setMenuIsVisible] = useState(false)
 
     const [isSelectorVisible, setSelectorVisible] = useState(true)
-    const currentDate = new Date()
-    const past30daysDate = new Date()
-    past30daysDate.setDate(currentDate.getDate() - 30)
 
-    const FormattedCurrentDate = currentDate.toISOString().split("T")[0]
-    const FormattedPast30DaysDate = past30daysDate.toISOString().split("T")[0]
+const today = new Date();
+const nextWeekStart = new Date();
+const nextWeekEnd = new Date();
+
+nextWeekStart.setDate(today.getDate() + 7);
+nextWeekEnd.setDate(today.getDate() + 14);
+
+const formattedNextWeekStart = nextWeekStart.toISOString().split("T")[0];
+const formattedNextWeekEnd = nextWeekEnd.toISOString().split("T")[0];
 
 
-    
 
 
 
@@ -93,13 +96,13 @@ function Last30Days() {
         const fetchData = async () => {
 
 
-            const popularResponse = await fetch(`https://api.rawg.io/api/games?dates=${FormattedPast30DaysDate},${FormattedCurrentDate}&genres=adventure&key=${Apikey}`)
+            const popularResponse = await fetch(`https://api.rawg.io/api/games?dates=${formattedNextWeekStart},${formattedNextWeekEnd}&key=${Apikey}`)
             const result = await popularResponse.json()
 
-            const ratingResponse = await fetch(`https://api.rawg.io/api/games?dates=${FormattedPast30DaysDate},${FormattedCurrentDate}&genres=adventure&ordering=-rating&key=${Apikey}`)
+            const ratingResponse = await fetch(`https://api.rawg.io/api/games?dates=${formattedNextWeekStart},${formattedNextWeekEnd}&ordering=-rating&key=${Apikey}`)
             const result2 = await ratingResponse.json()
 
-            const releaseResponse = await fetch(`https://api.rawg.io/api/games?dates=${FormattedPast30DaysDate},${FormattedCurrentDate}&genres=adventure&ordering=-released&key=${Apikey}`)
+            const releaseResponse = await fetch(`https://api.rawg.io/api/games?dates=${formattedNextWeekStart},${formattedNextWeekEnd}&ordering=-released&key=${Apikey}`)
             const result3 = await releaseResponse.json()
 
             const FormattedData: GamesDetails = {
@@ -110,7 +113,7 @@ function Last30Days() {
 
             setData(FormattedData)
             setCurrentData(FormattedData.PopularData)
-            setGameStateIndex(3)
+            setGameStateIndex(50)
 
         }
         fetchData()
@@ -134,7 +137,7 @@ function Last30Days() {
 
         setGamesStates(prevState =>
             prevState.map((item, i) => {
-                if (i === 3 && data?.PopularData) {
+                if (i === 50 && data?.PopularData) {
                     return {
                         ...item,
                         gameIndexes: item.gameIndexes.map((_, index) =>
@@ -142,7 +145,7 @@ function Last30Days() {
                         )
                     };
                 }
-                if (i === 5 && data?.RatingData) {
+                if (i === 52 && data?.RatingData) {
                     return {
                         ...item,
                         gameIndexes: item.gameIndexes.map((_, index) =>
@@ -150,7 +153,7 @@ function Last30Days() {
                         )
                     };
                 }
-                if (i === 4 && data?.ReleaseData) {
+                if (i === 51 && data?.ReleaseData) {
                     return {
                         ...item,
                         gameIndexes: item.gameIndexes.map((_, index) =>
@@ -193,10 +196,16 @@ function Last30Days() {
 
     function GamePlatforms(): void {
 
-
+        console.log(currentData![0])
+        console.log(currentData![1])
+        console.log(currentData![2])
+        console.log(currentData![3])
         
-        const tempArray: JSX.Element[][] = Array.from({ length: 20 }, () => [])// Initalzing 20 inner arrays
-        for (let i = 0; i < 20; i++) {
+        const tempArray: JSX.Element[][] = Array.from({ length: currentData!.length }, () => [])// Initalzing 20 inner arrays
+        for (let i = 0; i < currentData!.length; i++) {
+            if(currentData![i].parent_platforms===undefined)
+                break
+            else
             for (let j = 0; j < currentData![i].parent_platforms.length; j++) {
 
                 switch (currentData![i].parent_platforms[j].platform.name) {
@@ -240,7 +249,7 @@ function Last30Days() {
         setSelectorVisible(S => S = !S)
         setMenuIsVisible(M => M = !M)
         setShouldStartTimer(true)
-        setGameStateIndex(3)
+        setGameStateIndex(50)
     }
 
 
@@ -250,7 +259,7 @@ function Last30Days() {
         setSelectorVisible(S => S = !S)
         setMenuIsVisible(M => M = !M)
         setShouldStartTimer(true)
-        setGameStateIndex(4)
+        setGameStateIndex(52)
     }
 
     function setRating(): void {
@@ -259,7 +268,7 @@ function Last30Days() {
         setSelectorVisible(S => S = !S)
         setMenuIsVisible(M => M = !M)
         setShouldStartTimer(true)
-        setGameStateIndex(5)
+        setGameStateIndex(51)
     }
 
     function AddGame(gameNumber: number) {
@@ -301,7 +310,7 @@ function Last30Days() {
                     <h1>Loading</h1>
                 ) : (
                     <div className={POPCSS.RightSideContainer}>
-                        <h1>Last 30 days</h1>
+                        <h1>Next Week</h1>
 
                         <div className={POPCSS.SelectContainer} onClick={ShowDropDown} style={{ display: isSelectorVisible ? "flex" : "none" }}>
                             <div>Order by: </div>
@@ -382,4 +391,4 @@ function Last30Days() {
         </div>
     )
 }
-export default Last30Days
+export default NextWeek

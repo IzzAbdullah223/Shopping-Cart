@@ -4,7 +4,7 @@ import LeftArrow from '../../../assets/icons/LeftArrow'
 import ChevronLeft from '../../../assets/icons/ChevronLeft'
 import ChevronRight from '../../../assets/icons/ChevronRight'
 import ChevronDown from '../../../assets/icons/ChevronDown'
-import { useOutletContext,useParams } from 'react-router-dom'
+import { useOutletContext,useParams,Link } from 'react-router-dom'
  
 import {ModalGames,PlayDiceGame} from '../../../main'
 
@@ -232,10 +232,10 @@ function PlayDice(){
     return(
     <div className={PLAYCSS.PageContainer}>
         <div className={PLAYCSS.Top}>
-           <div className={PLAYCSS.TopLeft}>
+           <Link to="/" className={PLAYCSS.TopLeft}>
                <LeftArrow></LeftArrow>
                <h2>Harbor</h2>
-           </div>
+           </Link>
            <div className={PLAYCSS.TopRight}>
                <h1>{data?.GameTitle}</h1>
            </div>

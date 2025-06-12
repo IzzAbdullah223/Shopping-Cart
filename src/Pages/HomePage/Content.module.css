@@ -153,12 +153,14 @@
         backdrop-filter: blur(10px); /* Apply blur effect */
         padding: 20px 30px;
         border-radius: 15px;
+     
     }
     
     .Navigation h2{
         color: white;
         text-align: center;
         font-family: 'GT Walsheim Pro REGULAR';
+    
     }
      
     .Navigation img{
@@ -175,9 +177,10 @@
         border-radius: 15px;
         cursor: pointer;
         transition: transform 0.3s, background-color 0.2s;
-        font-family: 'GT Walsheim Pro THIN';
         text-decoration: none;
         color: inherit;
+        font-family: 'GT Walsheim Pro LIGHT';
+        font-size: 0.9rem;
     }
 
     
