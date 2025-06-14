@@ -1,4 +1,4 @@
-import { useEffect,useState} from 'react'
+import { useEffect,useState,useRef} from 'react'
 import PLAYCSS from '../PlayDice/PlayDice.module.css'
 import LeftArrow from '../../../assets/icons/LeftArrow'
 import ChevronLeft from '../../../assets/icons/ChevronLeft'
@@ -29,7 +29,7 @@ function PlayDice(){
      
 
      
-
+        const dotsContainerRef = useRef<HTMLDivElement>(null);
     
 
     interface GameInfo{
@@ -188,7 +188,7 @@ function PlayDice(){
          setImageIndex(prevIndex => {
             const newIndex = prevIndex === gameImages.length-1 ? 0 : prevIndex + 1;
             setTimeout(() => {
-                const DotsContainer = document.querySelector<HTMLDivElement>(`.${PLAYCSS.DotsContainer}`);
+                const DotsContainer = dotsContainerRef.current
                 if (DotsContainer) {
                     const DotsArray = Array.from(DotsContainer.children);
         
@@ -246,7 +246,7 @@ function PlayDice(){
                     <ChevronLeft onClick={LeftChevron}></ChevronLeft>
                     <img src={gameImages[ImageIndex]}></img>
                      <ChevronRight onClick={RightChevron}></ChevronRight>
-                    <div className={PLAYCSS.DotsContainer}>
+                    <div className={PLAYCSS.DotsContainer} ref={dotsContainerRef}>
                         {gameImages.map((_,i)=>{
                             if(i==0)
                                 return <div key={i} className={`${PLAYCSS.Dot} ${PLAYCSS.ActiveDot}`}></div>
