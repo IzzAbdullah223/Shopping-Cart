@@ -112,12 +112,15 @@ font-size: 1.2rem;
  
 
 .GameCard{
+ 
   min-width: 300px;
   background-color: #202020;
   border-radius: 5%;
   transition: transform 0.4s ease-out;
   flex: 1;
 }
+
+
  
 
 .GameCard:hover{
@@ -133,12 +136,6 @@ font-size: 1.2rem;
   border-top-right-radius: 5%;
   cursor: pointer;
   
-}
-
-@media(max-width:984px){
-  .Top img{
-    height: 40vh;
-  }
 }
 
 .GameCard .Below{
